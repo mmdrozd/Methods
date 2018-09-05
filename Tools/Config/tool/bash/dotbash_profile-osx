@@ -1,0 +1,15 @@
+# Get cross-user OSX .bash_profile (executed on initial login to a bash session)
+# Contains only things which should be executed only on first login
+#   Linked to .profile, so applies also to non-bash logins
+#
+# echo lines below commented out because noninteractive login 
+# is not supposed to produce any output 
+
+# echo Executing dotbash_profile-osx
+
+
+# echo source /Volumes/Sync/Lib/config/bash/dotbash_profile-all
+       source /Volumes/Sync/Lib/config/bash/dotbash_profile-all
+
+# Useful configuration tips are in
+# http://www.emacswiki.org/emacs/EmacsForMacOS

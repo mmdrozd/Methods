@@ -1,0 +1,7 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+ # This is executed after /etc/profile
+ # Gets universal OSX .bash_profile (usable for every user)
+
+# echo source /Volumes/Sync/Lib/config/bash/dotbash_profile-osx
+       source /Volumes/Sync/Lib/config/bash/dotbash_profile-osx
+

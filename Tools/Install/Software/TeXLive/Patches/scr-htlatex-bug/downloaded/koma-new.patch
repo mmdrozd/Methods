@@ -1,0 +1,89 @@
+--- tex4ht-4ht.tex  (revision 129)
++++ tex4ht-4ht.tex  (working copy)
+@@ -17032,6 +17032,7 @@
+ % scrartcl.4ht (|version), generated from |jobname.tex
+ % Copyright |CopyYear.1999. Eitan M. Gurari
+ |<TeX4ht copywrite|>
++|<scr old fonts|>
+ \input article.4ht
+ |<scr artcl, reprt, book|>
+ \Hinput{scrartcl}
+@@ -17218,24 +17219,7 @@
+ \ifx \@openbib@code\:UnDef \else
+  \pend:def\@openbib@code{\labelsep\z@}
+ \fi
+-\def\:temp#1#2!*?: {\def\:temp{#1}}
+-\expandafter\:temp\usepackage!*?: 
+-\def\:tempa{\@latex@e@error}
+-\ifx \:temp\:tempa \else
+-   \def\popthree#1#2#3#4{#4}
+-   \def\:tempa#1#2#3#4{\tmp:toks{#1{#2}}%
+-   \long\expandafter\edef\csname #4 \endcsname{\the\tmp:toks
+-        {\expandafter\noexpand
+-    \csname o:\expandafter\expandafter\:gobble\expandafter\string \popthree#3:\endcsname}}} 
+-\def\:temp#1{%
+-  \expandafter\expandafter\expandafter\:tempa\csname #1 \endcsname{#1}}
+-\:temp{rm}
+-\:temp{sf}
+-\:temp{tt}
+-\:temp{bf}
+-\:temp{it}
+-
+-\fi
++|<scr old fonts|>
+   \let\:tempc\listoffigures
+ \pend:def\:tempc{\begingroup \a:listoffigures
+    \def\@starttoc{\:tableofcontents[lof]\:gobble}}
+@@ -17434,24 +17418,7 @@
+ \ifx \@openbib@code\:UnDef \else
+  \pend:def\@openbib@code{\labelsep\z@}
+ \fi
+-\def\:temp#1#2!*?: {\def\:temp{#1}}
+-\expandafter\:temp\usepackage!*?: 
+-\def\:tempa{\@latex@e@error}
+-\ifx \:temp\:tempa \else
+-   \def\popthree#1#2#3#4{#4}
+-   \def\:tempa#1#2#3#4{\tmp:toks{#1{#2}}%
+-   \long\expandafter\edef\csname #4 \endcsname{\the\tmp:toks
+-        {\expandafter\noexpand
+-  \csname o:\expandafter\expandafter\:gobble\expandafter\string \popthree#3:\endcsname}}}
+-\def\:temp#1{%
+-  \expandafter\expandafter\expandafter\:tempa\csname #1 \endcsname{#1}}
+-\:temp{rm}
+-\:temp{sf}
+-\:temp{tt}
+-\:temp{bf}
+-\:temp{it}
+-
+-\fi
++|<scr old fonts|>
+   \let\:tempc\listoffigures
+ \pend:def\:tempc{\begingroup \a:listoffigures
+    \def\@starttoc{\:tableofcontents[lof]\:gobble}}
+@@ -17607,7 +17574,26 @@
+ }
+ >>>
+
++\<scr old fonts\><<<
++\def\:temp#1#2!*?: {\def\:temp{#1}}
++\expandafter\:temp\usepackage!*?: 
++\def\:tempa{\@latex@e@error}
++\ifx \:temp\:tempa \else
++   \def\popthree#1#2#3#4{#4}
++   \def\:tempa#1#2#3#4{\tmp:toks{#1{#2}}%
++   \long\expandafter\edef\csname #4 \endcsname{\the\tmp:toks
++        {\expandafter\noexpand
++  \csname o:\expandafter\expandafter\:gobble\expandafter\string \popthree#3:\endcsname}}}
++\def\:temp#1{%
++  \expandafter\expandafter\expandafter\:tempa\csname #1 \endcsname{#1}}
++\:temp{rm}
++\:temp{sf}
++\:temp{tt}
++\:temp{bf}
++\:temp{it}
+
++\fi
++>>>
+
+ \<addchap confic\><<<
+ \ifx \@@maybeautodot\:UnDef

@@ -1,0 +1,5 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# .profile is invoked in bash only if neither .bash_profile nor ~/.bash_login exist
+# 
+# This .profile is appropriate for all users, and is linked to by loop-over-directories-and-make-dot-profile-link.sh
+

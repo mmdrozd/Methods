@@ -1,0 +1,13 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# Aliases are not expanded when the shell is not interactive unless the _expand_aliases shell option is set using shopt
+
+if [ -e /Applications/Emacs.app ]; then
+    alias Emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+    export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs"
+fi
+    
+alias AdobeAcrobat="/Applications/Adobe\ Acrobat\ XI\ Pro/Adobe\ Acrobat\ Pro.app/Contents/MacOS/AdobeAcrobat"
+alias      Acrobat="/Applications/Adobe\ Acrobat\ XI\ Pro/Adobe\ Acrobat\ Pro.app/Contents/MacOS/AdobeAcrobat"
+
+shopt -s expand_aliases
+

@@ -1,0 +1,9 @@
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/python3
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/CDC
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/py35
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/py35
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/py27
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/py27_fin
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/python3
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/python3.3
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/PyObjC_py3

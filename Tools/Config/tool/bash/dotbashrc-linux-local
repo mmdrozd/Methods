@@ -1,0 +1,23 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# This should be run whenever a bash script is being run in interactive mode 
+# There are two ways to connect to the Methods directories:  Via Dropbox, or via a local link (for CDC at home)
+
+# If we get here, there is no ~/Dropbox folder, so the machine had better be CDC-local
+# For a VM with access to llorracc.local, if llorracc.local is not already connected then put on the clipboard (accessible via shft-ctrl-v) the commands necessary to mount it 
+
+source ~/.bashrc-linux-local-mount-force
+
+# Create canonical links
+if [ ! -e /media/ro.llorracc.local ] || [ ! -e /media/rw.llorracc.local ] || [ ! "$(ls -A /media/ro.llorracc.local)" ] || [ ! "$(ls -A /media/rw.llorracc.local)" ] || [ ! "$(ls -A /media/ro.llorracc.local)" ]; then
+    echo 'Something failed to mount; not linking (will preserve Dropbox link if it exists)'
+else
+    sudo rm -f  /Methods
+    sudo ln -fs /Methods-Mstr /Methods
+fi
+
+# Steps to test things to be distributed to students:
+# 0. Repoint /Methods to /Methods-Mstr (at shell: "sudo rm -f /Methods ; ln -fs /Methods-Mstr /Methods")
+# 0. Get it working
+# 0. Once working on VM, go to llorracc.local and DeltaWalker Sync /pri/Methods and /shr/Methods
+# 0. Repoint /Methods to /Methods-Slve (at shell: "sudo rm -f /Methods ; ln -fs /Methods-Slve /Methods")
+# 0. Test whether it works (it will fail if it tries to write to anything in /Methods path, which is RO

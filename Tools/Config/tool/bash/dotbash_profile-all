@@ -1,0 +1,10 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# Cross-platform (OSX, Linux, ...) .bash_profile:  Executed ONLY on login
+
+# Get anything that is configured in the user's .bashrc file (initial login does not automatically execute .bashrc)
+
+if [ -f ~/.bashrc ];
+    then source ~/.bashrc
+fi    
+
+

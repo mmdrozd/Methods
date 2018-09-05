@@ -1,0 +1,3 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# The file dotbash_profile-osx-setup is copied to ~/.bash_profile when the script loop-over-directories-and-setup-bash-shell.sh is run
+

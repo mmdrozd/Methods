@@ -1,0 +1,28 @@
+--- ./scrartcl.4ht	2017-03-10 18:08:12.000000000 -0500
++++ ./scrartcl_fixed.4ht	2017-03-10 18:19:13.000000000 -0500
+@@ -1,25 +1,6 @@
+ % scrartcl.4ht (2017-03-10-18:07), generated from tex4ht-4ht.tex
+ % Copyright 1999--2009 Eitan M. Gurari
+ 
+-\def\:temp#1#2!*?: {\def\:temp{#1}}
+-\expandafter\:temp\usepackage!*?:
+-\def\:tempa{\@latex@e@error}
+-\ifx \:temp\:tempa \else
+-   \def\popthree#1#2#3#4{#4}
+-   \def\:tempa#1#2#3#4{\tmp:toks{#1{#2}}%
+-   \long\expandafter\edef\csname #4 \endcsname{\the\tmp:toks
+-        {\expandafter\noexpand
+-  \csname o:\expandafter\expandafter\:gobble\expandafter\string \popthree#3:\endcsname}}}
+-\def\:temp#1{%
+-  \expandafter\expandafter\expandafter\:tempa\csname #1 \endcsname{#1}}
+-\:temp{rm}
+-\:temp{sf}
+-\:temp{tt}
+-\:temp{bf}
+-\:temp{it}
+-
+-\fi
+-
+ \input article.4ht
+ \Def:Section\minisec{}{#1}
+ \let\:minisec=\minisec

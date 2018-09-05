@@ -1,0 +1,6 @@
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+.google.com	TRUE	/	FALSE	1528314523	NID	118=JxgctOqcK2p1doYtECBhjIt1CCrKoTL-B-ZVQ3u15oTEF5AYCywDhpHo2tUBdvMlK-VHGZeGyW59Bq66sK7iNXQTMiIE12MJpquizEtFLRYC9LuFXvT-NwCsRgJTbxBf
+.scholar.google.com	TRUE	/	FALSE	1575575323	GSP	LM=1512503323:S=Lv3UWothbKOrvZWR

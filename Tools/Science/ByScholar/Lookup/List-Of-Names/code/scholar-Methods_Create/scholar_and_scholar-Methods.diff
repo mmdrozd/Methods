@@ -1,0 +1,116 @@
+--- ../scholar.py	2017-05-02 13:37:42.000000000 -0400
++++ ../scholar-Methods.py	2017-05-03 10:40:33.000000000 -0400
+@@ -7,6 +7,9 @@
+ # ChangeLog
+ # ---------
+ #
++# Modified for Methods class from scholar.py downloaded 2017-04-27
++# Search for initials CDC to find modifications
++#
+ # 2.11  The Scholar site seems to have become more picky about the
+ #       number of results requested. The default of 20 in scholar.py
+ #       could cause HTTP 503 responses. scholar.py now doesn't request
+@@ -161,6 +164,7 @@
+ # IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ # POSSIBILITY OF SUCH DAMAGE.
+ 
++import codecs 
+ import optparse
+ import os
+ import re
+@@ -281,22 +285,26 @@
+     A class representing articles listed on Google Scholar.  The class
+     provides basic dictionary-like behavior.
+     """
++    # CDC reordered the outputs below to put the most useful outputs at the left
+     def __init__(self):
+         # The triplets for each keyword correspond to (1) the actual
+         # value, (2) a user-suitable label for the item, and (3) an
+         # ordering index:
+         self.attrs = {
+             'title':         [None, 'Title',          0],
+-            'url':           [None, 'URL',            1],
++            'authorsAll':    [None, 'Authors',        1],  # CDC key for adding authors
+             'year':          [None, 'Year',           2],
+             'num_citations': [0,    'Citations',      3],
+-            'num_versions':  [0,    'Versions',       4],
+-            'cluster_id':    [None, 'Cluster ID',     5],
+-            'url_pdf':       [None, 'PDF link',       6],
+-            'url_citations': [None, 'Citations list', 7],
+-            'url_versions':  [None, 'Versions list',  8],
++            'ENTRYTYPE':     [None, 'EntryType',      4],  # CDC key for adding EntryType
++            'journal':       [None, 'journal',        5],  # CDC key for adding journal
++            'url':           [None, 'URL',            6],
++            'url_pdf':       [None, 'PDF link',       7],
++            'url_citations': [None, 'Citations list', 8],
+             'url_citation':  [None, 'Citation link',  9],
+-            'excerpt':       [None, 'Excerpt',       10],
++            'num_versions':  [0,    'Versions',      10],
++            'cluster_id':    [None, 'Cluster ID',    11],
++            'url_versions':  [None, 'Versions list', 12],
++            'excerpt':       [None, 'Excerpt',       13],
+         }
+ 
+         # The citation data in one of the standard export formats,
+@@ -878,7 +886,8 @@
+     CITFORM_BIBTEX = 4
+ 
+     def __init__(self):
+-        self.citform = 0 # Citation format, default none
++#        self.citform = 0 # Citation format, default none
++        self.citform = 4 # Citation format, default BIBTEX # CDC replaced the original default of self.citform = 0 on 20170501
+         self.per_page_results = None
+         self._is_configured = False
+ 
+@@ -1021,6 +1030,16 @@
+         html = self._get_http_response(url=query.get_url(),
+                                        log_msg='dump of query response HTML',
+                                        err_msg='results retrieval failed')
++        url=query.get_url()
++        with codecs.open('./results.html', 'w', encoding='utf-8') as f:
++          f.write(html.decode('utf-8'))
++          f.flush() # Write to disk
++          f.close() # Need to close
++        with codecs.open('./url.html', 'w', encoding='utf-8') as f:
++          f.write(url.decode('utf-8'))
++          f.flush()
++          f.close()
++#        import pdb; pdb.set_trace()                               
+         if html is None:
+             return
+ 
+@@ -1045,6 +1064,26 @@
+             return False
+ 
+         article.set_citation_data(data)
++# CDC added the code below to process the BibTeX entry to produce extra outputs
++        bibEntry = article.as_citation()
++        import bibtexparser
++        bib_database = bibtexparser.loads(bibEntry)
++        authorsAll = None
++        EntryType  = None
++        journal    = None
++        if 'author' in bib_database.entries[0].keys():
++          authorsAll = '%s' % bib_database.entries[0]['author']
++          
++        if 'ENTRYTYPE' in bib_database.entries[0].keys():
++            EntryType = '%s'  % bib_database.entries[0]['ENTRYTYPE']
++            
++        if 'journal' in bib_database.entries[0].keys():
++            journal = '%s'    % bib_database.entries[0]['journal']
++
++        article.attrs['authorsAll'][0] = authorsAll
++        article.attrs['ENTRYTYPE'][0]  = EntryType
++        article.attrs['journal'][0]    = journal
++# CDC end of added code
+         return True
+ 
+     def parse(self, html):
+@@ -1247,6 +1286,7 @@
+     querier = ScholarQuerier()
+     settings = ScholarSettings()
+ 
++    options.citation = 'bt' # CDC: force it to get BibTeX citations even if the '--citations' flag was not given on the command line
+     if options.citation == 'bt':
+         settings.set_citation_format(ScholarSettings.CITFORM_BIBTEX)
+     elif options.citation == 'en':

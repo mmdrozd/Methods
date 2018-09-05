@@ -1,0 +1,45 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# This should be run whenever a bash script is being run in interactive mode 
+# There are two ways to connect to the Methods directories:  Via Dropbox, or via a local link (for CDC at home)
+#
+
+# If we get here, there is no ~/Dropbox folder, so test whether the machine is CDC-local
+# For a VM with access to llorracc.local, if llorracc.local is not already connected then put on the clipboard (accessible via shft-ctrl-v) the commands necessary to mount it 
+
+# Mount separately as read-write and as read-only
+dirMountRW=/media/rw.llorracc.local # Read-Write, which allows CDC to use the VM directly to experiment with class files
+dirMountRO=/media/ro.llorracc.local # Read-Only   which mirrors what students' VM's get 
+dirMstrRW=/media/$dirMountRW/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods/ # This master not shared automatically with students, only gets shared when copied to Slve
+dirSlveRO=/media/$dirMountRO/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/shr/Methods/ # To emulate student class machines, this should be read only
+
+remount=0 # Default is not to remount
+
+# If either mountpoint exists but is empty, set remount=1; if either does not exist at all, set remount=1
+for d in $dirMountRW $dirMountRO; do 
+  [   -e $d ] && ([ ! "$(ls -A $d)" ]) && sudo rmdir $d && remount=1 
+  [ ! -e $d ] && remount=1
+done
+
+if [ $remount -eq 1 ]; then # One of them (at least) was empty or did not exist at all
+  # If either of them is mounted, unmount it 
+  for d in $dirMountRW $dirMountRO; do 
+    [ -e $d ] && ([ "$(ls -A $d)" ]) && echo "Unmounting $d before remount" && sudo umount $d
+  done
+
+  # Make sure both mountpoints exist
+  for d in $dirMountRW $dirMountRO; do 
+    [ ! -e $d ] && sudo mkdir $d
+  done
+
+  for d in /Methods-Mstr /Methods-Slve /Methods-Pri /Methods-Pub /Methods-Shr ; do # If these exist, need to be deleted before relinking 
+    [ -e $d ] && sudo rm $d
+  done
+
+  connect=''
+  connect+=`echo sudo sshfs -o allow_other       ccarroll@llorracc.local:/ $dirMountRW` && connect+=" ; " \
+  connect+=`echo sudo sshfs -o allow_other -o ro ccarroll@llorracc.local:/ $dirMountRO` 
+  connect+="/media/ro.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods/Tools/Install/Machines/010_Xubuntu/Scripts/010_Basic_Make-Root-Links.sh"
+  echo "Commands below will mount $dirMountRW and $dirMountRO and set up root links (though will NOT relink the /Methods root link):"
+  [[ `which xsel` >/dev/null ]] && echo 'and should be on the clipboard (hit ctrl-shft-v to paste):' && echo '' && echo $connect | xsel --clipboard --input
+  echo $connect 
+fi

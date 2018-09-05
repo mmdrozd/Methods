@@ -1,0 +1,121 @@
+;;; 2017-02-05: Updated for Methods class
+
+(setq inhibit-startup-message t) ;;; Inhibit annoying startup message
+(require 'dired-x)
+
+(dired "~/")  ;;; Start dired
+(shell) ;;; Start a shell
+
+(process-kill-without-query (get-process "shell"))
+
+;;; Make sure the parens bounce back to show you where start and end points are
+'(show-paren-mode t)
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-PDF-mode t)
+
+(setq delete-by-moving-to-trash t)
+(setq dired-recursive-deletes t)
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+;;  (add-to-list 'package-archives '("elpa"         . "http://elpa.gnu.org/elpa/")           t)
+;;  (add-to-list 'package-archives '("melpa"        . "http://melpa.org/packages/")        t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/")   t)
+  (add-to-list 'package-archives '("marmalade"    . "http://marmalade-repo.org/packages/") t)
+  (add-to-list 'package-archives '("org"          . "http://orgmode.org/elpa/")            t)
+  (package-initialize)
+
+; list the packages you want
+(setq package-list '(auctex reftex shell-here org csv-mode magit markdown-mode))
+
+; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+      (package-install package)))
+
+;; https://github.com/ieure/shell-here
+;; Open a shell buffer in (or relative to) default-directory, e.g. whatever directory the current buffer is in.
+(require 'shell-here)
+(define-key (current-global-map) "\C-c!" 'shell-here)
+
+
+) ;; end when (>= emacs-major-version 24)
+
+
+;; 2015-01-20: Copy full path of filename selected in dired onto the keyboard
+;; From http://stackoverflow.com/questions/18812938/copy-full-file-path-into-copy-paste-clipboard
+
+(defun clip-file ()
+  "Put the current file name on the clipboard"
+    (interactive)
+      (let ((filename (if (equal major-mode 'dired-mode)
+                            (file-name-directory default-directory)
+			                        (buffer-file-name))))
+						    (when filename
+						          (x-select-text filename))))
+
+;; from http://stackoverflow.com/questions/2416655/file-path-to-clipboard-in-emacs
+
+(defun put-file-name-on-clipboard ()
+  "Put the current file name on the clipboard"
+    (interactive)
+      (let ((filename (if (equal major-mode 'dired-mode)
+                            default-directory
+			                        (buffer-file-name))))
+						    (when filename
+						          (with-temp-buffer
+							          (insert filename)
+								          (clipboard-kill-region (point-min) (point-max)))
+									        (message filename))))
+
+(define-key (current-global-map) "\C-c\C-b" 'put-file-name-on-clipboard)
+
+;;; From http://www.emacswiki.org/emacs/UnfillParagraph
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+        (defun unfill-paragraph (&optional region)
+	      "Takes a multi-line paragraph and makes it into a single line of text."
+	            (interactive (progn (barf-if-buffer-read-only) '(t)))
+		          (let ((fill-column (point-max)))
+			          (fill-paragraph nil region)))
+
+;; Handy key definition
+        (define-key global-map "\M-Q" 'unfill-paragraph)
+
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+   (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
+(defun CDC-load-economicsbib ()
+   (interactive "*")
+   (find-file "/Volumes/Sync/Dropbox/Sys/Config/texlive/texmf-cdcpublicuse/bibtex/bib/economics.bib")
+)
+
+(global-set-key "\C-xl" 'CDC-load-economicsbib)
+
+(defun CDC-load-econtexSetup ()
+   (interactive "*")
+   (find-file "/Volumes/Sync/Dropbox/Sys/Config/texlive/texmf-cdcpublicuse/tex/latex/econtexSetup.sty")
+)
+
+(global-set-key "\C-xs" 'CDC-load-econtexSetup)
+
+(defun CDC-load-sHortcuts ()
+   (interactive "*")
+   (find-file "/Volumes/Sync/Dropbox/Sys/Config/texlive/texmf-cdcpublicuse/tex/latex/CDCShortcuts.sty")
+)
+
+(global-set-key "\C-xh" 'CDC-load-sHortcuts)
+
+
+(autoload 'gfm-mode "markdown-mode"
+   "Major mode for editing GitHub Flavored Markdown files" t)
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))

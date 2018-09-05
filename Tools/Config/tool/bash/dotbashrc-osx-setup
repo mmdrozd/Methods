@@ -1,0 +1,7 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# Executed for non-login shells (like emacs); sourced by ~/.bash_profile
+# Available for customization by each user
+# ~/.bashrc must not output anything
+source /Volumes/Sync/Lib/config/bash/dotbashrc-osx
+
+# The stuff below may be customized for each user (and sometimes is modified without the user's knowledge by program installs)

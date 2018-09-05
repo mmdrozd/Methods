@@ -1,0 +1,34 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# According to http://superuser.com/questions/789448/choosing-between-bashrc-profile-bash-profile-etc
+# ~/.bashrc should contain only those things specifically needed by the bash shell itself
+# while ~/.profile or ~/.bash_profile should contain things needed by all shells
+
+source /Volumes/Sync/Lib/config/bash/dotbashrc-all
+
+if [ -z "$LD_LIBRARY_PATH" ]; then # If there's nothing in the variable, then give it an initial value
+    export LD_LIBRARY_PATH=/usr/local/pulse
+else # there's something in it 
+    if [ "$LD_LIBRARY_PATH" != "/usr/local/pulse" ]; then # if there is something other than /usr/bin/pulse
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/pulse
+    fi
+fi
+    
+# Linux is missing a few useful MacOS commands, but has some close substitutes
+# Rather than having to constantly test which OS we are running, it's better just to
+# invoke the substitute automatically when the MacOS command is issued
+# The simplest way to fix that would be via an alias, but aliases are not available
+# by default in noninteractive shells
+# Needs to be a function and not an alias
+if [ ! $(uname -s) = "Darwin" ]; then # Not MacOS, assume Linux
+    # Use xsel to simulate OSX's pbcopy and pbpaste on Linux
+    function pbcopy ()  {
+    xsel --clipboard --input
+    }
+    function pbpaste () {
+    xsel --clipboard --output
+    }
+    function open () {
+    xdg-open "$*" &
+    }
+fi
+

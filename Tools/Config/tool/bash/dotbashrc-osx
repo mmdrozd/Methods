@@ -1,0 +1,83 @@
+# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
+# According to http://superuser.com/questions/789448/choosing-between-bashrc-profile-bash-profile-etc
+# ~/.bashrc should contain only those things specifically needed by the bash shell itself
+# Things needed by all shells go in .profile (?)
+
+# 2015-11-20: New GitUnixCommandsBrews-Emacs.sh creates the Carbon Emacs.app as the default
+# But at the shell, default should be the version without a GUI window
+# which is accomplished by the following line
+
+source /Volumes/Sync/Lib/config/bash/dotbashrc-all
+export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs"
+
+alias julia="/Applications/Julia-0.6.app/Contents/Resources/julia/bin/julia"
+alias emacs="/usr/local/bin/emacs -nw"
+alias keychain="open -a /Applications/Utilities/Keychain\ Access.app"
+alias pwgen41="/usr/local/bin/pwgen -B 4 1  | tr -d "'"\n"'" | pbcopy " # Copies it to the clipboard then pastes it back so user will see it
+alias pwgenqif='pwgen41 ; echo -n "zz_"$(pbpaste) | pbcopy '
+alias pwqif='pwgenqif ; echo $(pbpaste)'
+
+venw() {
+    cd "$@"
+    /Volumes/Sync/Lib/Code/bash/misc/terminalNameSet.sh ${PWD##*/}
+    /usr/local/bin/emacs -nw .
+}
+
+# gi has been moved to dobashrc-all so it will be available in linux as well
+# function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+# needed for using docbook xml files made available by brew install docbook
+export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
+
+alias math="/Applications/Mathematica.app/Contents/MacOS/MathKernel"
+alias DeltaWalker="/Applications/DeltaWalker.app/Contents/MacOS/DeltaWalker"
+alias emacshere="/Volumes/Sync/Lib/Code/bash/misc/terminalNameSet.sh ${PWD##*/} ; emacs -nw ."
+
+# Test whether this is an interactive shell
+if [[ -t "$fd" || -p /dev/stdin ]]
+then
+   interactive=FALSE
+ else
+    : # : means 'do nothing' # Uncomment below to print useful info when running an interactive shell
+#   echo ''
+#   echo In dotbashrc-osx:
+#   echo ''
+#   echo alias math="/Applications/Mathematica.app/Contents/MacOS/MathKernel"
+#   echo alias DeltaWalker="/Applications/DeltaWalker.app/Contents/MacOS/DeltaWalker"
+#   echo ''
+fi
+
+# Non-initialization shells (including the emacs shell) 
+# do not inherit the nice prompt created by /etc/bashrc
+# So, reexecute it
+#source /etc/bashrc
+
+# Modify cd command so that it works when you try to cd to a Mac OSX alias to a directory
+# http://blog.warrenmoore.net/blog/2010/01/09/make-terminal-follow-aliases-like-symlinks/
+# Works only in bash on OSX
+# Requires getTrueName.c to have been compiled and to be findable using $PATH
+# This is accomplished by running /Volumes/Sync/Lib/Code/C/getTrueName.sh
+if [ hash getTrueName 2>/dev/null ]; then  # http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
+  function cd
+  {
+  if [ ${#1} == 0 ]; then 
+      builtin cd 
+    elif [ -d "${1}" ]; then 
+      builtin cd "${1}"
+    elif [[ -f "${1}" || -L "${1}" ]]; then 
+      path=$(getTrueName "$1")
+      builtin cd "$path"
+    else 
+      builtin cd "${1}"
+    fi
+  }
+fi
+
+# Added by /Volumes/Sync/Lib/Install/anaconda/OSX/install-to-Sync.sh
+# If anaconda has been installed (directory exists and is not empty), put it in the path
+
+[ -d /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin ] && ([ "$(ls -A /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin)" ]) && export PATH="/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin:$PATH"
+
+# Set base_cdc as the default anaconda environment
+[ -d /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin/envs/base_cdc ] && ([ "$(ls -A /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin/envs/base_cdc)" ]) && export PATH="/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin/envs/base_cdc:$PATH"
+
