@@ -19,9 +19,11 @@ METH_TEXMF=$METH_TEXLIVE/texmf-local
 METH_BIBTEX=$METH_TEXMF/bibtex
 METH_TEX=$METH_TEXMF/tex
 
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;} # command-line gitignore constructor from www.gitignore.io
+if [[ $UID != 0 ]]; then # not the root user
+    function gi() { curl -L -s https://www.gitignore.io/api/$@ ;} # command-line gitignore constructor from www.gitignore.io
 
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+    parse_git_branch() {
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    }
+    export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+fi

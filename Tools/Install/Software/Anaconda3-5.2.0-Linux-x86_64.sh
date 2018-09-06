@@ -26,7 +26,10 @@ if [ ! $(uname -s) = "Darwin" ]; then # Not MacOS, assume Linux
 	echo ''
 	echo '/usr/local/anaconda3/bin is already in the path, so not adding'
 	echo ''
-    else
+    else # Add to root path -- only way to do this in ubuntu seems to be by changing /etc/environment
 	sudo mv /etc/environment /etc/environment.orig
 	sudo sed -e 's\/usr/local/sbin:\/usr/local/anaconda3/bin:/usr/local/sbin:\g' /etc/environment.orig > /etc/environment
+    fi
 fi
+
+    

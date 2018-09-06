@@ -81,3 +81,7 @@ fi
 # Set base_cdc as the default anaconda environment
 [ -d /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin/envs/base_cdc ] && ([ "$(ls -A /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin/envs/base_cdc)" ]) && export PATH="/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin/envs/base_cdc:$PATH"
 
+if type "pandoc" > /dev/null; then # if pandoc command exists
+    eval "$(pandoc --bash-completion)"
+fi
+
