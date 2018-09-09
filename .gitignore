@@ -1,3 +1,54 @@
+
+# Created by https://www.gitignore.io/api/latex,emacs,macos
+
+### Emacs ###
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile
+
+# directory configuration
+.dir-locals.el
+
+### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -39,6 +90,10 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+## Build tool directories for auxiliary files
+# latexrun
+latex.out/
 
 ## Auxiliary and intermediate files from other packages:
 # algorithms
@@ -184,6 +239,9 @@ sympy-plots-for-*.tex/
 *.pytxcode
 pythontex-files-*/
 
+# tcolorbox
+*.listing
+
 # thmtools
 *.loe
 
@@ -222,6 +280,9 @@ TSWLatexianTemp*
 # Texpad
 .texpadtmp
 
+# LyX
+*.lyx~
+
 # Kile
 *.backup
 
@@ -238,22 +299,58 @@ TSWLatexianTemp*
 # standalone packages
 *.sta
 
-# generated if using elsarticle.cls
-*.spl
+### LaTeX Patch ###
+# glossaries
+*.glstex
 
-# Ignore private files
-*_pri*
-*pri_*
-*Private*
-
-# Ignore MacOS junk files
+### macOS ###
+# General
 .DS_Store
-Icon*
+.AppleDouble
+.LSOverride
 
-# Ignore dropbox
-.dropbox
+# Icon must end with two \r
+Icon
 
-# Ignore defunct, old, etc
-*DEFUNCT*
-*BAD*
-*._
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
+# End of https://www.gitignore.io/api/latex,emacs,macos
+# Custom for CDC papers
+*.bibkey
+*.dep
+
+# economics.bib will be nonexistent on local machine, but should exist and be of zero size on remote
+# This requires it to exist but be empty on first commit, and ignored thereafter 
+economics.bib
+*.tmp
+# Custom for ShareLaTeX; allows configuration of ShareLaTeX without configuring other installations
+latexmkrc
+
+#
+_region_.*
+# Things marked in any of these ways are kept only locally
+*_pri*
+*_pri_*
+Private
+private
+
+# emacs .el files
+*

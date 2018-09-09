@@ -36,6 +36,7 @@ if [ -e /media/ro.llorracc.local ]; then # We are working on a home-local machin
 else # it's not a local machine so Dropbox will provide the Methods directory
     sudo rm -f /Methods # if /Methods exists, the ln syntax below will create /Methods/Methods; delete it to prevent
     sudo ln -fs /home/methods/Dropbox/Methods /
+    sudo mkdir -p /Volumes/Data
     sudo rm -f  /Volumes/Data/Tools ; sudo ln -fs /Methods/Tools/Scripts /Volumes/Data/Tools
 fi
 
@@ -71,3 +72,6 @@ fi
 
 sudo cp        ./010_Basic_Make-Root-Links_/etc/cron.d/* /etc/cron.d
 sudo chmod a+x /etc/cron.d/*
+
+sudo mkdir -p /home/methods/.local/share/applications
+sudo chmod a+rw /home/methods/.local/share/applications
