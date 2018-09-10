@@ -8,5 +8,5 @@ source /Volumes/Sync/Lib/config/bash/dotbashrc-all
 sudo apt-get update
 sudo apt-get -y install emacs
 
-sudo /$METH_CONFIG/user/make-links-for-users/loop-over-directories-and-make-dot-emacs-link-Linux.sh   
+$METH_CONFIG/user/make-links-for-users/loop-over-directories-and-make-dot-emacs-link-Linux.sh   
 
