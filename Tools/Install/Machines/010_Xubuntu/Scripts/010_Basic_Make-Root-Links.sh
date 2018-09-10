@@ -33,9 +33,19 @@ if [ -e /media/ro.llorracc.local ]; then # We are working on a home-local machin
     if [ ! -e /Methods ]; then
        sudo ln -fs /Methods-Mstr /Methods
     fi
-else # it's not a local machine so Dropbox will provide the Methods directory
+else # it's not a local machine so Methods should be local
     sudo rm -f /Methods # if /Methods exists, the ln syntax below will create /Methods/Methods; delete it to prevent
-    sudo ln -fs /home/methods/Dropbox/Methods /
+    if [ -e /home/methods/GitHub/Methods ]; then
+	sudo ln -fs /home/methods/GitHub/Methods /
+    else
+	if [ -e /home/methods/Dropbox/Methods ]; then # if GitHub/Methods did not exist link /Methods to Dropbox/Methods if it does 
+   	    sudo ln -fs /home/methods/Dropbox/Methods /
+	else
+	    echo 'Could not find an installation of Methods'
+	    echo 'Install either via GitHub or Dropbox and try again'
+	    exit 1
+	fi
+    fi
     sudo mkdir -p /Volumes/Data
     sudo rm -f  /Volumes/Data/Tools ; sudo ln -fs /Methods/Tools/Scripts /Volumes/Data/Tools
 fi

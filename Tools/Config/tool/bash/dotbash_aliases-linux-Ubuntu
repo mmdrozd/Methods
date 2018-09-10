@@ -16,7 +16,7 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 	    source ~/.bash_bootstrap
 	    rm     ~/.bash_bootstrap
 	else # Not bootstrapping, so link to local if it exists:
-	    if [ -d ~/Dropbox/Methods ]; then
+	    if [ -e ~/Dropbox/Methods ]; then
 		echo 'Switching automatically to existing ~/Dropbox/Methods folder. '
 		sudo rm -f /Methods ; sudo ln -fs /home/methods/Dropbox/Methods /Methods
 	    else
