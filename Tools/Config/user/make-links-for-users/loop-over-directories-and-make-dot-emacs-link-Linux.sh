@@ -12,10 +12,12 @@ me="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 # If it does not already exist, create standardized location for repository for downloaded packages 
 if [ ! -e /usr/local/share/emacs/site-lisp/elpa ]; then
     sudo mkdir -p   /usr/local/share/emacs/site-lisp/elpa
-    chmod a+rwx     /usr/local/share/emacs/site-lisp/elpa
     sudo mkdir -p   /usr/local/share/emacs/site-lisp/elpa/archives
-    chmod -Rf a+rwx /usr/local/share/emacs/site-lisp/elpa/archives
 fi
+
+# Fix permissions if they are broken
+sudo chmod a+rwx     /usr/local/share/emacs/site-lisp/elpa
+sudo chmod -Rf a+rwx /usr/local/share/emacs/site-lisp/elpa/archives
 
 Users=Users  # Mac default
 
