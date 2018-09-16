@@ -39,7 +39,7 @@ else # it's not a local machine so Methods should be local
 	sudo ln -fs /home/methods/GitHub/Methods /
     else
 	if [ -e /home/methods/Dropbox/Methods ]; then # if GitHub/Methods did not exist link /Methods to Dropbox/Methods if it does 
-   	    sudo ln -fs /home/methods/Dropbox/Methods /
+	    sudo ln -fs /home/methods/Dropbox/Methods /
 	else
 	    echo 'Could not find an installation of Methods'
 	    echo 'Install either via GitHub or Dropbox and try again'
