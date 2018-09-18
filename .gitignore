@@ -351,6 +351,12 @@ _region_.*
 *_pri_*
 Private
 private
+*Old*
+*_Old_*
+*_Old*
+
 
 # emacs .el files
-*
+*.el
+
+
