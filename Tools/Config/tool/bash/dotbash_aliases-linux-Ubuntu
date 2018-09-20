@@ -16,18 +16,20 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 	    source ~/.bash_bootstrap
 	    rm     ~/.bash_bootstrap
 	else # Not bootstrapping, so link to local if it exists:
-	    if [ -e ~/Dropbox/Methods ]; then
-		echo 'Switching automatically to existing ~/Dropbox/Methods folder. '
-		sudo rm -f /Methods ; sudo ln -fs /home/methods/Dropbox/Methods /Methods
+	    if [ -d ~/GitHub/Methods ]; then
+		echo 'Switching automatically to existing ~/GitHub/Methods folder. '
+		sudo rm -f /Methods ; sudo ln -fs /home/methods/GitHub/Methods /Methods
+		echo 'Pulling the latest version of courseware'
+		/Methods/Tools/Scripts/GitHub-Methods-Pull.sh
 	    else
-		echo '~/Dropbox/Methods folder does not exist'
+		echo '~/GitHub/Methods folder does not exist'
 		if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ] && [ "$(ls -A /media/ro.llorracc.local)" ] && [ "$(ls -A /media/rw.llorracc.local)" ]; then # local is mounted but not linked
 		    echo 'Linking to existing local Methods folder'
 		    /media/ro.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods/Tools/Install/Machines/010_Xubuntu/Scripts/010_Basic_Make-Root-Links.sh # makes links but does not switch /Methods
         	    sudo rm -f  /Methods
 		    sudo ln -fs /Methods-Slve /Methods
 		fi # end of test of whether /media/xx.llorracc.local exists
-	    fi # End of test whether ~/Dropbox/Methods/ exists
+	    fi # End of test whether ~/GitHub/Methods/ exists
 	    # Now offer option to connect to local alternative if it is available 
 	    if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ]; then # this machine has been marked as one on which local mounting might be an option
 		if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then # Running from a location where llorracc.local is visible, print option to link to it
@@ -37,11 +39,12 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 		    fi
 		else # Absence of /media/xx.llorracc.local indicates it's not a machine that can mount the local drives
 		    if [ `whoami` == "methods" ]; then
-			echo 'Need to connect to Dropbox.  Hit return to run ~/bin/Dropbox-Install.sh'
+			echo 'Need to run:'
+			echo 'cd ~ ; mkdir -p GitHub ; cd ./GitHub ; git clone https://github.com/ccarrollATjhucon/Methods.git'
+			echo 'hit return when done'
 			read answer
-			~/bin/Dropbox-Install.sh
 		    else
-			echo 'No connection to Dropbox, but OK because not methods user.'
+			echo 'No connection to GitHub methods, but OK because not methods user.'
 		    fi # methods user or not 
 		    #		    fi # local directories are mounted or not 
 		fi # ping succeeds or not 
