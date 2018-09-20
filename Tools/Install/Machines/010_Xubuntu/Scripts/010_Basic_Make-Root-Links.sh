@@ -34,7 +34,7 @@ if [ -e /media/ro.llorracc.local ]; then # We are working on a home-local machin
 	sudo ln -fs /Methods-Mstr /Methods
     fi
 else # it's not a local machine so Methods should be local
-    sudo rm -f /Methods # if /Methods exists, the ln syntax below will create /Methods/Methods; delete it to prevent
+    [[ -L /Methods ]] && sudo rm -f /Methods # if /Methods exists, the ln syntax below will create /Methods/Methods; delete it to prevent
     if [ -e /home/methods/GitHub/Methods ]; then
 	sudo ln -fs /home/methods/GitHub/Methods /
     else
