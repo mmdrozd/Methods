@@ -3,13 +3,13 @@
 # Available for customization by each user
 # ~/.bashrc (and anything called by it) must not output anything if the shell is noninteractive
 
+
 if [[ $- == *i* ]]; then # this is an interactive shell
     PS1='\u@\h:\W[\!] \$ '
     if [ -e /tmp/test-for-llorracc ]; then # This is the first time an interactive script has been run after bootup (test-for-llorracc should have been created by login script)
-	echo 'This is the first run of an interactive shell; testing for existence of Methods directory'
+	echo 'First run of interactive shell; testing for GitHub/Methods directory'
 	sudo rm -f /tmp/test-for-llorracc  # Prevent this test from running every time a new interactive script is run after first run
-	#	echo 'Links to Methods directory do not exist.'
-        # The stuff below will be run when the first interactive shell is launched
+        # The stuff below will be run when the first interactive shell is launched for a pristine course machine
         # ~/.bash_bootstrap contains whatever is necessary to complete the conversion of the machine from one state to another
         if [ -f ~/.bash_bootstrap ]; then
 	    echo 'Running bootstrap code to create links ...'
@@ -17,10 +17,7 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 	    rm     ~/.bash_bootstrap
 	else # Not bootstrapping, so link to local if it exists:
 	    if [ -e ~/GitHub/Methods ]; then
-		echo 'Switching automatically to existing ~/GitHub/Methods folder. '
-		sudo rm -f /Methods ; sudo ln -fs /home/methods/GitHub/Methods /Methods
-	        echo 'Pulling latest courseware from GitHub'
-		/Methods/Tools/Scripts/GitHub-Methods-Pull.sh
+		~/GitHub/Methods/Tools/Scripts/GitHub-Methods-Update.sh
 	    else
 		echo '~/GitHub/Methods folder does not exist'
 		if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ] && [ "$(ls -A /media/ro.llorracc.local)" ] && [ "$(ls -A /media/rw.llorracc.local)" ]; then # local is mounted but not linked
@@ -29,7 +26,7 @@ if [[ $- == *i* ]]; then # this is an interactive shell
         	    sudo rm -f  /Methods
 		    sudo ln -fs /Methods-Slve /Methods
 		fi # end of test of whether /media/xx.llorracc.local exists
-	    fi # End of test whether ~/Dropbox/Methods/ exists
+	    fi # End of test whether ~/GitHub/Methods/ exists
 	    # Now offer option to connect to local alternative if it is available 
 	    if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ]; then # this machine has been marked as one on which local mounting might be an option
 		if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then # Running from a location where llorracc.local is visible, print option to link to it
@@ -39,11 +36,15 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 		    fi
 		else # Absence of /media/xx.llorracc.local indicates it's not a machine that can mount the local drives
 		    if [ `whoami` == "methods" ]; then
-			echo 'Need to connect to Dropbox.  Hit return to run ~/bin/Dropbox-Install.sh'
+			echo 'Need to install Methods courseware.'
+			cmd="cd ; mkdir -p GitHub ; cd GitHub ; git clone https://github.com/ccarrollATjhuecon/Methods.git"
+			echo "$cmd" | pbcopy
+			echo 'Hit return to execute the command below:'
+			echo "$cmd" 
 			read answer
-			~/bin/Dropbox-Install.sh
+			eval "$cmd"
 		    else
-			echo 'No connection to Dropbox, but OK because not methods user.'
+			echo 'No Methods direcotry, but OK because not methods user.'
 		    fi # methods user or not 
 		    #		    fi # local directories are mounted or not 
 		fi # ping succeeds or not 

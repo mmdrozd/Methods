@@ -17,7 +17,8 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 	    rm     ~/.bash_bootstrap
 	else # Not bootstrapping, so link to local if it exists:
 	    if [ -e ~/GitHub/Methods ]; then
-		/Methods/Tools/Scripts/GitHub-Methods-Update.sh
+		sudo chmod a+x ~/GitHub/Methods/Tools/Scripts/GitHub-Methods-Update.sh
+		~/GitHub/Methods/Tools/Scripts/GitHub-Methods-Update.sh
 	    else
 		echo '~/GitHub/Methods folder does not exist'
 		if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ] && [ "$(ls -A /media/ro.llorracc.local)" ] && [ "$(ls -A /media/rw.llorracc.local)" ]; then # local is mounted but not linked
@@ -44,7 +45,7 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 			read answer
 			eval "$cmd"
 		    else
-			echo 'No Methods direcotry, but OK because not methods user.'
+			echo 'No Methods directory, but OK because not methods user.'
 		    fi # methods user or not 
 		    #		    fi # local directories are mounted or not 
 		fi # ping succeeds or not 

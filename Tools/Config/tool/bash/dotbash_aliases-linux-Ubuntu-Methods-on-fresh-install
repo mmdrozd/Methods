@@ -1,7 +1,0 @@
-# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
-# Executed for non-login shells (including emacs); sourced by ~/.bashrc
-# Available for customization by each user
-# ~/.bashrc (and anything called by it) must not output anything if the shell is noninteractive
-
-source /Volumes/Sync/Lib/config/bash/dotbash_aliases-linux-Ubuntu-Methods
-

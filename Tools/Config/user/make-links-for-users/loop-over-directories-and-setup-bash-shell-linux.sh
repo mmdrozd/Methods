@@ -55,10 +55,10 @@ for d in * ; do
 	sudo chown $d:$d /$Users/$d/.bashrc*
 	sudo chmod a+r /$Users/$d/.bashrc*
 	if [ ! -e /$Users/$d/.bash_aliases ]; then # if that user does not already have a .bash_aliases file, then give them the standard one
-	    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods-on-fresh-install /$Users/$d/.bash_aliases
+	    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods /$Users/$d/.bash_aliases
 	    sudo chown $d:$d /$Users/$d/.bash_aliases
 	else # the user DOES already have a .bash_aliases file, so go through the merge scenario
-	    if sudo -u $d diff /$Users/$d/.bash_aliases  /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods-on-fresh-install >/dev/null ; then # if the existing file is not a duplicate of the default file
+	    if sudo -u $d diff /$Users/$d/.bash_aliases  /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods >/dev/null ; then # if the existing file is not a duplicate of the default file
 		[ $quietly == "false" ] && echo The /$Users/$d/.bash_aliases file exists, but is identical to the default.
 		echo ''
 	    else
@@ -69,7 +69,7 @@ for d in * ; do
 		    cat /$Users/$d/.bash_aliases
 		    echo ''
 		    echo 'A diff command has been copied onto the clipboard if you want to inspect more closely.'
-		    echo sudo -u $d diff --side-by-side  /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods-on-fresh-install /$Users/$d/.bash_aliases 
+		    echo sudo -u $d diff --side-by-side  /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods /$Users/$d/.bash_aliases 
 #		    echo sudo -u $d diff --side-by-side  /Volumes/Sync/Lib/config/bash/dotbash_aliases-$Flavor /$Users/$d/.bash_aliases | pbcopy # pbcopy command has not been defined yet here
 		    echo ''
 		    echo 'Hit y to add the above lines to the end of the default .bash_aliases file.  Any other key to replace.'
@@ -83,7 +83,7 @@ for d in * ; do
 		    sudo chown $d:$d /$Users/$d/.bash_aliases
 		else 
 		    sudo rm        /$Users/$d/.bash_aliases
-		    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods-on-fresh-install /$Users/$d/.bash_aliases
+		    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods /$Users/$d/.bash_aliases
 		    sudo chown $d:$d /$Users/$d/.bash_aliases
 		fi # the existing file is a duplicate of the default file, so do nothing
 	    fi # Finished if-then about whether .bash_aliases file exists
