@@ -15,27 +15,36 @@ fi
 
 if [ -e /media/ro.llorracc.local ]; then # We are working on a home-local machine
     llorraccMethSlvePath=/media/ro.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/shr/Methods
-
     llorraccMethMstrPath=/media/rw.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods
+
     if [ ! "$(ls -A /media/ro.llorracc.local)" ]; then # we have not mounted the ro.llorracc.local directory
-	echo 'ro.llorracc.local exists but is empty -- must be mounted to proceed.  Hit return when mounted.'
+	echo 'ro.llorracc.local exists but is empty -- mount it if you want to use as local machine; hit return to ignore'
 	read answer
     fi
     sudo rm -f /Methods-Slve
     sudo ln -fs $llorraccMethSlvePath /Methods-Slve
     if [ ! "$(ls -A /media/rw.llorracc.local)" ]; then # we have not mounted the rw.llorracc.local directory
-	echo 'rw.llorracc.local exists but is empty -- must be mounted to proceed.  Hit return when mounted.'
+	echo 'ro.llorracc.local exists but is empty -- mount it if you want to use as local machine; hit return to ignore'
 	read answer
     fi
     sudo rm -f /Methods-Mstr
     sudo ln -fs $llorraccMethMstrPath /Methods-Mstr
     #    If no /Methods link exists, then create one for /Methods-Mstr; if one does exist, let it remain as is 
     if [ ! -e /Methods ]; then
-	sudo ln -fs /Methods-Mstr /Methods
+	if [ "$(ls -A /media/rw.llorracc.local)" ]; then # exists and nonempty
+	    sudo ln -fs /Methods-Mstr /Methods
+	else
+	    if [ "$(ls -A /media/ro.llorracc.local)" ]; then # exists and nonempty
+		sudo ln -fs /Methods-Slve /Methods
+	    fi # slave link
+	fi # master link
     fi
-else # it's not a local machine so Methods should be local
+fi # Finish allowing setup as local machine
+
+if [ ! "$(ls -A /Methods)" ]; then # No local link has been made
     [[ -L /Methods ]] && sudo rm -f /Methods # if /Methods exists, the ln syntax below will create /Methods/Methods; delete it to prevent
     if [ -e /home/methods/GitHub/Methods ]; then
+	sudo rm -f /Methods
 	sudo ln -fs /home/methods/GitHub/Methods /
     else
 	if [ -e /home/methods/Dropbox/Methods ]; then # if GitHub/Methods did not exist link /Methods to Dropbox/Methods if it does 
