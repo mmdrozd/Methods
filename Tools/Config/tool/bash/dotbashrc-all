@@ -1,23 +1,23 @@
 # ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
 # Executed no matter what system the user is running from
-METH_ROOT=/Methods  # Assumes proper link from /Methods to real location of Dropbox folder has been set up 
-METH_DATA=$METH_ROOT/Data
-METH_SOURCES=$METH_ROOT/Sources
-METH_TOOLS=$METH_ROOT/Tools
-METH_CONFIG=$METH_TOOLS/Config
-METH_CONFIG_tool=$METH_TOOLS/Config/tool
-METH_CONFIG_user=$METH_TOOLS/Config/tool
-METH_INSTALL=$METH_TOOLS/Install
-METH_LIB=$METH_TOOLS/Library
-METH_SCI=$METH_TOOLS/Library
-METH_MACHINES=$METH_INSTALL/Machines
-METH_SOFTWARE=$METH_INSTALL/Software
-METH_PACKAGES=$METH_INSTALL/Packages
-METH_SCRIPTS=$METH_TOOLS/Scripts
-METH_TEXLIVE=$METH_CONFIG/tool/texlive
-METH_TEXMF=$METH_TEXLIVE/texmf-local
-METH_BIBTEX=$METH_TEXMF/bibtex
-METH_TEX=$METH_TEXMF/tex
+export METH_ROOT=/Methods  # Assumes proper link from /Methods to real location of Dropbox folder has been set up 
+export METH_DATA=$METH_ROOT/Data
+export METH_SOURCES=$METH_ROOT/Sources
+export METH_TOOLS=$METH_ROOT/Tools
+export METH_CONFIG=$METH_TOOLS/Config
+export METH_CONFIG_tool=$METH_TOOLS/Config/tool
+export METH_CONFIG_user=$METH_TOOLS/Config/tool
+export METH_INSTALL=$METH_TOOLS/Install
+export METH_LIB=$METH_TOOLS/Library
+export METH_SCI=$METH_TOOLS/Library
+export METH_MACHINES=$METH_INSTALL/Machines
+export METH_SOFTWARE=$METH_INSTALL/Software
+export METH_PACKAGES=$METH_INSTALL/Packages
+export METH_SCRIPTS=$METH_TOOLS/Scripts
+export METH_TEXLIVE=$METH_CONFIG/tool/texlive
+export METH_TEXMF=$METH_TEXLIVE/texmf-local
+export METH_BIBTEX=$METH_TEXMF/bibtex
+export METH_TEX=$METH_TEXMF/tex
 
 if [[ $UID != 0 ]]; then # not the root user
     function gi() { curl -L -s https://www.gitignore.io/api/$@ ;} # command-line gitignore constructor from www.gitignore.io

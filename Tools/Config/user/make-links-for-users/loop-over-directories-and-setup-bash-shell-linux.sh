@@ -38,10 +38,10 @@ for d in * ; do
     if id -u $d > /dev/null 2>&1; then # if the user exists
 	echo "User: " $d
 	# Ubuntu's default ~/.bashrc file sources ~/.bash_aliases, so mostly want to make our mods in ~/.bash_aliases
-	# However, it only does that AFTER a test at the beginning for whether it is being sourced by a noninteractive shell
-	# I want noninteractive shells to get the environment variables and other goodies in ~/.bash_aliases
+	# However, ~/.bashrc only sources ~/.bash_aliases AFTER a test at the beginning for whether ~/.bashrc is being sourced by a noninteractive shell
+	# We want noninteractive shells to get the environment variables and other goodies in ~/.bash_aliases
 	# The fix is to put the sourcing of ~/.bash_aliases BEFORE the test for non-interactivity
-	# and to export BASH_ENV to ~/.bash_aliases to tell noninteractive scripts to run ~/.bash_aliases on startup
+	# and to export BASH_ENV to ~/.bash_aliases so that even noninteractive scripts will run ~/.bash_aliases on startup
 	# Sources:
 	#   http://unix.stackexchange.com/questions/257571/why-does-bashrc-check-whether-the-current-shell-is-interactive
 	#   https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html
@@ -55,7 +55,7 @@ for d in * ; do
 	sudo chown $d:$d /$Users/$d/.bashrc*
 	sudo chmod a+r /$Users/$d/.bashrc*
 	if [ ! -e /$Users/$d/.bash_aliases ]; then # if that user does not already have a .bash_aliases file, then give them the standard one
-	    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor /$Users/$d/.bash_aliases
+	    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-on-fresh-install /$Users/$d/.bash_aliases
 	    sudo chown $d:$d /$Users/$d/.bash_aliases
 	else # the user DOES already have a .bash_aliases file, so go through the merge scenario
 	    if sudo -u $d diff /$Users/$d/.bash_aliases  /Volumes/Sync/Lib/config/bash/dotbash_aliases-$Flavor >/dev/null ; then # if the existing file is not a duplicate of the default file

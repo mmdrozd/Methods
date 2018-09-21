@@ -1,9 +1,0 @@
-# ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
-# Get cross-user linux .bash_profile (executed on initial login to a bash session)
-# Contains ONLY things which should be executed ONLY on first login
-#   Linked to .profile, so applies also to non-bash logins
-#
-# Useful configuration tips are in
-# http://www.emacswiki.org/emacs/EmacsForMacOS
-
-[[ -e /Volumes/Sync/Lib/config/bash/dotbash_profile-all ]] && source /Volumes/Sync/Lib/config/bash/dotbash_profile-all

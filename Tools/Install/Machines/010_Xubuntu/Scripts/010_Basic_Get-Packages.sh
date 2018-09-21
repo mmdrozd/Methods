@@ -8,7 +8,11 @@ sudo apt -y install gparted bash-completion xsel markdown xscreensaver git hfspr
 
 # Packages that need to be installed by a custom script
 
-cd $METH_PACKAGES
+source ~/.bashrc # Get environment variables
+cmd="cd $METH_PACKAGES"
+echo "$cmd"
+eval "$cmd"
+pwd
 
 # 
 
