@@ -20,7 +20,7 @@ pwd
 
 if grep -q ^flags.*\ hypervisor\  /proc/cpuinfo; then
     echo "This is a Virtual Machine; installing VirtualBox-Guest-Additions"
-    sudo ./VirtualBox-Guest-Additions.sh
+    sudo /Methods/Tools/Install/Packages/VirtualBox-Guest-Additions.sh
 fi
 
 sudo /Methods/Tools/Install/Packages/samba.sh
