@@ -6,6 +6,7 @@ cd "$(dirname "$0")"
 
 ./010_Basic_Make-Root-Links.sh
 ./010_Basic_Make-User-Links.sh
+./010_Basic_Config.sh
 
 # Distinction between software and packages is somewhat arbitrary
 # One distinction is to desgnate as packages things that can be installed without configuration
