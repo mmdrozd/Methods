@@ -11,7 +11,7 @@ fi
 assignment=$1
 #assignment='02-10_Create-Your-pri-shr-pub-Directories_And-Share-Assignments-Folder-With-Instructor'
 
-monikers=( CarrollCD ReddyJK RotarescuAA ZhangTT hernandokaminskypd HernandokaminskyPD WangWY )
+monikers=( AcalinJ CarrollCD FiratM KalishEC KoosakJK RabideauBM WangTao )
 
 cd "$(dirname "$0")" # http://stackoverflow.com/questions/3349105/how-to-set-current-working-directory-to-the-directory-of-the-script
 for moniker in "${monikers[@]}"; do

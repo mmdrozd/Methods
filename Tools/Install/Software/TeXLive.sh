@@ -1,5 +1,7 @@
 #!/bin/bash
 
+scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # There are too many options for installing TeXLive, none of which is very satisfactory.
 # 
 # http://tipsonubuntu.com/2016/09/16/install-tex-live-2016-ubuntu-16-04-14-04/
@@ -33,7 +35,7 @@ fi
 
 if [ -d /usr/local/texlive ]; then
     echo 'It appears that TeXLive has already been installed on this machine.'
-    echo 'If you want to uninstall it and continue, open a shall and run:'
+    echo 'If you want to uninstall it and continue, open a shell and run:'
     echo '/Methods/Tools/Install/Software/TeXLive-Remove.sh'
     echo ''
     echo 'Otherwise, hit return to rerun the configuration/setup steps'
@@ -46,7 +48,6 @@ else # there was no installation, so install
     /Methods/Tools/Install/Software/TeXLive-tlmgr-Download.sh
 fi
 
-scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd /usr/local/texlive
 

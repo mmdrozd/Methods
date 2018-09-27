@@ -3,7 +3,7 @@
 # the first step in executing any assignment is to run this script.
 # It will copy the Markdown document containing the assignment to
 # the correct location in the student's pri directory structure.
-# The student then edits the assingnment customized with their moniker,
+# The student then edits the assignment customized with their moniker,
 # and turns in the result as described in "How-To-Turn-In-Assignments"
 
 if [ $# -ne 2 ]; then
@@ -13,7 +13,7 @@ if [ $# -ne 2 ]; then
 fi
 
 assnDir=$1
-moniker=$2 # assnDir=00_How-To-Turn-In-Assignments_ ; moniker=CarrollCD
+moniker=$2 # assnDir=00_How-To-Turn-In-Assignments ; moniker=CarrollCD
 assnRoot=Methods/Assignments
 
 # Create the receptacle directories in the right places
@@ -48,13 +48,11 @@ for i in pri shr ; do
     if [ $i == "pri" ]; then
 	cmd="cp -r /$assnRoot/$assnDir/*.* ~/Dropbox/$i/$assnRoot/$assnDir"
 	echo "$cmd"
-#	eval "$cmd"
+	eval "$cmd"
     fi
 done
 
 cd /$assnRoot/$assnDir
-#pwd
-#ls -las
 
 echo ''
 echo 'The following are the commands being executed:'

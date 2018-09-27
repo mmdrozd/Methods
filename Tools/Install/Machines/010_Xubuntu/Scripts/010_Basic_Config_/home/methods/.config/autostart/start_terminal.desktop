@@ -3,5 +3,5 @@ Name=xfce4-terminal
 GenericName=Terminal
 Comment=Interactive terminal
 Exec=dbus-launch xfce4-terminal
-Terminal=true
+Terminal=false
 Type=Application
