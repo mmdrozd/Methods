@@ -2,17 +2,18 @@
 How To Turn In Assignments
 --------------------------
 
-The first thing you do after you `Get-A-Course-Dropbox-Account` is to create at the root of your dropbox folder your `/pri` and `/shr` and `/pub` folders as described in `/Methods/Advice/Organizing-Private-vs-Shared-vs-Public-Materials.md`
+The first thing you do after you `Get-A-Course-Dropbox-Account` is to create at the root of your dropbox folder your `/pri` and `/shr` and `/pub` folders as described in `/Methods/Advice/Organizing-Sharing-Of-Materials.md`
 
 The next thing you should do is to make a directory inside your `shr` directory called `Methods/Assignments`:
 
 	cd ~/Dropbox
 	mkdir -p ./shr/Methods/Assignments # mkdir -p makes the full path to a directory
+	mkdir -p ./pri/Methods/Assignments
 
-When you are working on `[assignmentName]` from the public GitHub `/Methods/Assignments` folder, you will put your assignment in a directory you will have created on your VM at `[droot]/pri/Methods/Assignments/[assignmentName]_[Moniker]`.  
+When you are working on `[assignmentName]` from the public GitHub `/Methods/Assignments` folder, you will do the work on the assignment in the corresponding directory you will have created on your VM at `[droot]/pri/Methods/Assignments/[assignmentName]`.  
    * `[droot]` is the Dropbox root, `~/Dropbox`; it will be understood to be present in all future references to `/pri`, `/shr`, and `/pub`; that is, when I write `/pri/Methods/Tools` the full pathname you will use is `~/Dropbox/pri/Methods/Tools`
 
-As a concrete example, student `CarrollCD` working on assignment described in `00-97_Win-The-Nobel-Prize.md` would do all work for that assignment in his `/pri/Methods/Assignments/00-97_Win-The-Nobel-Prize_CarrollCD/` folder. 
+As a concrete example, student `CarrollCD` working on assignment described in `00-97_Win-The-Nobel-Prize.md` would do all work for that assignment in his `/pri/Methods/Assignments/00-97_Win-The-Nobel-Prize_CarrollCD/` folder.
 
 Your first step in doing a new assignment should be to run a script I have devised to make sure that the files in your `/pri` directory are created with the right name and in the right place.  (See below for instructions for running the script).
 
@@ -26,18 +27,18 @@ where the "./" at the beginning of a pathname indicates that what follows is the
 The script you need to run is in:
 
     /Methods/Tools/Scripts-For-Students
-	
-and its name is 
+
+and its name is
 
 	Assignment-Copy-To-Personal-Dropbox-Paths.sh
-	
+
 and an example of how to run it would be:
 
 	cd /Methods/Tools/Scripts-For-Students
 	./Assignment-Copy-To-Personal-Dropbox-Paths.sh 00_How-To-Turn-In-Assignments CarrollCD
-	
-It basically just creates the files and directory structure needed for the workflow above.	
-	
+
+It basically just creates the files and directory structure needed for the workflow above.
+
 To make all of this work, you will need to login to your Dropbox account, and "Share" with `instructor.methods.dropbox@llorracc.org` the `Assignments` folder you created above.  (See [Instructor-Procedure](#Instructor-Procedure)  below for details); sharing your Assignments folder in this way gives the instrucor account access to  everything inside of your `Assignments` folder.  Dropbox will automatically send `instructor.methods.dropbox@llorracc.org` a message to let me know that the assignment has been posted; you do NOT need to re-share your `/shr/Methods/Assignments` folder ever again after the first time).
 
 Warnings:

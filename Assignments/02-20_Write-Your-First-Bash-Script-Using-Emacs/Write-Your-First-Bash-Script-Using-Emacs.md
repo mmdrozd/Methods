@@ -1,35 +1,33 @@
 
 This assignment takes you through the process of writing your first bash script using Emacs in your VM.
 
-0. Launch a `Terminal` window
-
-0. Enter the command `emacs -nw` which will launch the emacs text editor inside the terminal window
+0. Launch `Emacs`
 
 0. Create a new file by hitting C-x C-f (that's short for CTRL-x followed by CTRL-f)
 
    * Emacs will pop up a little `minibuffer` at the _bottom_ of the terminal saying `Find file:`
 
-   * This is its way of asking you the filename you want to use 
+   * This is its way of asking you the filename you want to use
 
-   * Give it a filename `First-Bash-Script-[Moniker].sh`
+   * Give it a filename `Write-Your-First-Bash-Script-Using-Emacs_[Moniker].sh`
 
 0. As the first line of the script, enter the exact letters `#!/bin/bash`
 
    * This is the magic spell that identifies the file as a bash script file
 
-0. Now hit return a couple of times and write `echo "Hello world!"`
+0. Now hit return a couple of times and type `echo "Hello world!"`
 
-0. Hit `C-x C-s` (Control-x followed by Control-s) to save the file 
+0. Hit `C-x C-s` (Control-x followed by Control-s) to save the file
 
 0. Hit `C-x C-c` to exit from Emacs
 
-0. In the `Terminal` shell, type `cd /~` to change the directory to the home directory `/~` where you created the file
+0. In the `Terminal` shell, type `cd ~` to change the directory to the home directory `~` where you created the file
 
 0. Before the file can be executed, it must be marked as executable.
 
    * This is done using the `chmod` command (short for `change the modification characteristics of the file`)
 
-   * The specific command you must use is `chmod a+x *.sh` 
+   * The specific command you must use is `chmod a+x *.sh`
 
    * The `*.sh` syntax means `all files ending in .sh`
 
@@ -47,7 +45,7 @@ This assignment takes you through the process of writing your first bash script 
 
    0.  At the shell type `cat *.out`
 
-      * The `cat` command gives a `catalog` of the contents of the files that are its argument 
+      * The `cat` command gives a `catalog` of the contents of the files that are its argument
 
       * Since there is only one file ending in `.out` the catalog has only your program's output
 
@@ -55,16 +53,15 @@ This assignment takes you through the process of writing your first bash script 
 
       * You will notice that this time, Emacs opens as a graphical application in its own window
 
-      * The reason is that your previous invokation of emacs included the `-nw` flag, which is short for `no window` and has the effect of launching emacs inside the shell window
+      * The reason is that your previous invocation of emacs included the `-nw` flag, which is short for `no window` and has the effect of launching emacs inside the shell window
 
 0. Move your results to your `/shr` folder:
 
-   0.  In the `Terminal` shell, type `mkdir -p /home/methods/Dropbox/shr/Methods/Assignments/03-20_Write-Your-First-Bash-Script-Using-Emacs_[Moniker]`
+   0.  In the shell, type `mkdir -p /home/methods/Dropbox/shr/Methods/Assignments/[Num]_Write-Your-First-Bash-Script-Using-Emacs`
+   (replacing [Num] with whatever this assignment is actually numbered)
 
       * The `mkdir` command with the `-p` flag creates the directories needed to generate the specified folder structure
 
-   0.  Figure out how to move your `First-Bash-Script-[Moniker].sh` and `First-Bash-Script-[Moniker].out` files from the home directory `/~` to the directory created above with the `mkdir` command
+   0.  Figure out how to move your `First-Bash-Script-[Moniker].sh` and `First-Bash-Script-[Moniker].out` files from the home directory `~` to the directory created above with the `mkdir` command
 
-      * This is done in the `Terminal` shell.  Hint:
-
-	0. The command to move files is `mv`
+      * This is done in the shell.  Hint: The command to move files is `mv`
