@@ -78,8 +78,8 @@ for d in * ; do
 		fi # end of block executed only if not quietly
 		if [[ $answer == "y" || $answer == "Y" || $quietly == "true" ]] ; then
 		    sudo chmod a+w /$Users/$d/.bash_aliases
-		    sudo cat /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor /$Users/$d/.bash_aliases > ~/.bash_aliases_merged
-		    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor /$Users/$d/.bash_aliases
+		    sudo cat /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods /$Users/$d/.bash_aliases > ~/.bash_aliases_merged
+		    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods /$Users/$d/.bash_aliases
 		    sudo chown $d:$d /$Users/$d/.bash_aliases
 		else 
 		    sudo rm        /$Users/$d/.bash_aliases
