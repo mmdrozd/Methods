@@ -29,9 +29,11 @@ if [ ! $(uname -s) = "Darwin" ]; then # Not MacOS, assume Linux
     else # Add to root path -- only way to do this in ubuntu seems to be by changing /etc/environment
 	sudo chmod u+w /etc/environment
 	sudo sed -e 's\/usr/local/sbin:\/usr/local/anaconda3/bin:/usr/local/sbin:\g' /etc/environment > /tmp/environment
-	mv /tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
+	sudo mv /tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
 	sudo chmod u-w /etc/environment
     fi
 fi
 
-    
+source /etc/environment
+sudo conda install -c conda-forge jupyter_contrib_nbextensions
+
