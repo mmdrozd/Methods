@@ -78,8 +78,8 @@ for d in * ; do
 		fi # end of block executed only if not quietly
 		if [[ $answer == "y" || $answer == "Y" || $quietly == "true" ]] ; then
 		    sudo chmod a+w /$Users/$d/.bash_aliases
-		    sudo cat /Volumes/Sync/Lib/config/bash/dotbash_aliases-$Flavor /$Users/$d/.bash_aliases > ~/.bash_aliases_merged
-		    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$Flavor /$Users/$d/.bash_aliases
+		    sudo cat /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor /$Users/$d/.bash_aliases > ~/.bash_aliases_merged
+		    sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor /$Users/$d/.bash_aliases
 		    sudo chown $d:$d /$Users/$d/.bash_aliases
 		else 
 		    sudo rm        /$Users/$d/.bash_aliases
@@ -89,7 +89,7 @@ for d in * ; do
 	    fi # Finished if-then about whether .bash_aliases file exists
 	    if [ "$localMount" == "true" ]; then 
 		sudo cat ~/.bash_aliases /Volumes/Sync/Lib/config/bash/dotbashrc-$OS-local > /tmp/.bash_aliases
-		sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$Flavor-$OS-Methods /$Users/$d/.bash_aliases
+		sudo cp /Volumes/Sync/Lib/config/bash/dotbash_aliases-$OS-$Flavor-Methods /$Users/$d/.bash_aliases
 		sudo chown $d:$d /$Users/$d/.bash_aliases
 		#		sudo sudo mv /tmp/.bash_aliases /$Users/$d/.bash_aliases
 		#		sudo chown $u /$Users/$d/.bash_aliases

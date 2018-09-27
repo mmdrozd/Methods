@@ -35,15 +35,17 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 			mountOnly='source ~/.bashrc-linux-local-mount-force' && mountAndSwitch=$mountOnly && mountAndSwitch+=' ; sudo rm -r /Methods ; sudo ln -fs /Methods-Mstr /Methods' && echo ''
 			echo 'llorracc.local is available. Command to mount it is on clipboard (ctrl-shft-v to paste):' && echo '' && echo 'Mount only:' $mountOnly && echo 'Switch too:' $mountAndSwitch && echo '' && echo -n $mountAndSwitch | xsel --clipboard --input
 		    fi
-		else # Absence of /media/xx.llorracc.local indicates it's not a machine that can mount the local drives
+		else # Inability to ping llorracc-local despite presence of /media mounts 
 		    if [ `whoami` == "methods" ]; then
-			echo 'Need to install Methods courseware.'
-			cmd="cd ; mkdir -p GitHub ; cd GitHub ; git clone https://github.com/ccarrollATjhuecon/Methods.git"
-			echo "$cmd" | pbcopy
-			echo 'Hit return to execute the command below:'
-			echo "$cmd" 
-			read answer
-			eval "$cmd"
+			if [ ! -e /home/methods/GitHub/Methods ]; then
+			    echo 'Need to install Methods courseware.'
+			    cmd="cd ; mkdir -p GitHub ; cd GitHub ; git clone https://github.com/ccarrollATjhuecon/Methods.git"
+			    echo "$cmd" | pbcopy
+			    echo 'Hit return to execute the command below:'
+			    echo "$cmd" 
+			    read answer
+			    eval "$cmd"
+			fi
 		    else
 			echo 'No Methods directory, but OK because not methods user.'
 		    fi # methods user or not 
