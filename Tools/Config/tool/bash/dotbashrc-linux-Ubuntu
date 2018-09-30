@@ -1,100 +1,162 @@
 # ; -*- mode: sh ;-*- ;;; Forces editing in sh-mode 
-# Executed for non-login shells (including emacs); sourced by ~/.bashrc
-# Available for customization by each user
-# ~/.bashrc (and anything called by it) must not output anything if the shell is noninteractive
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+# Default CDC custom .bashrc for Ubuntu - see loop-over-directories-and-setub-bash-shell-linux
 
+if [ -f ~/.bash_aliases ]; then . ~/.bash_aliases ; fi ; export BASH_ENV=~/.bash_aliases
 
-if [[ $- == *i* ]]; then # this is an interactive shell
-    PS1='\u@\h:\W[\!] \$ '
-    if [ -e /tmp/test-for-llorracc ]; then # This is the first time an interactive script has been run after bootup (test-for-llorracc should have been created by login script)
-	echo 'First run of interactive shell; testing for GitHub/Methods directory'
-	sudo rm -f /tmp/test-for-llorracc  # Prevent this test from running every time a new interactive script is run after first run
-        # The stuff below will be run when the first interactive shell is launched for a pristine course machine
-        # ~/.bash_bootstrap contains whatever is necessary to complete the conversion of the machine from one state to another
-        if [ -f ~/.bash_bootstrap ]; then
-	    echo 'Running bootstrap code to create links ...'
-	    source ~/.bash_bootstrap
-	    rm     ~/.bash_bootstrap
-	else # Not bootstrapping, so link to local if it exists:
-	    if [ -e ~/GitHub/Methods ]; then
-		~/GitHub/Methods/Tools/Scripts/GitHub-Methods-Update.sh
-	    else
-		echo '~/GitHub/Methods folder does not exist'
-		if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ] && [ "$(ls -A /media/ro.llorracc.local)" ] && [ "$(ls -A /media/rw.llorracc.local)" ]; then # local is mounted but not linked
-		    echo 'Linking to existing local Methods folder'
-		    /media/ro.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods/Tools/Install/Machines/010_Xubuntu/Scripts/010_Basic_Make-Root-Links.sh # makes links but does not switch /Methods
-        	    sudo rm -f  /Methods
-		    sudo ln -fs /Methods-Slve /Methods
-		fi # end of test of whether /media/xx.llorracc.local exists
-	    fi # End of test whether ~/GitHub/Methods/ exists
-	    # Now offer option to connect to local alternative if it is available 
-	    if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ]; then # this machine has been marked as one on which local mounting might be an option
-		if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then # Running from a location where llorracc.local is visible, print option to link to it
-		    if [ ! "$(ls -A /media/ro.llorracc.local)" ] || [ ! "$(ls -A /media/rw.llorracc.local)" ]; then # something is not mounted, but could be
-			mountOnly='source ~/.bashrc-linux-local-mount-force' && mountAndSwitch=$mountOnly && mountAndSwitch+=' ; sudo rm -r /Methods ; sudo ln -fs /Methods-Mstr /Methods' && echo ''
-			echo 'llorracc.local is available. Command to mount it is on clipboard (ctrl-shft-v to paste):' && echo '' && echo 'Mount only:' $mountOnly && echo 'Switch too:' $mountAndSwitch && echo '' && echo -n $mountAndSwitch | xsel --clipboard --input
-		    fi
-		else # Absence of /media/xx.llorracc.local indicates it's not a machine that can mount the local drives
-		    if [ `whoami` == "methods" ]; then
-			echo 'Need to install Methods courseware.'
-			cmd="cd ; mkdir -p GitHub ; cd GitHub ; git clone https://github.com/ccarrollATjhuecon/Methods.git"
-			echo "$cmd" | pbcopy
-			echo 'Hit return to execute the command below:'
-			echo "$cmd" 
-			read answer
-			eval "$cmd"
-		    else
-			echo 'No Methods direcotry, but OK because not methods user.'
-		    fi # methods user or not 
-		    #		    fi # local directories are mounted or not 
-		fi # ping succeeds or not 
-	    fi # receptacles for mounting exist
-	fi # bootstrap file exists or not
-    fi # /tmp/test-for-lorracc exists or not 
-fi # interactive shell or not 
+# If not running interactively, don't do anything
 
-# ~/.bash_aliases could run twice because it's sourced twice in ~/.bashrc
-# First time is a modification of the default ~/.bashrc file to cause noninteractive shells to run ~/.bash_aliases
-# This should be the only modification to the default ~/.bashrc file
-# Second (possible) time is late in default ~/.bashrc file
-# Left in place to minimize changes in ~/.bashrc from Ubuntu distro default
-
-# Change the prompt (in an interactive shell)
-# Default prompt from Xubuntu ~/.bashrc contains entire path, which is much too long
-# The prompt below replaces this with just the basename of $0 (obtained by \W)
-# and puts the command number from history in [brackets]
-
-if [ ! -z "$BASH_ALIASES_HAS_RUN" ]; then # Don't keep adding to the path
-    return
-else
-    BASH_ALIASES_HAS_RUN=true
-fi
-
-# Add ~/bin to the front of the path to let bash find any user-specific commands
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-alias DeltaWalker=/usr/local/share/applications/DeltaWalker
-
-# if [[ $- == *i* ]]; then # this is an interactive shell
-#     #    PS1='${debian_chroot:+($debian_chroot)}\h/\W[\!]:\$ ' # Under occasional circumstances debian_chroot gets defined and makes massively long prompt, so next line eliminates it
-#     PS1='\h:\W[\!] \$ '
-#     if [ -e /tmp/test-for-llorracc ]; then # This is the first time an interactive script has been run after bootup
-# 	sudo rm -f /tmp/test-for-llorracc  # Prevent this test from running every time a new interactive script is run after first run
-# 	if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then # Running from a location where llorracc.local is visible, print option to link to it
-# 	    if [ ! -e /media/ro.llorracc.local ] || [ ! -e /media/rw.llorracc.local ] || [ ! "$(ls -A /media/ro.llorracc.local)" ] || [ ! "$(ls -A /media/rw.llorracc.local)" ]; then # something is not mounted, but could be
-# 		mountOnly='source ~/.bashrc-linux-local-mount-force' && mountAndSwitch=$mountOnly && mountAndSwitch+=' ; sudo rm -r /Methods ; sudo ln -fs /Methods-Mstr /Methods' && echo ''
-# 		echo 'llorracc.local is available. Command to mount it is on clipboard (ctrl-shft-v to paste):' && echo '' && echo 'Mount only:' $mountOnly && echo 'Switch too:' $mountAndSwitch && echo '' && echo -n $mountAndSwitch | xsel --clipboard --input
-# 	    fi
-# 	fi
-#     fi
-# fi
-
-# If not running interactively, don't do any of the stuff following the end of the case command
-# (which is the default Ubuntu method of testing shell interactivity)
 case $- in
     *i*) ;;
-    *) return;;
+      *) return;;
 esac
 
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#    PS1="\u@\h:\w/\$ " 
+    PS1="\W/\$ " 
+else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#    PS1="\u@\h:\w/\$ " 
+    PS1="\W/\$ " 
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\W/\$ " 
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like . ~/.bash-linux-local, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+# if [ -f ~/.bash_aliases ]; then
+#     . ~/.bash_aliases
+# fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Determine whether we are using Dropbox or llorracc.local or neither for access to the Methods folder
+if [ -d ~/Dropbox ]; then # if Dropbox exists, assume we are using it 
+  if hash dropbox 2>/dev/null; then
+      echo -n 'The Dropbox folder exists and the dropbox command exists '
+      if pgrep -x dropbox > /dev/null ; then
+	  echo 'and the dropbox command is running.'
+      else
+          echo 'but the dropbox command is not running; this should be fixed.'
+      fi
+  else
+      echo 'The Dropbox folder exists but the dropbox command does not exist.  This needs to be fixed.'
+      echo '  Delete the ~/Dropbox folder to convert completely to local mode.'
+      echo ''
+  fi
+  [ "$(readlink /Methods)" == "/home/methods/Dropbox/Methods" ] && echo 'The root /Methods link is to /home/methods/Dropbox/Methods.' && echo '' && [ -d /media/ro.llorracc.local ] && [ "$(ls -A /media/ro.llorracc.local)" ] && echo 'However, /media/ro.llorracc.local is populated.' && command='sudo rm -f /Methods ; sudo ln -fs /Methods-Slve /Methods'           && echo 'On clipboard (shft-C-v) is command to switch: ' $command && echo '' && echo $command | xsel --clipboard --input 
+  [ "$(readlink /Methods)" == "/Methods-Mstr" ]                 && echo 'The root /Methods link is to /Methods-Mstr.' && echo '' &&                                                            command='sudo rm -f /Methods ; sudo ln -fs /home/methods/Dropbox/Methods / ' && echo 'On clipboard (shft-C-v) is command to switch: ' $command && echo '' && echo $command | xsel --clipboard --input 
+  [ "$(readlink /Methods)" == "/Methods-Slve" ]                 && echo 'The root /Methods link is to /Methods-Slve.' && echo '' &&                                                            command='sudo rm -f /Methods ; sudo ln -fs /home/methods/Dropbox/Methods / ' && echo 'On clipboard (shft-C-v) is command to switch: ' $command && echo '' && echo $command | xsel --clipboard --input 
+else
+    if [ ! -e /media/ro.llorracc.local ] || [ ! -e /media/rw.llorracc.local ] || [ ! "$(ls -A /media/ro.llorracc.local)" ] || [ ! "$(ls -A /media/rw.llorracc.local)" ]; then
+	if [ `whoami` == "methods" ]; then
+	echo 'Neither valid Dropbox nor valid local links exist; enter passwords to create local links.'
+	source ~/.bashrc-linux-local-mount-force
+	fi
+    else
+	echo 'Working local mounts exist.'
+    fi
+    [ "$(readlink /Methods)" == "/Methods-Mstr" ] && echo 'The root /Methods link is to /Methods-Mstr' && echo ''
+    [ "$(readlink /Methods)" == "/Methods-Slve" ] && echo 'The root /Methods link is to /Methods-Slve' && echo ''
+fi
+
+# If anaconda has been installed (directory exists and is not empty), put it in the path
+[ -d /home/methods/anaconda2/bin ] && ([ "$(ls -A /home/methods/anaconda2/bin)" ]) && export PATH="/home/methods/anaconda2/bin:$PATH"
+[ -d /home/methods/anaconda3/bin ] && ([ "$(ls -A /home/methods/anaconda3/bin)" ]) && export PATH="/home/methods/anaconda3/bin:$PATH"
+[ -d /usr/local/anaconda2/bin ] && ([ "$(ls -A /usr/local/anaconda2/bin)" ]) && export PATH="/usr/local/anaconda2/bin:$PATH"
+[ -d /usr/local/anaconda3/bin ] && ([ "$(ls -A /usr/local/anaconda3/bin)" ]) && export PATH="/usr/local/anaconda3/bin:$PATH"
