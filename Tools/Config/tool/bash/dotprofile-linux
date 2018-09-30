@@ -3,6 +3,12 @@
 
 [[ -e /Volumes/Sync/Lib/config/bash/dotprofile-all ]] && source /Volumes/Sync/Lib/config/bash/dotprofile-all
 
+if [ -d /home/methods/anaconda3/bin ]; then
+    if [[ ! ":$PATH:" == *":$HOME/anaconda3/bin:"* ]]; then # anaconda3 has been installed but is not on path
+	export PATH="/home/methods/anaconda3/bin:$PATH"
+    fi
+fi
+
 # Linux gets this environment file at the beginning of any shell
 # MacOS uses a very different mechanism
 # if [ -e /etc/environment ]; then
