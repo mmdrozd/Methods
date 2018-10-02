@@ -10,5 +10,7 @@ This assignment is to write a script that installs the Anaconda superset of the 
 	 * Ability to avoid editing ~/.bashrc is facilitated by the fact that the ~/.bashrc file reads in the ~/.bash\_aliases file, which is where customizations can go
 	 * The custom ~/.bash_aliases file on your machine in turn reads in a methods-class-specific dotbashrc-linux file
 	 * That dotbashrc-linux file has the configuration info needed to tell the machine that Anaconda is in ~/Dropbox/anaconda3
-
+1. Once Anaconda is installed, you should also install the jupyter notebook extensions:
+   `conda install -c conda-forge jupyter_contrib_nbextensions`
+   
 

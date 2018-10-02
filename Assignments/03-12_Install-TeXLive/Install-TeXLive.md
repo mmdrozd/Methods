@@ -1,5 +1,4 @@
-
-Your homework in this assignment is just to make a modified version of this markdown document with your feedback on the ease or difficulty of the steps, and on bugs encountered.  As usual, put the resulting document in your `/shr/Methods/Assignments` folder with the name `[Num]_Install-TeXLive_[Moniker].md`.
+This assignment is to install LaTeX on your virtual machine, and then to post a modified version of this document with feedback on the assignment, and any bugs encountered). As usual, put the resulting document in the location described in the `How-To-Turn-In-Assignments` instructions
 
 0. Read through the script `/Methods/Tools/Install/Software/TeXLive.sh` which installs `TeXLive` and try to understand what it is doing (you should also go to any urls referenced in the script to learn what they have to say.  I have tried to document fullly what the script is doing).
 

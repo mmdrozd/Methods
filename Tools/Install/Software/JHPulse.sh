@@ -8,7 +8,7 @@ echo ''
 echo 'Hit return if you have already done this and successfully downloaded the Authenticator app'
 read answer 
 
-until [ -e ~/Downloads/pulse*.deb ]; do
+until [ -e ~/Downloads/*pulse*.deb ]; do
     echo ''
     echo ''
     echo 'The JHPulse Linux installer file is not in the ~/Downloads directory.'
@@ -23,7 +23,7 @@ until [ -e ~/Downloads/pulse*.deb ]; do
     read answer
 done
 
-sudo apt -y install ~/Downloads/pulse*.deb
+sudo apt -y install ~/Downloads/*pulse*.deb
 
 sudo /usr/local/pulse/PulseClient.sh install_dependency_packages
 

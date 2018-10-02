@@ -188,7 +188,7 @@
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
      ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
  '(case-fold-search t)
- '(csv-separators (quote ("," "|")))
+ '(csv-separators (quote ("," "&" "|")))
  '(package-selected-packages
    (quote
     (flymd exec-path-from-shell csv gited git-lens git-commit gist git bind-key free-keys yasnippet tablist shell-here pbcopy markdown-mode magit-gh-pulls csv-mode color-theme auctex async)))

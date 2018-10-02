@@ -40,7 +40,7 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 			if [ ! -e /home/methods/GitHub/Methods ]; then
 			    echo 'Need to install Methods courseware.'
 			    cmd="cd ; mkdir -p GitHub ; cd GitHub ; git clone https://github.com/ccarrollATjhuecon/Methods.git"
-			    echo "$cmd" | pbcopy
+			    echo "$cmd" | xsel --clipboard --input
 			    echo 'Hit return to execute the command below:'
 			    echo "$cmd" 
 			    read answer
@@ -76,6 +76,11 @@ fi
 # Add ~/bin to the front of the path to let bash find any user-specific commands
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
+fi
+
+# If Anaconda has been installed in the user's directory, tell bash it's there
+if [ -d "~/anaconda3/bin" ]; then
+    export PATH="$HOME/anadonda3/bin"
 fi
 
 alias DeltaWalker=/usr/local/share/applications/DeltaWalker
