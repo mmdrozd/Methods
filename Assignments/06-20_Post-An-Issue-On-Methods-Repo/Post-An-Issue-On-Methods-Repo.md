@@ -1,1 +1,0 @@
-../00_Assignments-All/Post-An-Issue-On-Methods-Repo/Post-An-Issue-On-Methods-Repo.md
