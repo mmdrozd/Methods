@@ -15,6 +15,8 @@
 	
    1.  In your fork, go to Students/2018-Fall/Monikers
       * Create a file named [Moniker].md
+      * git config --global user.email "your email on GitHub"
+      * git config --global user.name "your name on GitHub"
       * Put your real name in the markdown file
       * `git add .`
       * `git commit -m 'Reveal who [Moniker] is'`
