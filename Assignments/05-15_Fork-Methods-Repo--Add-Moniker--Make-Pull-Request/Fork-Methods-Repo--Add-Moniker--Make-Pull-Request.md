@@ -23,10 +23,12 @@
 	  * git push
 
    1. Make a pull request (help.github.com/articles/creating-a-pull-request-from-a-fork)
-      1. Go to the original repo (ccarrollATjhuecon/Methods)
+      1. Go to the forked repo ([STUDENT-GITHUB-HANDLE]/Methods)
 	  1. Right of the branch menu, "New pull request"
 	  1. Compare across forks
 	     * base fork: ccarrollATjhuecon/Methods
-		 * head fork: [STUDENT-GITHUB-HANDLE] 
+		 * base: master
+		 * head fork: [STUDENT-GITHUB-HANDLE]/Methods
+		 * head: master (or your branch name you want to create pull request for)
 		 * click: Create pull request
 
