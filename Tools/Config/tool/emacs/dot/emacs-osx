@@ -191,7 +191,7 @@
  '(csv-separators (quote ("," "&" "|")))
  '(package-selected-packages
    (quote
-    (flymd exec-path-from-shell csv gited git-lens git-commit gist git bind-key free-keys yasnippet tablist shell-here pbcopy markdown-mode magit-gh-pulls csv-mode color-theme auctex async)))
+    (ztree flymd exec-path-from-shell csv gited git-lens git-commit gist git bind-key free-keys yasnippet tablist shell-here pbcopy markdown-mode magit-gh-pulls csv-mode color-theme auctex async)))
  '(safe-local-variable-values (quote ((TeX-auto-save . t) (TeX-parse-self . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

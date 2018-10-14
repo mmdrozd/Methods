@@ -3,7 +3,8 @@
 
 scriptName="$(basename $0)"
 scriptDir="$(dirname "$0")"
-cd /tmp
+mkdir ~/tmp
+cd ~/tmp
 # Install as root user 
 sudo curl -O https://repo.continuum.io/archive/$scriptName
 
@@ -15,7 +16,7 @@ sudo curl -O https://repo.continuum.io/archive/$scriptName
 # echo Hit return when you have checked that the downloaded file is uncorrupted
 # read answer
 
-sudo bash /tmp/$scriptName -b -u -p /usr/local/anaconda3
+sudo bash ~/tmp/$scriptName -b -u -p /usr/local/anaconda3
 
 sudo /usr/local/anaconda3/bin/conda create -n py27 python=2.7 anaconda
 
@@ -28,8 +29,8 @@ if [ ! $(uname -s) = "Darwin" ]; then # Not MacOS, assume Linux
 	echo ''
     else # Add to root path -- only way to do this in ubuntu seems to be by changing /etc/environment
 	sudo chmod u+w /etc/environment
-	sudo sed -e 's\/usr/local/sbin:\/usr/local/anaconda3/bin:/usr/local/sbin:\g' /etc/environment > /tmp/environment
-	sudo mv /tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
+	sudo sed -e 's\/usr/local/sbin:\/usr/local/anaconda3/bin:/usr/local/sbin:\g' /etc/environment > ~/tmp/environment
+	sudo mv ~/tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
 	sudo chmod u-w /etc/environment
     fi
 fi
@@ -37,3 +38,4 @@ fi
 source /etc/environment
 sudo conda install -c conda-forge jupyter_contrib_nbextensions
 
+sudo rm -Rf ~/tmp
