@@ -27,7 +27,7 @@ sudo curl -O https://repo.continuum.io/archive/$scriptName
 if [ "$who" == "root" ]; then 
     sudo bash ~/tmp/$scriptName -b -u -p /usr/local/anaconda3
 
-    # sudo /usr/local/anaconda3/bin/conda create -n py27 python=2.7 anaconda
+    sudo /usr/local/anaconda3/bin/conda create -n py27 python=2.7 anaconda
 
     # Add anaconda to paths both for root and for all other users
     if [ ! $(uname -s) = "Darwin" ]; then # Not MacOS, assume Linux
