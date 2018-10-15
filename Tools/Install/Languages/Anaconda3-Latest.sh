@@ -8,11 +8,11 @@ CONTREPO=https://repo.continuum.io/archive/
 # Stepwise filtering of the html at $CONTREPO
 # Get the topmost line that matches our requirements, extract the file name.
 ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
-cmd="wget -O ~/tmp/$ANACONDAURL $CONTREPO$ANACONDAURL"
+cmd="wget -O ~/tmp/$ANACONDAURL $CONTREPO$ANACONDAURL ; cd ~/tmp"
 echo "$cmd"
 eval "$cmd"
 
-cmd="chmod a+x $ANACONDAURL ; $ANACONDAURL $CONTREPO$ANACONDAURL -b -t"
+cmd="chmod a+x ~/tmp/$ANACONDAURL ; ~/tmp/$ANACONDAURL $CONTREPO$ANACONDAURL -b -p ~/anaconda3"
 echo $cmd
 eval $cmd
 
@@ -30,5 +30,3 @@ else
 fi
 
 rm -f ~/tmp/$ANACONDAURL ~/tmp/.bash_aliases*
-
-

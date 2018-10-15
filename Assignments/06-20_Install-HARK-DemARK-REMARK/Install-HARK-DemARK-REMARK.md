@@ -14,6 +14,7 @@ This assignment is to write a script set up the HARK toolkit within an appropria
 	   `source activate ARK`
 	* Launch the `spyder` python development environment (just type `spyder &` at the command prompt)
 	* Load the `do_all.py` file and run it
+	   * Hint: Is there something that looks like a `play` button? Bingo!
 0. Navigate to the `DemARK/notebooks` directory and from inside that directory
     * Activate the ARK environment that you have created:
 	   `source activate ARK`

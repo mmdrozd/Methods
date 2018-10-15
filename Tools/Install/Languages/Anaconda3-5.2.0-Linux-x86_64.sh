@@ -52,5 +52,7 @@ else #
     echo '-b batch mode'
     echo '-u update existing installation'
     echo '-t run package tests after installation'
-    sudo bash ~/tmp/$scriptName -b -u 
+    cmd="sudo bash ~/tmp/$scriptName -b -u -p ~/"
+    echo $cmd
+    eval $cmd
 fi

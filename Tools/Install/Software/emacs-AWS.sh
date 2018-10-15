@@ -8,7 +8,8 @@
 sudo apt -y update
 sudo apt -y install emacs25-nox
 
-if grep -q 'load-theme' ~/.emacs; then
+touch ~/.emacs
+if ! grep -q 'load-theme' ~/.emacs; then
     echo '' >> ~/.emacs
     echo "(load-theme 'tango-dark)" >> ~/.emacs
 fi
