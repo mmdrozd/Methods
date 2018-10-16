@@ -16,3 +16,8 @@ When you are comfortable with the idea, follow the instructions below to get a f
 0. After getting your valid credit card or debit card number, AWS will make a phone call
    * You will need to enter the number that the website shows you into your phone to confirm the account
 0. We will do the rest of the setup in class
+
+For a description of storage, see https://aws.amazon.com/premiumsupport/knowledge-center/ebs-volume-charges/
+
+nb. To avoid charges, you will need to "terminate" the instance you have created
+

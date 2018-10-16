@@ -23,7 +23,11 @@ if grep -q anaconda3 ~/.bash_aliases; then
     cat ~/.bash_aliases
     echo ''
 else
-    cat ~/.bash_aliases > ~/tmp/.bash_aliases_initial
+    if [ -e ~/.bash_aliases ]; then
+	cat ~/.bash_aliases > ~/tmp/.bash_aliases_initial
+    else
+	touch ~/tmp/.bash_aliases_initial
+    fi
     echo '' >> ~/tmp/.bash_aliases_initial
     echo $addToPath >> ~/tmp/.bash_aliases_initial
     mv ~/tmp/.bash_aliases_initial ~/.bash_aliases

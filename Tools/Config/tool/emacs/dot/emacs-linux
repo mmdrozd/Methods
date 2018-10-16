@@ -146,3 +146,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 83 :width normal)))))
+
+;; The default linux theme is appalling -- replace
+(load-theme 'tango-dark)
