@@ -33,4 +33,8 @@ else
     mv ~/tmp/.bash_aliases_initial ~/.bash_aliases
 fi
 
+source ~/.bashrc
+conda update conda
+conda update anaconda
+
 rm -f ~/tmp/$ANACONDAURL ~/tmp/.bash_aliases*
