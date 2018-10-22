@@ -56,3 +56,10 @@ else #
     echo $cmd
     eval $cmd
 fi
+
+source ~/.bashrc
+sudo chmod a+w -Rf /usr/local/anaconda*
+
+sudo conda update conda
+sudo conda update anaconda
+
