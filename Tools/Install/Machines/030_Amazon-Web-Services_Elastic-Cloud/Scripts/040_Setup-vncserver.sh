@@ -8,7 +8,11 @@
 
 echo 'Please wait while software is installed'
 sudo apt-get update
-sudo apt -y install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal xfce4 vnc4server xfce-terminal 
+sudo apt -y install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal xfce4 vnc4server xfce4-terminal
+
+# 0. Now git clone Methods repository
+
+git clone https://github.com/ccarrollATjhuecon/Methods
 
 # 0. Now setup startup files
 
