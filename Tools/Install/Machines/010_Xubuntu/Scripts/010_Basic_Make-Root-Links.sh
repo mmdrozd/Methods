@@ -18,14 +18,18 @@ if [ -e /media/ro.llorracc.local ]; then # We are working on a home-local machin
     llorraccMethMstrPath=/media/rw.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods
 
     if [ ! "$(ls -A /media/ro.llorracc.local)" ]; then # we have not mounted the ro.llorracc.local directory
-	echo 'ro.llorracc.local exists but is empty -- mount it if you want to use as local machine; hit return to ignore'
-	read answer
+	if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then
+	    echo 'ro.llorracc.local is pingable but not mounted -- mount it if you want to use as local machine; hit return to ignore'
+            read answer
+	    fi
     fi
     sudo rm -f /Methods-Slve
     sudo ln -fs $llorraccMethSlvePath /Methods-Slve
     if [ ! "$(ls -A /media/rw.llorracc.local)" ]; then # we have not mounted the rw.llorracc.local directory
-	echo 'ro.llorracc.local exists but is empty -- mount it if you want to use as local machine; hit return to ignore'
-	read answer
+	    if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then
+  	        echo 'rw.llorracc.local exists but is empty -- mount it if you want to use as local machine; hit return to ignore'
+	        read answer
+	    fi
     fi
     sudo rm -f /Methods-Mstr
     sudo ln -fs $llorraccMethMstrPath /Methods-Mstr

@@ -14,8 +14,15 @@ if [ -e /var/cache/apt/methods/google-chrome-stable_current_amd64.deb ]; then
     echo ''
     echo 'It appears that you may already have installed Google Chrome.  Skipping installation.'
     echo ''
-    echo 'To force a reinstall, delete /var/cache/apt/google-chrome-stable_current_amd64.deb'
+    echo 'To force a reinstall delete '
+    echo '' 
+    echo '/var/cache/apt/google-chrome-stable_current_amd64.deb'
+    echo ''
     echo 'and rerun this script.'
+    echo ''
+    echo ''
+    echo ''
+    echo ''
 else 
     cd /var/cache/apt/methods
     sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

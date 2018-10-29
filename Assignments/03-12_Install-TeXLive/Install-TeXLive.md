@@ -2,7 +2,7 @@ This assignment is to install LaTeX on your virtual machine, and then to post a 
 
 0. Read through the script `/Methods/Tools/Install/Software/TeXLive.sh` which installs `TeXLive` and try to understand what it is doing (you should also go to any urls referenced in the script to learn what they have to say.  I have tried to document fullly what the script is doing).
 
-    * WARNING: This installs the full version of TeXLive, which is I think about 3 gb.  To do so it downloads an installer that is also about 3gb.  Thus, if the amount of space occupied by your virtual disk file cannot expand by AT THE VERY LEAST 6gb (and to be safe, you should probably make it 10gb), you may need to consider another option, like (a) mounting an external drive (say, a spare USB key); and (b) rewriting the /TeXLive.sh script to download the installer to your external drive, and install from there, which at least saves you the disk space required for the installation files themselves.
+    * WARNING: This installs the full version of TeXLive, which is I think about 3 gb.  To do so it downloads an installer that is also about 3gb.  Thus, if the amount of space occupied by your virtual disk file cannot expand by AT THE VERY LEAST 6gb (and to be safe, you should probably make sure you have at least 10gb available for expansion of your virtual drive), you may need to consider another option, like (a) mounting an external drive (say, a spare USB key); and (b) rewriting the `TeXLive.sh` script to download the installer to your external drive, and install from there, which at least saves you the disk space required for the installation files themselves.
 
 0. Install the `okular` PDF viewer (`sudo apt -y install okular`)
 
@@ -18,4 +18,4 @@ This assignment is to install LaTeX on your virtual machine, and then to post a 
 
     (You can find their default settings, along with the other defaults, in `/usr/local/texlive/[YYYY]/texmf-dist/web2c/texmf.cnf`)
 
-    (You may need to change the permissions over the file)
+    (You may need to change the permissions of the file)
