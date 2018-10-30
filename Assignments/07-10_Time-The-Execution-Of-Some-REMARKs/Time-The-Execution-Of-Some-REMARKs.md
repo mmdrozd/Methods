@@ -105,4 +105,4 @@
    `spyder &`   
    
 Run the relevant do_all.py files   
-Report the time   
+Report the time to execute the files  
