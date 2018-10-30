@@ -14,3 +14,95 @@
 0. When you have finished doing this on your VM, repeat the exercise on an AWS EC2 instance
    * You will probably want to review the sketchy instructions `Get-AWS-Account-And-Learn-About-EC2.md` and the info in
    `/Methods/Tools/Install/Machines/030_Amazon-Web-Services_Elastic-Cloud/Scripts`
+
+
+**Detailed instructions for the assignment 07_10_Time-The-Execution-Of-Some-REMARKs on an AWS EC2 instance**
+
+0. Open your VM
+0. Launch an instance on AWS
+0. Open Terminal
+
+   `cd Downloads`   
+   `ssh -i "AcalinJ.pem" ubuntu@ec2-18-222-201-18.us-east2.compute.amazonaws.com`   
+   `sudo apt update`    
+   `sudo apt install xfce4 xgce4-goodies`   
+   
+   `git clone https://github.com/ccarrollATjhuecon/Methods`   
+   
+   `sudo apt install tightvncserver`   
+
+   #This bloc of instructions might be useless   
+   `mkdir -p ~/.vnc/xstartup`   
+   `cd Methods/Tools/Install/Machines/030_Amazon-Web-Services_Elastic-Cloud/Resources/userRoot/dot/vnc`   
+   `cp xstartup_xfce ~/.vnc/xstartup`   
+   `chmod a+x !$`      
+   #End of bloc      
+   
+   `vncserver`
+
+   You are asked to give a password   
+   Because we are going to be changing how the VNC server is configured, first stop the VNC server instance that is running on port       5901 with the following command:   
+   `vncserver -kill :1`   
+
+   The output should look like this:   
+   Killing Xtightvnc process ID 17648   
+   
+   Before you modify the xstartup file, back up the original:   
+   `mv ~/.vnc/xstartup ~/.vnc/xstartup.bak`   
+   Now create a new xstartup file and open it in your text editor:   
+   `nano ~/.vnc/xstartup`   
+
+   Commands in this file are executed automatically whenever you start or restart the VNC server. We need VNC to start our desktop        environment if it's not already started. Add these commands to the file:   
+   `#!/bin/bash`      
+   `xrdb $HOME/.Xresources`   
+   `startxfce4 &`   
+   
+   Press Esc control-X then Yes Enter to save changes   
+
+   `sudo chmod +x ~/.vnc/xstartup`   
+   
+   Now, restart the VNC server.   
+   `vncserver`   
+   
+0. Do not close this terminal, open a second one   
+   `cd Downloads   
+   ssh -L 5901:localhost:5901 -i AcalinJ.pem ubuntu@ec2-18-222-201-18.us-east-2.compute.amazonaws.com`   
+   
+0. Again do not close this new terminal, open a third one   
+   `Remmina`   
+   
+   Select Protocol: VCN   
+   Server: localhost:5901   
+   Connect   
+   
+   It will ask you the password, type it. Once you are connected, you'll see the default Xfce desktop.   
+   
+0. In the remote machine (localhost:5901), open a terminal   
+   
+   `sudo apt install python-pip`      
+   `sudo apt-get install curl`      
+   `$ curl -O https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh`      
+   `chmod a+x Anaconda3-5.2.0-Linux-x86_64.sh`      
+   `./Anaconda3-5.2.0-Linux-x86_64.sh`   
+   
+   `export PATH=~/anaconda3/bin:$PATH`   
+   `conda --version`   
+   `conda install -c conda-forge jupyter_contrib_nbextensions`   
+   `sudo apt install spyder`   
+   
+   `conda create -y --name ARK python=3.6`    
+   `pip install –upgrade pip`   
+   `pip install econ-ark`   
+    
+   `cd`   
+   `mkdir GitHub`   
+   `cd GitHub`   
+   
+   `git clone git://github.com/econ-ark/DemARK`   
+   `git clone git://github.com/econ-ark/REMARK`   
+   
+   `source activate ARK`   
+   `spyder &`   
+   
+Run the relevant do_all.py files   
+Report the time   
