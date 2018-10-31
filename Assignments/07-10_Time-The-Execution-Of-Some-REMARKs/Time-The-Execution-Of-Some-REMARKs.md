@@ -44,33 +44,11 @@
    When you ran `vncserver` (do not run it again) it created a xstartup file. Commands in this file are executed automatically whenever you start or restart the VNC server. We need VNC to start our desktop environment if it's not already started. Before you modify the xstartup file, back up the original:   
    `mv ~/.vnc/xstartup ~/.vnc/xstartup.bak`       
    
-   There are two ways to proceed:    
-   1. You can copy the xstartup file from the Methods repo.   
+   You have to copy the xstartup file from the Methods repo. Change directory to the folder where the file is located, then copy it:  
       `cd Methods/Tools/Install/Machines/030_Amazon-Web-Services_Elastic-Cloud/Resources/userRoot/dot/vnc`   
       `cp xstartup_xfce ~/.vnc/xstartup`   
       `chmod a+x !$`      
-   
-   1. Or you can write the xstartup file manually.   
-      `nano ~/.vnc/xstartup`   
-      Then add these commands to the file:   
-      `#!/bin/sh`    
-      `# Uncomment the following two lines for normal desktop:`   
-      `unset SESSION_MANAGER`   
-      `# exec /etc/X11/xinit/xinitrc`   
-      `unset DBUS_SESSION_BUS_ADDRESS`   
-      `startxfce4 &`   
-      `[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup`   
-      `[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources`   
-      `xsetroot -solid grey`   
-      `vncconfig -iconic &`   
-      `gnome-panel &`   
-      `gnome-settings-daemon &`   
-      `metacity &`   
-      `nautilus &`   
-      `gnome-terminal &`     
-      Press Esc control-X then Yes Enter to save changes   
-      `sudo chmod +x ~/.vnc/xstartup`   
-   
+    
    Now, restart the VNC server.   
    `vncserver`   
    
@@ -79,7 +57,7 @@
    `ssh -L 5901:localhost:5901 -i [Moniker].pem ubuntu@ec2-18-222-201-18.us-east-2.compute.amazonaws.com` (again, the DNS is given to you by AWS)       
    
 0. Again do not close this new terminal, open a third one   
-   `Remmina`   
+   `remmina`   
    
    Select Protocol: VCN   
    Server: localhost:5901   
