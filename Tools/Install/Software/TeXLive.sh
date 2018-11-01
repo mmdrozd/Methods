@@ -17,7 +17,7 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sudo apt update
 sudo apt -y install perl-tk
-sudo apt -y install gksu
+# sudo apt -y install gksu
 
 # Because TeXLive is so large, uninstall any previous versions before installing
 
