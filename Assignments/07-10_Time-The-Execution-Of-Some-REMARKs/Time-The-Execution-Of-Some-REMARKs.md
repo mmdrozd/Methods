@@ -1,4 +1,5 @@
 
+
 0. Pull the latest versions of the REMARK repo
 0. For the SolvingMicroDSOPs repo:
     * Verify that you are able to execute the "do_all.py" programs in spyder on your VM
@@ -19,18 +20,18 @@
 **Detailed instructions for the assignment 07_10_Time-The-Execution-Of-Some-REMARKs on an AWS EC2 instance**
 
 0. Open your VM
-0. Launch an instance on AWS
+0. Launch an instance on AWS (You might to want to select 30 GiB Size on the Add Storage section)
 0. Open Terminal
 
    `cd Downloads`   
    `ssh -i "[Moniker].pem" ubuntu@ec2-18-222-201-18.us-east2.compute.amazonaws.com` (copy the link given to you by AWS under Connect to your instance using its public DNS)       
    `sudo apt update`    
    `sudo apt-get upgrade`
-   `sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal xfce4 vnc4server`   
+   `sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal xfce4 vnc4server xfce4-terminal`   
    
    `git clone https://github.com/ccarrollATjhuecon/Methods`   
    
-   `sudo apt install tightvncserver`        
+   `sudo apt install tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer`        
    
    `vncserver`
 
@@ -39,10 +40,7 @@
    `vncserver -kill :1`   
 
    The output should look like this:   
-   Killing Xtightvnc process ID 17648   
-   
-   When you ran `vncserver` (do not run it again) it created a xstartup file. Commands in this file are executed automatically whenever you start or restart the VNC server. We need VNC to start our desktop environment if it's not already started. Before you modify the xstartup file, back up the original:   
-   `mv ~/.vnc/xstartup ~/.vnc/xstartup.bak`       
+   Killing Xtigervnc process ID 9523... success!    
    
    You have to copy the xstartup file from the Methods repo. Change directory to the folder where the file is located, then copy it:  
       `cd Methods/Tools/Install/Machines/030_Amazon-Web-Services_Elastic-Cloud/Resources/userRoot/dot/vnc`   
@@ -77,6 +75,7 @@
    `conda --version`   
    `conda install -c conda-forge jupyter_contrib_nbextensions`   
    `sudo apt install spyder`   
+   `conda install pyopengl`
    
    `conda create -y --name ARK python=3.6`    
    `pip install –upgrade pip`   
