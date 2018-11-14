@@ -19,14 +19,15 @@
 
 **Detailed instructions for the assignment 07_10_Time-The-Execution-Of-Some-REMARKs on an AWS EC2 instance**
 
+
 0. Open your VM
-0. Launch an instance on AWS (You might to want to select 30 GiB Size on the Add Storage section)
+0. Launch an instance on AWS (**Important note**: The Free tier eligible instance type (1GB RAM, 1 vCPU) is not powerful enough to properly run this code. An appropriate instance configuration would include 8GB RAM, 2 vCPUs and a network performance up to 10 Gigabit. Moreover, select 30 GiB Size on the Add Storage section. **AWS will charge you a (small) fee for such configuration, so remember to terminate your instance after you are done!** 
 0. Open Terminal
 
    `cd Downloads`   
    `ssh -i "[Moniker].pem" ubuntu@ec2-18-222-201-18.us-east2.compute.amazonaws.com` (copy the link given to you by AWS under Connect to your instance using its public DNS)       
    `sudo apt update`    
-   `sudo apt-get upgrade`
+   `sudo apt-get upgrade`    
    `sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal xfce4 vnc4server xfce4-terminal`   
    
    `git clone https://github.com/ccarrollATjhuecon/Methods`   
@@ -67,7 +68,8 @@
    
    `sudo apt install python-pip`      
    `sudo apt-get install curl`      
-   `$ curl -O https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh`      
+   `curl -O https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh`      
+   Note: -O is the uppercase letter O, not the number 0.   
    `chmod a+x Anaconda3-5.2.0-Linux-x86_64.sh`      
    `./Anaconda3-5.2.0-Linux-x86_64.sh`   
    
