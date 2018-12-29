@@ -5,16 +5,6 @@
 ;;; 2017-02-06: CDC file to which emacs on macs should link
 ;;; 2017-08-24: Fix failure to correctly load TeX-latex-mode automatically 
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (package-initialize)
 
 (load "/Volumes/Sync/Lib/config/emacs/dot/emacs-all")

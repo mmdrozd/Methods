@@ -94,6 +94,8 @@ for texfile in tex bibtex; do
     sudo ln -fs /Methods/Tools/Config/tool/texlive/texmf-local/$texfile ./$texfile
 done
 
+sudo apt -y install xzdec
+sudo apt -y install texlive-fonts-extra
 sudo texhash
 
 sudo rm -Rf ~/tmp-TeXLive    
