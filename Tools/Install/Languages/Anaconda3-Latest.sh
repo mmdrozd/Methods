@@ -38,3 +38,8 @@ conda update conda
 conda update anaconda
 
 rm -f ~/tmp/$ANACONDAURL ~/tmp/.bash_aliases*
+conda install -c anaconda scipy
+conda install -c pyopengl # Otherwise you get an error "Segmentation fault (core dumped)"
+
+./Anaconda-jupyter_contrib_nbextensions.sh
+/Methods/Tools/Config/tool/jupytext/default.sh

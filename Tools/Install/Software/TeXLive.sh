@@ -68,7 +68,8 @@ for YYYY in ????; do # This should find all directories that are four characters
     done
 done
 
-if [ -f /usr/local/texlive/texmf.cnf ]; then # Don't want to have to recreate texmf.cnf every time there's a new version of texlive    sudo mv /usr/local/texlive/$YYYY/texmf.cnf texmf_orig.cnf 
+if [ -f /usr/local/texlive/texmf.cnf ]; then # Don't want to have to recreate texmf.cnf every time there's a new version of texlive
+    sudo mv /usr/local/texlive/$YYYY/texmf.cnf texmf_orig.cnf 
     sudo ln -fs /usr/local/texlive/texmf-local/web2c/texmf.cnf /usr/local/texlive/$YYYY
 else # the configuration file does not exist yet, so make it 
     sudo cp $scriptDir/TeXLive/root/usr/local/texlive/texmf-local/web2c/texmf.cnf /usr/local/texlive/texmf-local/web2c/texmf.cnf

@@ -63,3 +63,5 @@ sudo chmod a+w -Rf /usr/local/anaconda*
 sudo conda update conda
 sudo conda update anaconda
 
+conda install -c anaconda scipy
+conda install -c pyopengl # Otherwise you get an error "Segmentation fault (core dumped)"
