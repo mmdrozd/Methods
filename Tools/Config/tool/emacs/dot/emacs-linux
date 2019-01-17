@@ -101,7 +101,7 @@
  '(org-export-with-sub-superscripts nil)
  '(package-selected-packages
    (quote
-    (csv tablist yasnippet shell-here auctex paradox cl-lib leanote gmail-message-mode markdown-preview-mode markdown-mode pbcopy magit-gh-pulls color-theme)))
+    (magit csv tablist yasnippet shell-here auctex paradox cl-lib leanote gmail-message-mode markdown-preview-mode markdown-mode pbcopy magit-gh-pulls color-theme)))
  '(paradox-automatically-star t)
  '(safe-local-variable-values (quote ((TeX-parse-self . t)))))
 
@@ -149,3 +149,19 @@
 
 ;; The default linux theme is appalling -- replace
 (load-theme 'tango-dark)
+
+;; CUA OS copypasta even in ncurses mode
+(progn
+                (setq x-select-enable-clipboard t)
+                (defun xsel-cut-function (text &optional push)
+                  (with-temp-buffer
+                    (insert text)
+                    (call-process-region (point-min) (point-max) "xsel" nil 0 nil "--clipboard" "--input")))
+                (defun xsel-paste-function()
+
+                  (let ((xsel-output (shell-command-to-string "xsel --clipboard --output")))
+                    (unless (string= (car kill-ring) xsel-output)
+                      xsel-output )))
+                (setq interprogram-cut-function 'xsel-cut-function)
+                (setq interprogram-paste-function 'xsel-paste-function))
+		

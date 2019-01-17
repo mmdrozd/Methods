@@ -361,4 +361,5 @@ private
 # emacs .el files
 *.el
 
-
+# Ignore flymd files
+flymd.*

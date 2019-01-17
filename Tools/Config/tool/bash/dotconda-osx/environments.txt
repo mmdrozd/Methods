@@ -8,3 +8,4 @@
 /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/python3.3
 /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/PyObjC_py3
 /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda
+/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/envs/py27_GanongNoelUI
