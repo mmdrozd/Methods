@@ -3,6 +3,8 @@
 # sudo 
 set -e
 
+finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish_modified-for-methods.sh
+
 # set defaults
 default_hostname="$(hostname)"
 default_domain="jhu.edu"
@@ -64,7 +66,7 @@ if ! grep -q "noninteractive" /proc/cmdline ; then
     if [[ ! -f $tmp/finish.sh ]]; then
         echo -n " downloading finish.sh: "
         cd $tmp
-        download "https://raw.githubusercontent.com/netson/ubuntu-unattended/master/finish.sh"
+        download "$finishPath"
     fi
 
     # set proper permissions on finish script
