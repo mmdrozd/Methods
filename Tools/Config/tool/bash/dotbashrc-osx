@@ -10,6 +10,8 @@
 source /Volumes/Sync/Lib/config/bash/dotbashrc-all
 export EDITOR="/Applications/Emacs.app/Contents/MacOS/Emacs"
 
+# defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # https://supports.apple.com/en-us/HT208209; speeds up browsing on network shares by ignoring .DS_Store and showing everything alphabetically
+
 alias julia="/Applications/Julia-0.6.app/Contents/Resources/julia/bin/julia"
 alias emacs="/usr/local/bin/emacs -nw"
 alias keychain="open -a /Applications/Utilities/Keychain\ Access.app"
@@ -84,4 +86,8 @@ fi
 if type "pandoc" > /dev/null; then # if pandoc command exists
     eval "$(pandoc --bash-completion)"
 fi
+
+[ -d /Volumes/Sync/Lib/Code/bash/sys ] && ([ "$(ls -A /Volumes/Sync/Lib/Code/bash/sys)" ]) && export PATH="/Volumes/Sync/Lib/Code/bash/sys:$PATH"
+
+# Added by /Volumes/Sync/Lib/Install/anaconda/OSX/install-to-Sync.sh
 

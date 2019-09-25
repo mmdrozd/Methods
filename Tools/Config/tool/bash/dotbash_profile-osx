@@ -12,4 +12,21 @@
        source /Volumes/Sync/Lib/config/bash/dotbash_profile-all
 
 # Useful configuration tips are in
-# http://www.emacswiki.org/emacs/EmacsForMacOS
+# http://www.emacswiki.org/emacs/EmacsForMacOS. /Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/etc/profile.d/conda.sh
+export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig # for Octave
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/Volumes/Sync/Sys/OSX/linked/root/usr/local/bin/anaconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

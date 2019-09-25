@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd "$(dirname "$0")" 
 # If jupytext has not been installed, install it
 [[ ! `conda list | grep jupytext` != '' ]] && sudo conda install -c conda-forge jupytext
 

@@ -1,17 +1,29 @@
+;;; 2019-08-11: Add (with-eval-after-load) to handle problems documented below with aquamacs
 ;;; 2017-12-03: Add the flymd package, which produces a live-updating version of the Markdown document you are editing
 ;;; 2017-12-03: Configure markdown-mode so that it compiles using /Methods/Tools/Install/Software/markdown-preview-gfm/flavor.rb which renders github-flavored Markdown (allowing tables)
 ;;; 2017-12-02: Fix the fact that GUI emacs did not get the same PATH as terminal; see https://github.com/purcell/exec-path-from-shell
 ;;; 2017-10-08: Add git and gist to default packages
 ;;; 2017-02-06: CDC file to which emacs on macs should link
 ;;; 2017-08-24: Fix failure to correctly load TeX-latex-mode automatically 
+;; ____________________________________________________________________________
+;; Aquamacs custom-file warning:
+;; Warning: After loading this .emacs file, Aquamacs will also load
+;; customizations from `custom-file' (customizations.el). Any settings there
+;; will override those made here.
+;; Consider moving your startup settings to the Preferences.el file, which
+;; is loaded after `custom-file':
+;; ~/Library/Preferences/Aquamacs Emacs/Preferences
+;; _____________________________________________________________________________
 
+(with-eval-after-load 'tls                              ;;; Required for Aquamacs; see https://github.com/davidswelt/aquamacs-emacs/pull/140
+  (push "/private/etc/ssl/cert.pem" gnutls-trustfiles)) ;;; 
 (package-initialize)
 
 (load "/Volumes/Sync/Lib/config/emacs/dot/emacs-all")
 
 (when (>= emacs-major-version 24) ;; version 24 introduced the package manager
   (require 'package)
-  (append-to-list 'package-list '(auctex shell-here org csv-mode git markdown-mode pbcopy yasnippet async git gist exec-path-from-shell flymd))
+  (append-to-list 'package-list '(elpy auctex shell-here org csv-mode markdown-mode pbcopy yasnippet async git gist magit exec-path-from-shell material-theme py-autopep8))
 
   ;; fetch the list of packages available
   (unless package-archive-contents
@@ -134,55 +146,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(Buffer-menu-name-width 30)
- '(TeX-command-list
-   (quote
-    (("TeX" "%(PDF)%(tex) %(file-line-error) %(extraopts) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
-      (plain-tex-mode texinfo-mode ams-tex-mode)
-      :help "Run plain TeX")
-     ("LaTeX" "%`%l%(mode)%' %t" TeX-run-TeX nil
-      (latex-mode doctex-mode)
-      :help "Run LaTeX")
-     ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
-      (texinfo-mode)
-      :help "Run Makeinfo with Info output")
-     ("Makeinfo HTML" "makeinfo %(extraopts) --html %t" TeX-run-compile nil
-      (texinfo-mode)
-      :help "Run Makeinfo with HTML output")
-     ("AmSTeX" "amstex %(PDFout) %(extraopts) %`%S%(mode)%' %t" TeX-run-TeX nil
-      (ams-tex-mode)
-      :help "Run AMSTeX")
-     ("ConTeXt" "%(cntxcom) --once --texutil %(extraopts) %(execopts)%t" TeX-run-TeX nil
-      (context-mode)
-      :help "Run ConTeXt once")
-     ("ConTeXt Full" "%(cntxcom) %(extraopts) %(execopts)%t" TeX-run-TeX nil
-      (context-mode)
-      :help "Run ConTeXt until completion")
-     ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
-     ("View" "open -a TeXShop.app %s.pdf" TeX-run-command t t :help "Run Text viewer")
-     ("Print" "%p" TeX-run-command t t :help "Print the file")
-     ("Queue" "%q" TeX-run-background nil t :help "View the printer queue" :visible TeX-queue-command)
-     ("File" "%(o?)dvips %d -o %f " TeX-run-dvips t t :help "Generate PostScript file")
-     ("Dvips" "%(o?)dvips %d -o %f " TeX-run-dvips nil t :help "Convert DVI file to PostScript")
-     ("Ps2pdf" "ps2pdf %f" TeX-run-ps2pdf nil t :help "Convert PostScript file to PDF")
-     ("Index" "makeindex %s" TeX-run-index nil t :help "Run makeindex to create index file")
-     ("Xindy" "texindy %s" TeX-run-command nil t :help "Run xindy to create index file")
-     ("Check" "lacheck %s" TeX-run-compile nil
-      (latex-mode)
-      :help "Check LaTeX file for correctness")
-     ("ChkTeX" "chktex -v6 %s" TeX-run-compile nil
-      (latex-mode)
-      :help "Check LaTeX file for common mistakes")
-     ("Spell" "(TeX-ispell-document \"\")" TeX-run-function nil t :help "Spell-check the document")
-     ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
-     ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
-     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
- '(case-fold-search t)
- '(csv-separators (quote ("," "&" "|")))
+ '(aquamacs-customization-version-id 310 t)
+ '(aquamacs-tool-bar-user-customization nil t)
+ '(ns-tool-bar-display-mode nil t)
+ '(ns-tool-bar-size-mode nil t)
+ '(one-buffer-one-frame-mode (quote default))
  '(package-selected-packages
    (quote
-    (ztree flymd exec-path-from-shell csv gited git-lens git-commit gist git bind-key free-keys yasnippet tablist shell-here pbcopy markdown-mode magit-gh-pulls csv-mode color-theme auctex async)))
- '(safe-local-variable-values (quote ((TeX-auto-save . t) (TeX-parse-self . t)))))
+    (pretty-hydra origami yafolding wc-mode apples-mode material-theme use-package tablist shell-here py-autopep8 pbcopy markdown-mode magit-gh-pulls helm-bind-key git gist free-keys flymd flycheck-pycheckers exec-path-from-shell elpy diminish csv-mode color-theme auctex)))
+ '(visual-line-mode nil t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -191,3 +163,5 @@
  )
 
 (put 'downcase-region 'disabled nil)
+
+
