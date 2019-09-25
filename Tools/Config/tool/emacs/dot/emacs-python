@@ -1,0 +1,3 @@
+;; Recommendations from https://realpython.comemacs-the-best-python-editor
+(load-theme 'material t) ;; black background
+(global-linum-mode t)    ;; enable line numbers globally
