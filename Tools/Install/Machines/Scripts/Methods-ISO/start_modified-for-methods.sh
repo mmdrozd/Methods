@@ -62,6 +62,19 @@ if ! grep -q "noninteractive" /proc/cmdline ; then
     apt-get -y autoremove
     apt-get -y purge
 
+    # Install Methods course material
+
+    apt-get -y git
+    mkdir -p /home/methods/GitHub/ccarrollATjhuecon
+    chmod a+rwx !$
+    cd !$
+    git clone https://github.com/ccarrollATjhuecon/Methods.git
+
+    # Other packages
+
+    apt -y install ca-certificates openssl python openssh-server vim xubuntu-desktop
+
+    apt-get -y 
     # download the finish script if it doesn't yet exist
     if [[ ! -f $tmp/finish.sh ]]; then
         echo -n " downloading finish.sh: "
