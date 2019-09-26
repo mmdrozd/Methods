@@ -56,4 +56,4 @@ apt -y install emacs
 # rm $0
 
 #echo 'Run finish.sh'
-reboot
+
