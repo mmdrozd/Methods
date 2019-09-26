@@ -3,6 +3,10 @@
 
 finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish_modified-for-methods.sh
 
+# set defaults
+default_hostname="$(hostname)"
+default_domain="jhu.edu"
+
 # define download function
 # courtesy of http://fitnr.com/showing-file-download-progress-using-wget.html
 download()
@@ -36,21 +40,20 @@ cd Methods/Tools/Install/Machines/010_Xubuntu/Scripts
 
 apt -y install emacs 
 
-# download the finish script if it doesn't yet exist
-if [[ ! -f $tmp/finish.sh ]]; then
-    cd "$tmp"
-    download "$finishPath"
-fi
+# # download the finish script if it doesn't yet exist
+# if [[ ! -f $tmp/finish.sh ]]; then
+#     cd "$tmp"
+#     download "$finishPath"
+# fi
 
-# set proper permissions on finish script
-chmod a+x "$tmp/finish.sh"
+# # set proper permissions on finish script
+# chmod a+x "$tmp/finish.sh"
 
-sudo -u methods xfce4-terminal -e 'bash "$tmp/finish.sh; bash"'
+# sudo -u methods xfce4-terminal -e 'bash "$tmp/finish.sh; bash"'
 
 # remove myself to prevent any unintended changes at a later stage
 # echo 'Remove this script: sudo rm "$0
 # rm $0
 
 #echo 'Run finish.sh'
-# reboot
-#
+reboot

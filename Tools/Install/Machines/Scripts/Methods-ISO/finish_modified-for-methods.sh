@@ -19,9 +19,5 @@ download()
 #    echo " DONE"
 }
 
-datetime="$(date +%Y%m%d%H%S)"
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hostname
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hosts
-
 echo 'Now reboot'
 read answer
