@@ -64,17 +64,16 @@ if ! grep -q "noninteractive" /proc/cmdline ; then
 
     # Install Methods course material
 
-    apt-get -y git
-    mkdir -p /home/methods/GitHub/ccarrollATjhuecon
+    apt-get -y install git
+    mkdir -p /home/methods/GitHub/
     chmod a+rwx !$
     cd !$
     git clone https://github.com/ccarrollATjhuecon/Methods.git
 
     # Other packages
 
-    apt -y install ca-certificates openssl python openssh-server vim xubuntu-desktop
+    apt -y install ca-certificates openssl openssh-server vim xubuntu-desktop xfce4
 
-    apt-get -y 
     # download the finish script if it doesn't yet exist
     if [[ ! -f $tmp/finish.sh ]]; then
         echo -n " downloading finish.sh: "
