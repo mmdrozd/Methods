@@ -1,6 +1,5 @@
 #!/bin/bash
-# This script will be in the user's $HOME directory and should be executed upon boot by
-# sudo 
+# This script will be in the /var/local/methods directory and should be executed by root at the first boot 
 
 finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish_modified-for-methods.sh
 

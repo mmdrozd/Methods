@@ -1,0 +1,13 @@
+#!/bin/bash
+# https://askubuntu.com/questions/156771/run-a-script-only-at-the-very-first-boot
+
+FLAG="/var/log/firstboot.log"
+if [ ! -f $FLAG ]; then
+   #Put here your initialization sentences
+   /bin/bash /var/local/start_modified-for-methods.sh
+
+   #the next line creates an empty file so it won't run the next boot
+   touch $FLAG
+#else
+#   echo "Do nothing"
+fi
