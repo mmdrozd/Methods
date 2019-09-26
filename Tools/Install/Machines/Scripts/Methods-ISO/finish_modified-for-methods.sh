@@ -2,9 +2,6 @@
 # This script will be in the user's $HOME directory and should be executed upon boot by
 # sudo 
 
-# set defaults
-default_hostname="$(hostname)"
-default_domain="jhu.edu"
 tmp="/home/methods" # Working directory
 
 # define download function
@@ -20,4 +17,3 @@ download()
 }
 
 echo 'Now reboot'
-read answer

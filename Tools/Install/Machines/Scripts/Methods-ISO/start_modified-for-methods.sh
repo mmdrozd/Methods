@@ -30,15 +30,21 @@ sed -i "s/ubuntu/Xub-$datetime/g" /etc/hosts
 apt-get -y install git
 GHDir=/home/methods/GitHub/
 mkdir -p "$GHDir"
-chmod a+rwx "$GHDir"
 cd "$GHDir"
 git clone https://github.com/ccarrollATjhuecon/Methods.git
+chmod -Rf a+rwx "$GHDir"
+chown -Rf methods:methods "$GHDir"
 cd Methods/Tools/Install/Machines/010_Xubuntu/Scripts
-/bin/bash ./010_Basic.sh
+sudo -u methods /bin/bash ./010_Basic.sh
 
 # Other packages
 
 apt -y install emacs 
+
+chown -Rf methods:methods /home/methods/*
+chown -Rf methods:methods /home/methods/.*
+chown -Rf methods:methods /home/methods/*.*
+
 
 # # download the finish script if it doesn't yet exist
 # if [[ ! -f $tmp/finish.sh ]]; then
