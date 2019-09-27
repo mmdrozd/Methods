@@ -39,4 +39,4 @@ else
 fi
 
 # Make Chrome the default app for handling text/html mimetype 
-xdg-mime default google-chrome.desktop text/html
+sudo xdg-mime default google-chrome.desktop text/html

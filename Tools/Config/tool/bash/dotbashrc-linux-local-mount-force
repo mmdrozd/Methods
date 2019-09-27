@@ -7,9 +7,8 @@
 if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then # Running from a location where llorracc.local is visible, print option to link to it
     echo 'llorracc.local is visible; proceeding.' 
 else
-    exit
-    #echo 'llorracc.local is not visible; probably you need to change the Networking setting in the VM to "Bridged Adapter"; hit return when llorracc.local can be pinged.'
-    #read answer
+    echo 'llorracc.local is not visible; probably you need to change the Networking setting in the VM to "Bridged Adapter"; hit return when llorracc.local can be pinged.'
+    read answer
 fi
 
 # For a VM with access to llorracc.local, if llorracc.local is not already connected then put on the clipboard (accessible via shft-ctrl-v) the commands necessary to mount it 

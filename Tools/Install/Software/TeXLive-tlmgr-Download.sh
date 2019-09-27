@@ -13,26 +13,23 @@
 
 # However, in order to work, this requires the installation of perl-tk and recommends gksu
 
+scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 sudo apt update
 sudo apt -y install perl-tk
 sudo apt -y install gksu
 
 # Because TeXLive is so large, uninstall any previous versions before installing
 
-sudo apt-get purge texlive
-sudo apt-get autoremove
-sudo apt-get clean
+sudo "$scriptDir/TeXLive-Remove.sh"
 
 # Installs into /opt/texbin, so that directory must exist
 if [ ! -d /opt/texbin ]; then
     sudo mkdir -p /opt/texbin
 fi
 
-scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-mkdir -p ~/tmp-TeXLive
-
-cd ~/tmp-TeXLive # Store the install files in the ~/tmp-TeXLive directory, erase it at the end of the install
+# Store the install files in the ~/tmp-TeXLive directory, erase it at the end of the install
+mkdir -p ~/tmp-TeXLive ; cd ~/tmp-TeXLive 
 
 # wget is a command that retrieves files from the internet 
 wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu && chmod +x ./install-tl-ubuntu

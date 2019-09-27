@@ -9,6 +9,8 @@ fi
 # This will leave /opt/texbin in the /etc/environment file, but that should not cause any problems
 
 sudo apt -y purge texlive*
+sudo apt -y autoremove
+sudo apt -y clean
 sudo rm -rf /usr/local/texlive
 sudo rm -rf ~/.texlive*
 sudo rm -rf /usr/local/share/texmf

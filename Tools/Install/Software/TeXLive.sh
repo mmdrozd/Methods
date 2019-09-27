@@ -15,21 +15,6 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # However, in order to work, this requires the installation of perl-tk and recommends gksu
 
-sudo apt update
-sudo apt -y install perl-tk
-# sudo apt -y install gksu
-
-# Because TeXLive is so large, uninstall any previous versions before installing
-
-sudo apt-get purge texlive
-sudo apt-get autoremove
-sudo apt-get clean
-
-# Installs into /opt/texbin, so that directory must exist
-if [ ! -d /opt/texbin ]; then
-    sudo mkdir -p /opt/texbin
-fi
-
 # Get the directory in which this script is being run because assumptions will be made later
 # about location of patch files relative to that directory
 
