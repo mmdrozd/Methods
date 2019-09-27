@@ -36,18 +36,18 @@ chmod -Rf a+rwx "$GHDir"
 chown -Rf methods:methods "$GHDir"
 cd Methods/Tools/Install/Machines/010_Xubuntu/Scripts
 sudo -u methods /bin/bash ./010_Basic.sh
-#sudo -u methods /bin/bash ./020_Intermediate.sh
-#sudo -u methods /bin/bash ./030_Advanced.sh
+sudo -u methods /bin/bash ./020_Intermediate.sh
+sudo -u methods /bin/bash ./030_Advanced.sh
 
 # Other packages
 
 apt -y install emacs
-# apt -y update
-# apt -y upgrade
+apt -y update
+apt -y upgrade
 
-# chown -Rf methods:methods /home/methods/*
-# chown -Rf methods:methods /home/methods/.*
-# chown -Rf methods:methods /home/methods/*.*
+chown -Rf methods:methods /home/methods/*
+chown -Rf methods:methods /home/methods/.*
+chown -Rf methods:methods /home/methods/*.*
 
 
 # # download the finish script if it doesn't yet exist
