@@ -35,6 +35,11 @@ git clone https://github.com/ccarrollATjhuecon/Methods.git
 chmod -Rf a+rwx "$GHDir"
 chown -Rf methods:methods "$GHDir"
 cd Methods/Tools/Install/Machines/010_Xubuntu/Scripts
+
+chown -Rf methods:methods /home/methods/*
+chown -Rf methods:methods /home/methods/.*
+chown -Rf methods:methods /home/methods/*.*
+
 sudo -u methods /bin/bash ./010_Basic.sh
 sudo -u methods /bin/bash ./020_Intermediate.sh
 sudo -u methods /bin/bash ./030_Advanced.sh

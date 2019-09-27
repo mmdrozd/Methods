@@ -4,7 +4,12 @@
 FLAG="/var/log/firstboot.log"
 if [ ! -f $FLAG ]; then
    #Put here your initialization sentences
-   /bin/bash /var/local/start_modified-for-methods.sh
+   echo 'You should execute:' > ~/README.txt
+   echo '/bin/bash /var/local/start_modified-for-methods.sh' >> ~/README.txt
+   echo ''
+   echo 'To see where it goes wrong in the autostart process using rc.local'
+   
+#  /bin/bash /var/local/start_modified-for-methods.sh
 
    #the next line creates an empty file so it won't run the next boot
    touch $FLAG
