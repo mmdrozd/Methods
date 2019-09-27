@@ -1,6 +1,13 @@
 #!/bin/bash
 # Adapted from http://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu
 
+sudo ls
+scriptDir="$(dirname "`realpath $0`")"
+
+if [ -e ~/tmp ]; then
+    sudo rm -Rf ~/tmp
+fi
+
 mkdir ~/tmp
 cd ~/tmp
 
@@ -12,11 +19,12 @@ cmd="wget -O ~/tmp/$ANACONDAURL $CONTREPO$ANACONDAURL ; cd ~/tmp"
 echo "$cmd"
 eval "$cmd"
 
-cmd="chmod a+x ~/tmp/$ANACONDAURL ; ~/tmp/$ANACONDAURL $CONTREPO$ANACONDAURL -b -p ~/anaconda3"
-echo $cmd
-eval $cmd
+cmd="sudo rm -Rf ~/anaconda3 ; chmod a+x ~/tmp/$ANACONDAURL ; ~/tmp/$ANACONDAURL -b -p ~/anaconda3"
+echo "$cmd"
+eval "$cmd"
 
 addToPath='export PATH=~/anaconda3/bin:$PATH'
+eval "$addToPath"
 if grep -q anaconda3 ~/.bash_aliases; then
     echo 'It appears that the path for anaconda3 has already been added to the ~/.bash_aliases file for this user'
     echo ''
@@ -32,14 +40,14 @@ else
     echo $addToPath >> ~/tmp/.bash_aliases_initial
     mv ~/tmp/.bash_aliases_initial ~/.bash_aliases
 fi
-
+echo "$PATH"
 source ~/.bashrc
-conda update conda
-conda update anaconda
+conda update --yes conda
+conda update --yes anaconda
 
 rm -f ~/tmp/$ANACONDAURL ~/tmp/.bash_aliases*
-conda install -c anaconda scipy
-conda install -c pyopengl # Otherwise you get an error "Segmentation fault (core dumped)"
+conda install --yes -c anaconda scipy
+conda install --yes -c anaconda pyopengl # Otherwise you get an error "Segmentation fault (core dumped)"
 
-./Anaconda-jupyter_contrib_nbextensions.sh
+$scriptDir/Anaconda-jupyter_contrib_nbextensions.sh
 /Methods/Tools/Config/tool/jupytext/default.sh

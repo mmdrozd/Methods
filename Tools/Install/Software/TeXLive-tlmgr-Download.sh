@@ -34,6 +34,8 @@ mkdir -p ~/tmp-TeXLive ; cd ~/tmp-TeXLive
 # wget is a command that retrieves files from the internet 
 wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu && chmod +x ./install-tl-ubuntu
 
+sudo apt -y install texlive-base
+
 sudo ./install-tl-ubuntu --more-tex # This is the installer, which must be executed with root permissions; the --more-tex option installs extra files needed, for example, for Lyx
 
 # Add the path to the current binaries 
