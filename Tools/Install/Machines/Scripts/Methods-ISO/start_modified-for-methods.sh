@@ -36,6 +36,8 @@ chmod -Rf a+rwx "$GHDir"
 chown -Rf methods:methods "$GHDir"
 cd Methods/Tools/Install/Machines/010_Xubuntu/Scripts
 sudo -u methods /bin/bash ./010_Basic.sh
+sudo -u methods /bin/bash ./020_Intermediate.sh
+sudo -u methods /bin/bash ./030_Advanced.sh
 
 # Other packages
 
