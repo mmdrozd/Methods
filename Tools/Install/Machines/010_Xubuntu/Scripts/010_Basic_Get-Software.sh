@@ -9,4 +9,3 @@ cd $METH_SOFTWARE
 ./emacs.sh
 
 ./Chrome.sh
-
