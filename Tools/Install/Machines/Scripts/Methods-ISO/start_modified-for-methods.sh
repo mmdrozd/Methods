@@ -42,12 +42,12 @@ sudo -u methods /bin/bash ./010_Basic.sh
 # Other packages
 
 apt -y install emacs
-apt -y update
-apt -y upgrade
+# apt -y update
+# apt -y upgrade
 
-chown -Rf methods:methods /home/methods/*
-chown -Rf methods:methods /home/methods/.*
-chown -Rf methods:methods /home/methods/*.*
+# chown -Rf methods:methods /home/methods/*
+# chown -Rf methods:methods /home/methods/.*
+# chown -Rf methods:methods /home/methods/*.*
 
 
 # # download the finish script if it doesn't yet exist
