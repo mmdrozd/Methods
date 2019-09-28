@@ -7,6 +7,7 @@ finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/To
 default_hostname="$(hostname)"
 default_domain="jhu.edu"
 
+
 # define download function
 # courtesy of http://fitnr.com/showing-file-download-progress-using-wget.html
 download()
@@ -34,6 +35,17 @@ cd "$GHDir"
 git clone https://github.com/ccarrollATjhuecon/Methods.git
 chmod -Rf a+rwx "$GHDir"
 chown -Rf methods:methods "$GHDir"
+
+# Now add the paths to the root environment 
+sudo chmod u+w /etc/environment
+
+sudo cat /etc/environment /Volumes/Data/GitHub/ccarrollATjhuecon/Methods/Tools/Config/tool/bash/dotbashrc-all > /tmp/environment
+sudo mv /tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
+sudo chmod u-w /etc/environment
+
+source /etc/environment
+
+
 cd Methods/Tools/Install/Machines/010_Xubuntu/Scripts
 
 chown -Rf methods:methods /home/methods/*

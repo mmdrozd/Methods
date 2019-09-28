@@ -6,6 +6,10 @@
 
 if [ -f ~/.bash_aliases ]; then . ~/.bash_aliases ; fi ; export BASH_ENV=~/.bash_aliases
 
+# If the dotbashrc-all file exists, source it to get env vars
+dbrc=/home/methods/GitHub/Methods/Tools/Config/tool/bash/dotbashrc-all
+[[ -f "$dbrc" ]] && . "$dbrc" 
+
 # If not running interactively, don't do anything
 
 case $- in

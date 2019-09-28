@@ -34,8 +34,8 @@ else
     echo 'Now is your chance to change your preferred browser to Chrome (actually, Chromium) using Preferred Applications tool'
     echo 
     echo 'Launch it from mouse menu at top if desired'
-    echo 'Hit return when you have made your choice.'
-    read answer
+#    echo 'Hit return when you have made your choice.'
+#    read answer
 fi
 
 # Make Chrome the default app for handling text/html mimetype 
