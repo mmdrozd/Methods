@@ -9,4 +9,4 @@ sudo apt-get update
 sudo apt-get -y install emacs
 
 $METH_CONFIG/user/make-links-for-users/loop-over-directories-and-make-dot-emacs-link-Linux.sh   
-
+sudo gpg --homedir /usr/local/share/emacs/site-lisp/elpa/gnupg --receive-keys 066DAFCB81E42C40

@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 ./010_Basic_Config.sh
 
 # Distinction between software and packages is somewhat arbitrary
-# One distinction is to desgnate as packages things that can be installed without configuration
+# One distinction is to designate as packages things that can be installed without configuration
 ./010_Basic_Get-Packages.sh 
 ./010_Basic_Get-Software.sh 
 

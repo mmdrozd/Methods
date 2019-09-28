@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")" 
 # If jupytext has not been installed, install it
-[[ ! `conda list | grep jupytext` != '' ]] && sudo conda install -c conda-forge jupytext
+[[ ! `conda list | grep jupytext` != '' ]] && conda install -c conda-forge jupytext
 
 if [ ! -e ~/.jupyter/jupyter_notebook_config.py ]; then
 	jupyter notebook --generate-config

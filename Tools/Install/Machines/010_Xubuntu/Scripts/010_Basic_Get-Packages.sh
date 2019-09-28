@@ -4,7 +4,9 @@ echo '' ; echo "$0" ; echo ''
 
 # Packages that can be installed directly and with no need for any configuration
 
-sudo apt -y install gparted bash-completion xsel markdown xscreensaver git hfsprogs rpl lynx touchegg curl wget nscd cifs-utils openssh-server nautilus-share xclip
+sudo apt -y install gparted bash-completion xsel markdown xscreensaver git hfsprogs rpl lynx touchegg curl wget nscd cifs-utils openssh-server nautilus-share xclip avahi-daemon avahi-discover avahi-utils libnss-mnds mdns-scan
+
+sudo xdg-mime default nautilus.desktop inode/directory application
 
 # Packages that need to be installed by a custom script
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 
-[[ ! `pip list | grep cite2c` != '' ]] && sudo pip install -c cite2c
+source ~/.bashrc
+[[ ! `pip list | grep cite2c` != '' ]] && pip install cite2c && python -m cite2c.install
 
 
