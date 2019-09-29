@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#source /Volumes/Sync/Lib/config/bash/dotbashrc-all
+source /Volumes/Sync/Lib/config/bash/dotbashrc-METHODS
 # make machine-wide place for package files
 
 # Set location for downloaded packages which should be available to any user 

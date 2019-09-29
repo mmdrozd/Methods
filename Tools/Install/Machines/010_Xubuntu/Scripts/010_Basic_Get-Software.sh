@@ -2,7 +2,7 @@
 
 echo '' ; echo Running "$0" ; echo ''
 
-source /Volumes/Sync/Lib/config/bash/dotbashrc-all
+source /Volumes/Sync/Lib/config/bash/dotbashrc-METHODs
 
 cd $METH_SOFTWARE
 
