@@ -34,6 +34,7 @@ mkdir -p "$GHDir"
 cd "$GHDir"
 if [ ! -e /home/methods/GitHub/ccarrollATjhuecon/Methods ]; then
     git clone https://github.com/ccarrollATjhuecon/Methods.git
+    cd Methods
 else
     cd Methods
     git fetch
@@ -51,8 +52,7 @@ sudo chmod u-w /etc/environment
 
 source /etc/environment
 
-
-cd Methods/Tools/Install/Machines/010_Xubuntu/Scripts
+cd Tools/Install/Machines/010_Xubuntu/Scripts
 
 chown -Rf methods:methods /home/methods/*
 chown -Rf methods:methods /home/methods/.*
