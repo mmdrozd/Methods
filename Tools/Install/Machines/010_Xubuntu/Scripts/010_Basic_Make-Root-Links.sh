@@ -47,11 +47,11 @@ fi # Finish allowing setup as local machine
 
 if [ ! "$(ls -A /Methods)" ]; then # No local link has been made
     [[ -L /Methods ]] && sudo rm -f /Methods # if /Methods exists, the ln syntax below will create /Methods/Methods; delete it to prevent
-    if [ -e /home/methods/GitHub/Methods ]; then
+    if [ -e /home/methods/GitHub/ccarrollATjhuecon/Methods ]; then
 	sudo rm -f /Methods
-	sudo ln -fs /home/methods/GitHub/Methods /
+	sudo ln -fs /home/methods/GitHub/ccarrollATjhuecon/Methods /
     else
-	if [ -e /home/methods/Dropbox/Methods ]; then # if GitHub/Methods did not exist link /Methods to Dropbox/Methods if it does 
+	if [ -e /home/methods/Dropbox/Methods ]; then # if GitHub/ccarrollATjhuecon/Methods did not exist link /Methods to Dropbox/Methods if it does 
 	    sudo ln -fs /home/methods/Dropbox/Methods /
 	else
 	    echo 'Could not find an installation of Methods'

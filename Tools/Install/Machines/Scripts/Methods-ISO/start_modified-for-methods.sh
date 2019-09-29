@@ -29,10 +29,10 @@ sed -i "s/ubuntu/Xub-$datetime/g" /etc/hosts
 # Install Methods course material
 
 apt-get -y install git
-GHDir=/home/methods/GitHub/
+GHDir=/home/methods/GitHub/ccarrollATjhuecon
 mkdir -p "$GHDir"
 cd "$GHDir"
-if [ ! -e /home/methods/GitHub/Methods ]; then
+if [ ! -e /home/methods/GitHub/ccarrollATjhuecon/Methods ]; then
     git clone https://github.com/ccarrollATjhuecon/Methods.git
 else
     cd Methods
@@ -61,17 +61,6 @@ chown -Rf methods:methods /home/methods/*.*
 sudo ./010_Basic.sh
 sudo ./020_Intermediate.sh
 sudo ./030_Advanced.sh
-
-# Other packages
-
-apt -y install emacs
-apt -y update
-apt -y upgrade
-
-chown -Rf methods:methods /home/methods/*
-chown -Rf methods:methods /home/methods/.*
-chown -Rf methods:methods /home/methods/*.*
-
 
 # # download the finish script if it doesn't yet exist
 # if [[ ! -f $tmp/finish.sh ]]; then

@@ -1,5 +1,5 @@
 #!/bin/bash
-source /Methods/Tools/Config/tool/bash/dotbashrc-all
+source /Methods/Tools/Config/tool/bash/dotbashrc-METHODS
 
 sudo apt -y install curl
 sudo apt -y install wget

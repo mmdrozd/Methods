@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo '' ; echo 'Switching automatically to existing ~/GitHub/Methods folder. '
-sudo rm -f /Methods ; sudo ln -fs /home/methods/GitHub/Methods /Methods
+echo '' ; echo 'Switching automatically to existing ~/GitHub/ccarrollATjhuecon/Methods folder. '
+sudo rm -f /Methods ; sudo ln -fs /home/methods/GitHub/ccarrollATjhuecon/Methods /Methods
 echo 'Pulling latest courseware from GitHub'
 /Methods/Tools/Scripts/GitHub-Methods-Pull.sh
 echo 'Rerunning Basic setup script (in case it has changed)'

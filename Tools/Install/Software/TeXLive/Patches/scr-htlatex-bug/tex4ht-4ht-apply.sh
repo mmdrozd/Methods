@@ -23,7 +23,7 @@
 # Best guess is that Apple has done its best to prevent users from doing that
 # Alternative is to manually source the dotbashrc file to bring in environment variables
 
-source /Methods/Tools/Config/tool/bash/dotbashrc-all
+source /Methods/Tools/Config/tool/bash/dotbashrc-METHODS
 
 cd $METH_INSTALL/Software/TeXLive/Patches/scr-htlatex-bug
 

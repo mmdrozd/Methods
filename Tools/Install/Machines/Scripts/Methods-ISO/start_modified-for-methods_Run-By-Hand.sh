@@ -64,7 +64,7 @@ if ! grep -q "noninteractive" /proc/cmdline ; then
     # Install Methods course material
 
     apt-get -y install git
-    GHDir=/home/methods/GitHub/
+    GHDir=/home/methods/GitHub/ccarrollATjhuecon/
     mkdir -p "$GHDir"
     chmod a+rwx "$GHDir"
     cd "$GHDir"

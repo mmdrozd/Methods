@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Starting with the `Basic` version of the VM, upgrade it to the `Intermediate` version
-source /Methods/Tools/Config/tool/bash/dotbashrc-all
+source /Methods/Tools/Config/tool/bash/dotbashrc-METHODS
 
 if [ -z "$METH_INSTALL" ]; then
     echo 'Environment variables are not available as required.  Diagnose and fix, then rerun.'
