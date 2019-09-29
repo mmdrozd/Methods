@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [ `whoami` != 'methods' ]; then
-    echo 'This script must be run by username methods'
-    echo ''
-    echo 'Exiting.'
-    exit 1
-fi
+# if [ `whoami` != 'methods' ]; then
+#     echo 'This script must be run by username methods'
+#     echo ''
+#     echo 'Exiting.'
+#     exit 1
+# fi
 
 me="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
 
