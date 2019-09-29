@@ -45,7 +45,7 @@ chown -Rf methods:methods "$GHDir"
 # Now add the paths to the root environment 
 sudo chmod u+w /etc/environment
 
-sudo cat /etc/environment "$GHDir/Methods/Tools/Config/tool/bash/dotbashrc-all" > /tmp/environment
+sudo cat /etc/environment "$GHDir/Methods/Tools/Config/tool/bash/dotbashrc-METHODS" > /tmp/environment
 sudo mv /tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
 sudo chmod u-w /etc/environment
 
