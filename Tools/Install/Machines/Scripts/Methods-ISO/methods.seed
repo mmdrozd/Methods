@@ -32,8 +32,8 @@ d-i clock-setup/utc                                         boolean     false
 d-i clock-setup/ntp                                         boolean     true
 
 # user account setup
-d-i passwd/root-password                                    password    Ely78Jhu!
-d-i passwd/root-login                                       boolean     false
+d-i passwd/root-password                                    password    {{pwhash}}
+d-i passwd/root-login                                       boolean     true
 d-i passwd/make-user                                        boolean     true
 d-i passwd/user-fullname                                    string      {{username}}
 d-i passwd/username                                         string      {{username}}
