@@ -58,9 +58,9 @@ chown -Rf methods:methods /home/methods/*
 chown -Rf methods:methods /home/methods/.*
 chown -Rf methods:methods /home/methods/*.*
 
-sudo -u methods /bin/bash ./010_Basic.sh
-sudo -u methods /bin/bash ./020_Intermediate.sh
-sudo -u methods /bin/bash ./030_Advanced.sh
+sudo ./010_Basic.sh
+sudo ./020_Intermediate.sh
+sudo ./030_Advanced.sh
 
 # Other packages
 
