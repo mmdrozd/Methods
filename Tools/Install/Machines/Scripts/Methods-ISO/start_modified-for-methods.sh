@@ -32,14 +32,20 @@ apt-get -y install git
 GHDir=/home/methods/GitHub/
 mkdir -p "$GHDir"
 cd "$GHDir"
-git clone https://github.com/ccarrollATjhuecon/Methods.git
+if [ ! -e /home/methods/GitHub/Methods ]; then
+    git clone https://github.com/ccarrollATjhuecon/Methods.git
+else
+    cd Methods
+    git fetch
+    git pull
+fi
 chmod -Rf a+rwx "$GHDir"
 chown -Rf methods:methods "$GHDir"
 
 # Now add the paths to the root environment 
 sudo chmod u+w /etc/environment
 
-sudo cat /etc/environment /Volumes/Data/GitHub/ccarrollATjhuecon/Methods/Tools/Config/tool/bash/dotbashrc-all > /tmp/environment
+sudo cat /etc/environment "$GHDir/Methods/Tools/Config/tool/bash/dotbashrc-all" > /tmp/environment
 sudo mv /tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
 sudo chmod u-w /etc/environment
 
