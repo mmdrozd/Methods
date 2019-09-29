@@ -16,13 +16,13 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 	    source ~/.bash_bootstrap
 	    rm     ~/.bash_bootstrap
 	else # Not bootstrapping, so link to local if it exists:
-	    if [ -e ~/GitHub/Methods ]; then
-		echo 'Switching automatically to existing ~/GitHub/Methods folder. '
-		sudo rm -f /Methods ; sudo ln -fs /home/methods/GitHub/Methods /Methods
+	    if [ -e ~/GitHub/ccarrollATjhuecon/Methods ]; then
+		echo 'Switching automatically to existing ~/GitHub/ccarrollATjhuecon/Methods folder. '
+		sudo rm -f /Methods ; sudo ln -fs /home/methods/GitHub/ccarrollATjhuecon/Methods /Methods
 	        echo 'Pulling latest courseware from GitHub'
 		/Methods/Tools/Scripts/GitHub-Methods-Pull.sh
 	    else
-		echo '~/GitHub/Methods folder does not exist'
+		echo '~/GitHub/ccarrollATjhuecon/Methods folder does not exist'
 		if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ] && [ "$(ls -A /media/ro.llorracc.local)" ] && [ "$(ls -A /media/rw.llorracc.local)" ]; then # local is mounted but not linked
 		    echo 'Linking to existing local Methods folder'
 		    /media/ro.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods/Tools/Install/Machines/010_Xubuntu/Scripts/010_Basic_Make-Root-Links.sh # makes links but does not switch /Methods

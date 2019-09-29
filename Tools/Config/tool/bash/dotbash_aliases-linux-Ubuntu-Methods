@@ -7,7 +7,7 @@
 if [[ $- == *i* ]]; then # this is an interactive shell
     PS1='\u@\h:\W[\!] \$ '
     if [ -e /tmp/test-for-llorracc ]; then # This is the first time an interactive script has been run after bootup (test-for-llorracc should have been created by login script)
-	echo 'First run of interactive shell; testing for GitHub/Methods directory'
+	echo 'First run of interactive shell; testing for GitHub/ccarrollATjhuecon/Methods directory'
 	sudo rm -f /tmp/test-for-llorracc  # Prevent this test from running every time a new interactive script is run after first run
         # The stuff below will be run when the first interactive shell is launched for a pristine course machine
         # ~/.bash_bootstrap contains whatever is necessary to complete the conversion of the machine from one state to another
@@ -16,18 +16,18 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 	    source ~/.bash_bootstrap
 	    rm     ~/.bash_bootstrap
 	else # Not bootstrapping, so link to local if it exists:
-	    if [ -e ~/GitHub/Methods ]; then
-		sudo chmod a+x ~/GitHub/Methods/Tools/Scripts/GitHub-Methods-Update.sh
-		~/GitHub/Methods/Tools/Scripts/GitHub-Methods-Update.sh
+	    if [ -e ~/GitHub/ccarrollATjhuecon/Methods ]; then
+		sudo chmod a+x ~/GitHub/ccarrollATjhuecon/Methods/Tools/Scripts/GitHub-Methods-Update.sh
+		~/GitHub/ccarrollATjhuecon/Methods/Tools/Scripts/GitHub-Methods-Update.sh
 	    else
-		echo '~/GitHub/Methods folder does not exist'
+		echo '~/GitHub/ccarrollATjhuecon/Methods folder does not exist'
 		if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ] && [ "$(ls -A /media/ro.llorracc.local)" ] && [ "$(ls -A /media/rw.llorracc.local)" ]; then # local is mounted but not linked
 		    echo 'Linking to existing local Methods folder'
 		    /media/ro.llorracc.local/Volumes/Sync/Dropbox/OthersTo/JHU/Courses/pri/Methods/Tools/Install/Machines/010_Xubuntu/Scripts/010_Basic_Make-Root-Links.sh # makes links but does not switch /Methods
         	    sudo rm -f  /Methods
 		    sudo ln -fs /Methods-Slve /Methods
 		fi # end of test of whether /media/xx.llorracc.local exists
-	    fi # End of test whether ~/GitHub/Methods/ exists
+	    fi # End of test whether ~/GitHub/ccarrollATjhuecon/Methods/ exists
 	    # Now offer option to connect to local alternative if it is available 
 	    if [ -e /media/ro.llorracc.local ] && [ -e /media/rw.llorracc.local ]; then # this machine has been marked as one on which local mounting might be an option
 		if [ "`ping -c 1 llorracc.local &> /dev/null ; echo $?`" == "0" ]; then # Running from a location where llorracc.local is visible, print option to link to it
@@ -37,7 +37,7 @@ if [[ $- == *i* ]]; then # this is an interactive shell
 		    fi
 		else # Inability to ping llorracc-local despite presence of /media mounts 
 		    if [ `whoami` == "methods" ]; then
-			if [ ! -e /home/methods/GitHub/Methods ]; then
+			if [ ! -e /home/methods/GitHub/ccarrollATjhuecon/Methods ]; then
 			    echo 'Need to install Methods courseware.'
 			    cmd="cd ; mkdir -p GitHub ; cd GitHub ; git clone https://github.com/ccarrollATjhuecon/Methods.git"
 			    echo "$cmd" | xsel --clipboard --input

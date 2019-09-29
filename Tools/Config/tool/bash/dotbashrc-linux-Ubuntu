@@ -7,7 +7,7 @@
 if [ -f ~/.bash_aliases ]; then . ~/.bash_aliases ; fi ; export BASH_ENV=~/.bash_aliases
 
 # If the dotbashrc-all file exists, source it to get env vars
-dbrc=/home/methods/GitHub/Methods/Tools/Config/tool/bash/dotbashrc-METHODS
+dbrc=/home/methods/GitHub/ccarrollATjhuecon/Methods/Tools/Config/tool/bash/dotbashrc-METHODS
 [[ -f "$dbrc" ]] && . "$dbrc" 
 
 # If not running interactively, don't do anything
@@ -149,8 +149,8 @@ if [ -d ~/Dropbox ]; then # if Dropbox exists, assume we are using it
 else
     if [ ! -e /media/ro.llorracc.local ] || [ ! -e /media/rw.llorracc.local ] || [ ! "$(ls -A /media/ro.llorracc.local)" ] || [ ! "$(ls -A /media/rw.llorracc.local)" ]; then
 	if [ `whoami` == "methods" ]; then
-	    if [ ! -e /home/methods/GitHub/Methods ]; then
-		echo 'Neither valid Dropbox nor valid local links exist nor GitHub/Methods exist; enter passwords to create local links.'
+	    if [ ! -e /home/methods/GitHub/ccarrollATjhuecon/Methods ]; then
+		echo 'Neither valid Dropbox nor valid local links exist nor GitHub/ccarrollATjhuecon/Methods exist; enter passwords to create local links.'
 		source ~/.bashrc-linux-local-mount-force
 	    fi
 	fi

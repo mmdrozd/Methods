@@ -12,9 +12,9 @@ At shell:
 	mkdir GitHub
 	cd GitHub
 	git clone https://github.com/ccarrollATjhuecon/Methods.git
-	cd ~/GitHub/Methods/Tools/Install/Software
+	cd ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Software
 	./emacs-AWS.sh
-	cd ~/GitHub/Methods/Tools/Install/Languages
+	cd ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages
 	./Anaconda3-Latest.sh
 
 0. Install the `REMARK` repo

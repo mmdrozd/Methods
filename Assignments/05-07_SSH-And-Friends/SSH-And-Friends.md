@@ -44,7 +44,7 @@ We are going to again become root for the purpose of executing this command. Bel
 
     su # to become the root user -- you will have to give the password
 	mkdir -p /tmp/Methods/Assignments # to create the directory into which the files will be copied
-	scp -r methods@localhost:/home/methods/GitHub/Methods/Assignments/* /tmp/Methods/Assignments
+	scp -r methods@localhost:/home/methods/GitHub/ccarrollATjhuecon/Methods/Assignments/* /tmp/Methods/Assignments
 
 A Google search for `scp command examples` will turn up a host of other ways to use the command. You can also do a bit of 
 prep work so that you do not need to enter your password for the remote machine every time you use the command.
@@ -67,11 +67,11 @@ The `sshfs` tool allows you to securely mount a directory or drive on the remote
 
 	sudo apt -y install sshfs # It is probably already installed
 	sudo mkdir -p /mnt/Methods # Make the 'mount point' where the new content will be accessible
-	sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/Methods /mnt/Methods
+	sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/ccarrollATjhuecon/Methods /mnt/Methods
 	
 Now if you do 
 
-	ls /home/methods/GitHub/Methods
+	ls /home/methods/GitHub/ccarrollATjhuecon/Methods
 	ls /mnt/Methods
 	
 you should see exactly the same listing, because these are two paths to the same object
