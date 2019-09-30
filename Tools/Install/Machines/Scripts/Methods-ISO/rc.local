@@ -3,11 +3,7 @@
 
 FLAG="/var/log/firstboot.log"
 if [ ! -f $FLAG ]; then
-   #Put here your initialization sentences
-   echo 'You should execute:' > /home/methods/README.txt
-   echo '/bin/bash /var/local/start_modified-for-methods.sh' >> /home/methods/README.txt
-   echo ''
-   echo 'To see where it goes wrong in the autostart process using rc.local'
+   #Put here your initialization stuff
    
    sudo rm /var/local/start_modified-for-methods.log # sudo is not necessary because this should be run as root, but useful as a reminder of that fact
    sudo /var/local/start_modified-for-methods.sh | sudo tee /var/local/start_modified-for-methods.log
