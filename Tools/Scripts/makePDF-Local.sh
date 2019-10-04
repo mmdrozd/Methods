@@ -1,9 +1,10 @@
 #!/bin/bash
+# A 'local' version of the PDF should not have the empty economics.bib file or the filled $textName.bib file
 
 if [ $# -ne 2 ]
 then
   echo "usage:   ${0##*/} <path> <file>"
-  echo "example: ${0##*/} /Methods/Data/Papers/RepresentingWithoutRA/Latest/LaTeX RepresentingWithoutRA"
+  echo "example: ${0##*/} /home/methods/Papers/BufferStockTheory/BufferStockTheory-Shared BufferStockTheory"
   exit 1
 fi
 
@@ -12,7 +13,11 @@ textName=$2
 
 toolRoot=/Methods/Tools/Scripts
 
-echo {{{ Starting $toolRoot/${0##*/} $pathName $textName
+#pathName=/home/methods/Papers/BufferStockTheory/BufferStockTheory-Shared ; textName=BufferStockTheory
+echo '{{{ Starting '
+echo '' 
+echo $toolRoot/${0##*/} $pathName $textName
+echo ''
 
 echo cd $pathName
      cd $pathName || { echo 'cd $pathName failed; exiting' ; exit 1; }
@@ -31,38 +36,13 @@ if [ -f economics.bib ]
   then rm economics.bib
 fi
 
-# Remove any files beginning with econtex* because they are not for the local but instead for the portable version
-if test -n "$(find . -maxdepth 1 -name 'econtex*' -print -quit)"
-then
-    sudo rm econtex*.*
-fi
-# Remove any files beginning with handout* because they are not for the local but instead for the portable version
-if test -n "$(find . -maxdepth 1 -name 'handout*' -print -quit)"
-then
-    sudo rm handout*.*
-fi
-
-# Remove any files beginning with bejournal* because they are not for the local but instead for the portable version
-if test -n "$(find . -maxdepth 1 -name 'bejournal*' -print -quit)"
-then
-    sudo rm bejournal*.*
-fi
-
-if [ -f ReadMe.texmf ] 
-  then rm -f ReadMe.texmf
-fi
-
 if [ -f $textName.bib ]; then
     rm -f $textName.bib
     touch $textName.bib
 fi
 
-if [ -f $textName-Add.readme ] 
-  then rm -f $textName-Add.readme
-fi
-
-echo pwd
-     pwd
+#echo pwd
+#     pwd
 
 if [ ! -e $textName.tex ]; then 
   echo `pwd`/$textName.tex does not exist.  Halting ${0##*/}.
@@ -87,11 +67,8 @@ echo pdflatex -halt-on-error --shell-escape \'\\newcommand\\UseOption\{PrintGeom
 
 echo cd $pathName/..
      cd $pathName/..
-
-     ln -fs ./LaTeX/$textName.pdf ./$textName.pdf
-echo ln -fs ./LaTeX/$textName.pdf ./$textName.pdf
      
-echo open   ./$textName.pdf
-     open   ./$textName.pdf
+echo '' ; 'You should be able to open '$textName.pdf ; echo ''
 
 echo Finished $toolRoot/${0##*/} $pathName $textName }}}
+echo ''
