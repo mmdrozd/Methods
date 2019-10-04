@@ -2,6 +2,7 @@
 
 # 20191004- Functionality merged into GitHub-Methods-Pull.sh
 
+/Methods/Tools/Scripts/GitHub-Methods-Pull.sh
 # echo '' ; echo 'Switching automatically to existing ~/GitHub/ccarrollATjhuecon/Methods folder. '
 # sudo rm -f /Methods ; sudo ln -fs /home/methods/GitHub/ccarrollATjhuecon/Methods /Methods
 # echo 'Pulling latest courseware from GitHub'
