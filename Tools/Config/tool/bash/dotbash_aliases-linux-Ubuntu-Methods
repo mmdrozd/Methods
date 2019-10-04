@@ -7,7 +7,8 @@
 if [[ $- == *i* ]]; then # this is an interactive shell
     PS1='\u@\h:\W[\!] \$ '
     if [ -e /tmp/test-for-llorracc ]; then # This is the first time an interactive script has been run after bootup (test-for-llorracc should have been created by login script)
-	echo 'First run of interactive shell; testing for GitHub/ccarrollATjhuecon/Methods directory'
+	echo 'First run of interactive shell;'
+	echo 'Testing for GitHub/ccarrollATjhuecon/Methods directory'
 	sudo rm -f /tmp/test-for-llorracc  # Prevent this test from running every time a new interactive script is run after first run
         # The stuff below will be run when the first interactive shell is launched for a pristine course machine
         # ~/.bash_bootstrap contains whatever is necessary to complete the conversion of the machine from one state to another
