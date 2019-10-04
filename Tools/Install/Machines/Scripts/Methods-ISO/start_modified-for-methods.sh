@@ -7,7 +7,6 @@ finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/To
 default_hostname="$(hostname)"
 default_domain="jhu.edu"
 
-
 # define download function
 # courtesy of http://fitnr.com/showing-file-download-progress-using-wget.html
 download()
@@ -61,6 +60,9 @@ chown -Rf methods:methods /home/methods/*.*
 sudo ./010_Basic.sh
 sudo ./020_Intermediate.sh
 sudo ./030_Advanced.sh
+
+# Adding the methods user to the vbox allows the user to browse shared network folders
+sudo adduser methods vboxsf
 
 # # download the finish script if it doesn't yet exist
 # if [[ ! -f $tmp/finish.sh ]]; then
