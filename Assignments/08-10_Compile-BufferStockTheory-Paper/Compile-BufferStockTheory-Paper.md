@@ -5,11 +5,14 @@ The `BufferStockTheory` paper will serve as a template for your own paper for th
 
 The script "Compile-BufferStockTheory-Paper.sh" has the steps needed to set this up
 
-Briefly, the setup works as follows. We will create a directory structure like this:
-	`/BST`
-	`/BST/BST-Shared`
-	`/BST/BST-Public`
-	`/BST/BST-make`
+Briefly, the setup works as follows. In the `~/Papers` directory We will create a directory structure like this:
+
+```
+	/BST
+	/BST/BST-Shared
+	/BST/BST-Public
+	/BST/BST-make
+```
 
 1. The `-Shared` directory will correspond to a 'private' GitHub repo
    * The idea of having a private repo ending `-Shared` is to share with coauthors
@@ -33,8 +36,6 @@ Briefly, the setup works as follows. We will create a directory structure like t
 # Create `BST-Shared`
 
    1. Download the original, public version of my `BufferStockTheory` Paper
-      `cd ~/Papers/BST`
-      `git clone https://github.com/llorracc/BufferStockTheory.git`
    1. Detach it from my GitHub remote by removing the `.git` directory:
       `rm -Rf BufferStockTheory/.git`
    1. Then rename it to `BST-Shared`
@@ -43,7 +44,7 @@ Briefly, the setup works as follows. We will create a directory structure like t
       * This will be the `remote` corresponding to your local `BST-Shared`
       * GitHub will give you a set of instructions to execute at the command line
    1. Add some 'private' content and push it upstream
-       Download the [Submit.tex](https://raw.githubusercontent.com/ccarrollATjhuecon/BufferStockTheory-Shared/master/Private/TheOnion/Submit.tex) file to the `TheOnion` directory
+      * Download the [Submit.tex](https://raw.githubusercontent.com/ccarrollATjhuecon/BufferStockTheory-Shared/master/Private/TheOnion/Submit.tex) file to the `Private/TheOnion` directory
 
 # Create `BST-Public`
 
@@ -52,8 +53,12 @@ Briefly, the setup works as follows. We will create a directory structure like t
       * For example, the script strips out directories labeled `Private`
       * Like the one that contains the submission letter to a journal
 
+
 # Test
-To test whether the setup is working:
+
+All the steps above should be accomplished by the `Compile-BufferStockTheory-Paper.sh` script
+
+After the script has finished, you should test whether the setup is working:
 
 1. Install the `econ-ark` toolkit:
    `sudo conda install -c conda-forge econ-ark`
@@ -68,4 +73,3 @@ To test whether the setup is working:
       `./makePublic.sh ~/Public/BST update`
 
 1. Incorporate the changes via `postEverything.sh`
-
