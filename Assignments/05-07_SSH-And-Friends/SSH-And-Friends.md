@@ -67,10 +67,10 @@ If such keys do not exist already, you can generate them with a shell command li
 If the keys DO exist already, you need to make sure they have the right permissions and ownership:
 
 ```
-   `cd ~`
-   `sudo chown -Rf methods ~/.ssh`
-   `sudo chmod 600 ~/.ssh/id_rsa`
-   `sudo chmod 644 ~/.ssh/id_rsa.pub`
+   cd ~
+   sudo chown -Rf methods ~/.ssh
+   sudo chmod 600 ~/.ssh/id_rsa
+   sudo chmod 644 ~/.ssh/id_rsa.pub
 ```
 
 ## Registering your key with a remote resource (GitHub)
@@ -91,8 +91,10 @@ If the keys DO exist already, you need to make sure they have the right permissi
 
    the answer would be
 
-   `origin	https://github.com/ccarrollATjhuecon/BST-Shared.git (fetch)`
-   `origin	https://github.com/ccarrollATjhuecon/BST-Shared.git (push)`
+```
+   origin	https://github.com/ccarrollATjhuecon/BST-Shared.git (fetch)
+   origin	https://github.com/ccarrollATjhuecon/BST-Shared.git (push)
+```
 
 You would need to change this using a command like:
 
@@ -118,16 +120,16 @@ To set up the credential helper, from a shell:
 The `sshfs` tool allows you to securely mount a directory or drive on the remote machine in such a way that, while mounted, it becomes part of the filesystem of the host machine.
 
 ```
-	sudo apt -y install sshfs # It is probably already installed
-	sudo mkdir -p /mnt/Methods # Make the 'mount point' where the new content will be accessible
-	sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/Methods /mnt/Methods
+sudo apt -y install sshfs # It is probably already installed
+sudo mkdir -p /mnt/Methods # Make the 'mount point' where the new content will be accessible
+sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/Methods /mnt/Methods
 ```
 
 Now if you do
 
 ```
-      ls /home/methods/GitHub/Methods
-      ls /mnt/Methods
+ls /home/methods/GitHub/Methods
+ls /mnt/Methods
 ```
 
 you should see exactly the same listing, because these are two paths to the same object
