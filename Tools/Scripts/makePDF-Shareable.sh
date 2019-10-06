@@ -16,13 +16,24 @@ echo "$cmd"
 eval "$cmd"
 echo ''
 
+if [ -e economics.bib ]; then
+    rm economics.bib
+fi
+
 rm -f "$textName".bib
 touch "$textName".bib
 cmd="pdflatex -halt-on-error $textName"
 echo "$cmd"
 eval "$cmd" > /dev/null
 if [ "$?" -eq 1 ]; then
-   eval "$cmd" # If an error occurs, rerun wihtout suppressing output
+    eval "$cmd" # If an error occurs, rerun wihtout suppressing output
+    echo '' ; echo ''
+    echo 'Error occurred in makePDF-Shareable.sh.' ; echo ''
+    echo 'Command was:'
+    echo "$cmd"
+    echo ''
+    echo 'Hit return when this command runs successfully, or C-c'
+    read answer
 fi
 bibtex="bibtex $textName"
 echo ''

@@ -4,7 +4,7 @@
 if [ $# -ne 2 ]
 then
   echo "usage:   ${0##*/} <path> <file>"
-  echo "example: ${0##*/} /home/methods/Papers/BufferStockTheory/BufferStockTheory-Shared BufferStockTheory"
+  echo "example: ${0##*/} /home/methods/Papers/BST/BST-Shared BufferStockTheory"
   exit 1
 fi
 
@@ -13,7 +13,7 @@ textName=$2
 
 toolRoot=/Methods/Tools/Scripts
 
-#pathName=/home/methods/Papers/BufferStockTheory/BufferStockTheory-Shared ; textName=BufferStockTheory
+#pathName=/home/methods/Papers/BST/BST-Shared ; textName=BufferStockTheory
 echo '{{{ Starting '
 echo '' 
 echo $toolRoot/${0##*/} $pathName $textName
@@ -49,26 +49,26 @@ if [ ! -e $textName.tex ]; then
   exit 1
 fi
 
-echo pdflatex -halt-on-error --shell-escape \'\\newcommand\\UseOption\{PrintGeom,FromShell\}\\input\{\'$textName\'} ' 1> /dev/null '
-     pdflatex -halt-on-error --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}" 1> /dev/null 
-     (( $? ))        && pdflatex --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}" # If prior command generated an error exit condition, then repeat it visibly
+echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
+     pdflatex -halt-on-error  "\input{$textName}" 1> /dev/null 
+     (( $? ))        && pdflatex  "\input{$textName}" # If prior command generated an error exit condition, then repeat it visibly
 bibtex -terse    $textName
-echo pdflatex -halt-on-error --shell-escape \'\\newcommand\\UseOption\{PrintGeom,FromShell\}\\input\{\'$textName\'} ' 1> /dev/null '
-													      pdflatex -halt-on-error    --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}"  1> /dev/null
-[[ $? -eq 1 ]] && pdflatex --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
-echo pdflatex -halt-on-error --shell-escape \'\\newcommand\\UseOption\{PrintGeom,FromShell\}\\input\{\'$textName\'} ' 1> /dev/null '
-													      pdflatex -halt-on-error    --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}"  1> /dev/null
-[[ $? -eq 1 ]] && pdflatex --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
-echo pdflatex -halt-on-error --shell-escape \'\\newcommand\\UseOption\{PrintGeom,FromShell\}\\input\{\'$textName\'} ' 1> /dev/null '
-													      pdflatex -halt-on-error    --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}"  1> /dev/null
-[[ $? -eq 1 ]] && pdflatex --shell-escape "\newcommand\UseOption{PrintGeom,FromShell}\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
+echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
+													      pdflatex -halt-on-error     "\input{$textName}"  1> /dev/null
+[[ $? -eq 1 ]] && pdflatex  "\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
+echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
+													      pdflatex -halt-on-error     "\input{$textName}"  1> /dev/null
+[[ $? -eq 1 ]] && pdflatex  "\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
+echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
+													      pdflatex -halt-on-error     "\input{$textName}"  1> /dev/null 
+[[ $? -eq 1 ]] && pdflatex  "\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
 
-/Methods/Tools/Scripts/bibtoolGet.sh $textName > ../$textName.bib
+
 
 echo cd $pathName/..
      cd $pathName/..
      
-echo '' ; 'You should be able to open '$textName.pdf ; echo ''
+echo '' ; echo 'You should be able to open '$textName.pdf ; echo ''
 
 echo Finished $toolRoot/${0##*/} $pathName $textName }}}
 echo ''
