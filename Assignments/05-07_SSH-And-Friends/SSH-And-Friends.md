@@ -49,6 +49,29 @@ We are going to again become root for the purpose of executing this command. Bel
 A Google search for `scp command examples` will turn up a host of other ways to use the command. You can also do a bit of
 prep work so that you do not need to enter your password for the remote machine every time you use the command.
 
+## Mount A Network Drive
+
+The `sshfs` tool allows you to securely mount a directory or drive on the remote machine in such a way that, while mounted, it becomes part of the filesystem of the host machine.
+
+```
+sudo apt -y install sshfs # It is probably already installed
+sudo mkdir -p /mnt/Methods # Make the 'mount point' where the new content will be accessible
+sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/Methods /mnt/Methods
+```
+
+Now if you do
+
+```
+ls /home/methods/GitHub/Methods
+ls /mnt/Methods
+```
+
+you should see exactly the same listing, because these are two paths to the same object
+
+The command to unmount:
+
+	sudo fusermount -u /mnt/Methods
+
 ## SSH keys
 
 If you will be connecting regularly from your computer to online resources using ssh tools, it will be convenient for your user to have a a `key` that you can upload to the remote resource machine so that it can recognize your machine without the necessity of always entering a username and password.
@@ -114,26 +137,3 @@ To set up the credential helper, from a shell:
    git config --global credential.helper cache
    git config --global credential.helper 'cache --timeout=3600'
 ```   
-
-## Mount A Network Drive
-
-The `sshfs` tool allows you to securely mount a directory or drive on the remote machine in such a way that, while mounted, it becomes part of the filesystem of the host machine.
-
-```
-sudo apt -y install sshfs # It is probably already installed
-sudo mkdir -p /mnt/Methods # Make the 'mount point' where the new content will be accessible
-sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/Methods /mnt/Methods
-```
-
-Now if you do
-
-```
-ls /home/methods/GitHub/Methods
-ls /mnt/Methods
-```
-
-you should see exactly the same listing, because these are two paths to the same object
-
-The command to unmount:
-
-	sudo fusermount -u /mnt/Methods
