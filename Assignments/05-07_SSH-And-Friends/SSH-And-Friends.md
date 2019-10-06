@@ -1,9 +1,9 @@
 # Interacting Remotely with an SSH-Enabled Machine
 
-Unix computers that have enabled the `secure shell` (SSH) protocol can be controlled remotely using a suite of tools 
+Unix computers that have enabled the `secure shell` (SSH) protocol can be controlled remotely using a suite of tools
 that allow interaction with the remote computer almost as if the user were physically present
 
-* On your VM, ssh can be enabled with the shell command `sudo apt -y install openssh-server`
+* On your VM, ssh has been enabled with the shell command `sudo apt -y install openssh-server`
 
 ## Login via SSH
 0. Connecting via SSH requires, at a minimum, knowledge of a username and password for the computer being connected to
@@ -23,7 +23,7 @@ that allow interaction with the remote computer almost as if the user were physi
 	  * And that connecting by ssh has been enabled on the other machine
 0. You should now be connected to the remote computer on precisely the same footing you would have if you had logged into the computer from a physical connection like a keyboard
    * Confirm that you are logged in as the methods user using the `whoami` command
-   * A second proof that you are logged in as the methods user is to use the command `ls` 
+   * A second proof that you are logged in as the methods user is to use the command `ls`
    * You should see the usual default list of folders from your home directory
 0. Exit from your secure shell:
    * `exit` is the command
@@ -44,43 +44,86 @@ We are going to again become root for the purpose of executing this command. Bel
 
     su # to become the root user -- you will have to give the password
 	mkdir -p /tmp/Methods/Assignments # to create the directory into which the files will be copied
-	scp -r methods@localhost:/home/methods/GitHub/ccarrollATjhuecon/Methods/Assignments/* /tmp/Methods/Assignments
+	scp -r methods@localhost:/home/methods/GitHub/Methods/Assignments/* /tmp/Methods/Assignments
 
-A Google search for `scp command examples` will turn up a host of other ways to use the command. You can also do a bit of 
+A Google search for `scp command examples` will turn up a host of other ways to use the command. You can also do a bit of
 prep work so that you do not need to enter your password for the remote machine every time you use the command.
 
 ## SSH keys
 
-If you will be connecting regularly from your computer to online resources using ssh tools, you should generate a `key` that you can 
-upload to the remote resource machine:
+If you will be connecting regularly from your computer to online resources using ssh tools, it will be convenient for your user to have a a `key` that you can upload to the remote resource machine so that it can recognize your machine without the necessity of always entering a username and password.
+
+The default location for such a key is the `~/.ssh/` directory. The default kind of key is an RSA key, which has two parts, a `private` part named `~/.ssh/id_rsa` and a `public` part named `~/.ssh/id_rsa.pub`.  
+
+If such keys do not exist already, you can generate them with a shell command like:
 
 	ssh-keygen -t rsa -b 4096 -C "methods VM of [Moniker]" # This is a "Comment" that lets you identify the key
 
    * You will be prompted to "Enter a file in which to save the key."
    * You should hit the enter (or return) key to accept the default location proposed
    * You will then be asked to enter a passphrase
-   * Again you can just hit enter 
-   
+   * Again you can just hit enter
+
+If the keys DO exist already, you need to make sure they have the right permissions and ownership:
+
+  `cd ~`
+  `sudo chown -Rf methods ~/.ssh`
+  `sudo chmod 600 ~/.ssh/id_rsa`
+  `sudo chmod 644 ~/.ssh/id_rsa.pub`
+
+## Registering your key with a remote resource (GitHub)
+
+   Registering your key allows you to interact with a remote machine without the cumbersome requirement to enter a username and password at every step. This is particularly convenient when interacting with GitHub.
+
+   Instructions for how register your ssh key with your GitHub account [are here](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account)
+
+   You should follow those instructions (since your machine should already have a key, you can omit the step of generating one)
+
+   In order to interact with a remote repo without using password or username, you need to adjust GitHub's url for connecting with the remote resource via ssh rather than https.  For example, if you obtained a repo originally by
+
+   `git clone https://github.com/llorracc/BufferStockTheory.git`
+
+   then, inside the cloned BufferStockTheory directory, you asked
+
+   `git remote -v`
+
+   the answer would be
+
+   `origin	https://github.com/ccarrollATjhuecon/BST-Shared.git (fetch)`
+   `origin	https://github.com/ccarrollATjhuecon/BST-Shared.git (push)`
+
+You would need to change this using a command like:
+
+  `git remote set-url origin git@github.com/ccarrollATjhuecon/BST-Shared.git`
+
+## Git Credential Helper
+
+Another way to avoid having always to enter your password is to use a `credential-helper`
+
+On Win or Mac machines, it is possible to configure the credential helper so that you never need to enter your credentials again for interacting with a repo.
+
+On Linux machines, the credential helper tool is more limited: As with the timeout on the sudo command, there is an 'expiration date' (defaulting to 3600 seconds) after which you will be required to reenter username and password.
+
+To set up the credential helper, from a shell:
+
+   `git config --global credential.helper cache`
+   `git config --global credential.helper 'cache --timeout=3600'`
+
 ## Mount A Network Drive
 
 The `sshfs` tool allows you to securely mount a directory or drive on the remote machine in such a way that, while mounted, it becomes part of the filesystem of the host machine.
 
 	sudo apt -y install sshfs # It is probably already installed
 	sudo mkdir -p /mnt/Methods # Make the 'mount point' where the new content will be accessible
-	sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/ccarrollATjhuecon/Methods /mnt/Methods
-	
-Now if you do 
+	sudo sshfs -o allow_other -o IdentityFile=~/.ssh/id_rsa.pub methods@localhost:/home/methods/GitHub/Methods /mnt/Methods
 
-	ls /home/methods/GitHub/ccarrollATjhuecon/Methods
+Now if you do
+
+	ls /home/methods/GitHub/Methods
 	ls /mnt/Methods
-	
+
 you should see exactly the same listing, because these are two paths to the same object
 
 The command to unmount:
 
 	sudo fusermount -u /mnt/Methods
-
-
-	
-
-   

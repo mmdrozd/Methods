@@ -46,9 +46,12 @@ for d in * ; do
 	#   http://unix.stackexchange.com/questions/257571/why-does-bashrc-check-whether-the-current-shell-is-interactive
 	#   https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html
 	if [ ! -e /$Users/$d/.ssh/id_rsa.pub ]; then # If there is no public rsa key, make one
-	    sudo mkdir -p /home/methods/.ssh
-	    sudo chmod a+rwx /home/methods/.ssh
-	    ssh-keygen -b 4096 -t rsa -q -N "" -C "methods-auto" -f /home/methods/.ssh/id_rsa
+	    sudo mkdir -p /$Users/$d/.ssh
+	    sudo chmod a+rwx /$Users/$d/.ssh
+	    ssh-keygen -b 4096 -t rsa -q -N "" -C "$d-auto" -f /home/$d/.ssh/id_rsa
+	    sudo chown -Rf $d /$Users/$d/.ssh
+	    sudo chmod 644 /$Users/$d/.ssh/id_rsa.pub
+	    sudo chmod 600 /$Users/$d/.ssh/id_rsa
 	fi
 	dateNow=`date '+%Y%m%d-%H%Mh'`
 	if [ -e /$Users/$d/.bashrc ]; then sudo mv /$Users/$d/.bashrc /$Users/$d/.bashrc_$dateNow ; fi # Archive the original
