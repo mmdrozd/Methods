@@ -70,6 +70,6 @@ After the script has finished, you should test whether the setup is working:
 1. Change the name of the author of the paper to your own name, and `makeEverything` again
 
 1. Update the `BST-Public` local directory with the script:
-      `./makePublic.sh ~/Public/BST update`
+      `./makePublic.sh ~/Papers/BST/BST-Public update`
 
 1. Incorporate the changes via `postEverything.sh`
