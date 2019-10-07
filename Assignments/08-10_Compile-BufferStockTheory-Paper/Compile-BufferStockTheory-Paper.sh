@@ -25,14 +25,6 @@ if [ -d ~/Papers/BST ]; then
     exit
 fi
 
-if [ -d ~/Papers/BST ]; then
-    echo 'Before running this script, please execute the command:'
-    echo ''
-    echo 'rm -Rf ~/Papers/BST'
-    echo '' ; echo 'Once this is done, rerun this script'
-    exit
-fi
-
 # Configure git so that it (temporarily) remembers usernames and passwords
 
 git config --global credential.helper cache
