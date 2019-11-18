@@ -49,21 +49,14 @@ if [ ! -e $textName.tex ]; then
   exit 1
 fi
 
-echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
-     pdflatex -halt-on-error  "\input{$textName}" 1> /dev/null 
-     (( $? ))        && pdflatex  "\input{$textName}" # If prior command generated an error exit condition, then repeat it visibly
+arg='-halt-on-error -file-line-error "\input{'$textName'}"'
+echo "pdflatex -interaction=nonstopmode $arg"
+eval "pdflatex -interaction=nonstopmode $arg"  1> /dev/null # Prevent endless LaTeX output
+(( $? ))  && eval "pdflatex $arg" | grep -v /usr/local/texlive # If prior command generated an error exit condition, then repeat it visibly and not in nonstopmode
+
 bibtex -terse    $textName
-echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
-													      pdflatex -halt-on-error     "\input{$textName}"  1> /dev/null
-[[ $? -eq 1 ]] && pdflatex  "\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
-echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
-													      pdflatex -halt-on-error     "\input{$textName}"  1> /dev/null
-[[ $? -eq 1 ]] && pdflatex  "\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
-echo pdflatex -halt-on-error  \'\\input\{$textName} \' 
-													      pdflatex -halt-on-error     "\input{$textName}"  1> /dev/null 
-[[ $? -eq 1 ]] && pdflatex  "\input{$textName}"  # If prior command generated an error exit condition, then repeat it visibly
-
-
+eval "pdflatex -interaction=nonstopmode $arg"  1> /dev/null # Prevent endless LaTeX output
+eval "pdflatex -interaction=nonstopmode $arg"  1> /dev/null # Prevent endless LaTeX output
 
 echo cd $pathName/..
      cd $pathName/..
