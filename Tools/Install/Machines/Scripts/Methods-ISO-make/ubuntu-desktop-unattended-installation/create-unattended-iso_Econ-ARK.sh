@@ -4,8 +4,8 @@
 pathToScript=$(dirname `realpath "$0"`)
 # pathToScript=/media/sf_VirtualBox/OSBOXES-From/ubuntu-unattended-install-options/ubuntu-desktop-unattended-installation/
 methodsURL=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO
-startFile=start_modified-for-methods.sh
-seed_file="methods.seed"
+startFile=start_modified-for-econ-ark.sh
+seed_file="econ-ark.seed"
 ks_file=ks.cfg
 rclocal_file=rc.local
 
@@ -96,7 +96,7 @@ xenn_vers=$(fgrep Xenial $tmphtml | head -1 | awk '{print $6}')
 bion_vers=$(fgrep Bionic $tmphtml | head -1 | awk '{print $6}')
 
 datestr=`date +"%Y%m%d"`
-name='methods'
+name='econ-ark'
 
 # ask whether to include vmware tools or not
 while true; do
@@ -140,10 +140,10 @@ fi
 
 # ask the user questions about his/her preferences
 read -ep " please enter your preferred timezone: " -i "${timezone}" timezone
-read -ep " please enter your preferred username: " -i "methods" username
-read -ep " please enter your preferred password: " -i "Ely78Jhu!" password
+read -ep " please enter your preferred username: " -i "econ-ark" username
+read -ep " please enter your preferred password: " -i "kra-noce" password
 printf "\n"
-read -ep " confirm your preferred password: " -i "Ely78Jhu!" password2
+read -ep " confirm your preferred password: " -i "kra-noce" password2
 printf "\n"
 read -ep " Make ISO bootable via USB: " -i "yes" bootable
 
@@ -175,7 +175,7 @@ if [[ ! -f $tmp/$rclocal_file ]]; then
     download "$methodsURL/$rclocal_file"
 fi
 
-# download methods seed file
+# download econ-ark seed file
 if [[ ! -f $tmp/$seed_file ]]; then
     echo -n " downloading $seed_file: "
     download "$methodsURL/$seed_file"
@@ -254,10 +254,10 @@ late_command="chroot /target curl -L -o /var/local/$startFile $methodsURL/$start
      chroot /target chmod +x /var/local/$startFile ;\
      chroot /target chmod +x /etc/rc.local ;\
      mkdir -p /etc/lightdm/lightdm.conf.d ;\
-     chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-methods.conf $methodsURL/root/etc/lightdm/lightdm.conf.d/autologin-methods.conf ;\
-     chroot /target chmod 755 /etc/lightdm/lightdm.conf.d/autologin-methods.conf ;"
+     chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $methodsURL/root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\
+     chroot /target chmod 755 /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;"
 
-# copy the methods seed file to the iso
+# copy the econ-ark seed file to the iso
 cp -rT $tmp/$seed_file $tmp/iso_new/preseed/$seed_file
 
 # copy the kickstart file to the root
@@ -285,12 +285,12 @@ seed_checksum=$(md5sum $tmp/iso_new/preseed/$seed_file)
 
 # add the autoinstall option to the menu
 sed -i "/label install/ilabel autoinstall\n\
-  menu label ^Autoinstall Methods Ubuntu Server\n\
+  menu label ^Autoinstall Econ-Ark Ubuntu Server\n\
   kernel /install/vmlinuz\n\
-  append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz DEBCONF_DEBUG=5 auto=true priority=high preseed/file=/cdrom/preseed/methods.seed preseed/file/checksum=$seed_checksum -- ks=cdrom:/ks.cfg " $tmp/iso_new/isolinux/txt.cfg
+  append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz DEBCONF_DEBUG=5 auto=true priority=high preseed/file=/cdrom/preseed/econ-ark.seed preseed/file/checksum=$seed_checksum -- ks=cdrom:/ks.cfg " $tmp/iso_new/isolinux/txt.cfg
   
 # add the autoinstall option to the menu for USB Boot
-sed -i '/set timeout=30/amenuentry "Autoinstall Methods Ubuntu Server" {\n\	set gfxpayload=keep\n\	linux /install/vmlinuz append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz auto=true priority=high preseed/file=/cdrom/preseed/methods.seed quiet ---\n\	initrd	/install/initrd.gz\n\}' $tmp/iso_new/boot/grub/grub.cfg
+sed -i '/set timeout=30/amenuentry "Autoinstall Econ-Ark Ubuntu Server" {\n\	set gfxpayload=keep\n\	linux /install/vmlinuz append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz auto=true priority=high preseed/file=/cdrom/preseed/econ-ark.seed quiet ---\n\	initrd	/install/initrd.gz\n\}' $tmp/iso_new/boot/grub/grub.cfg
 sed -i -r 's/timeout=[0-9]+/timeout=1/g' $tmp/iso_new/boot/grub/grub.cfg
 
 echo " creating the remastered iso"
@@ -298,9 +298,9 @@ cd $tmp/iso_new
 # echo 'Hit C-C to quit'
 # read answer
 pwd
-cmd="(mkisofs -D -r -V "METHODS_UBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $tmp/$new_iso_name . > /dev/null 2>&1) &"
+cmd="(mkisofs -D -r -V "ECONARK_UBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $tmp/$new_iso_name . > /dev/null 2>&1) &"
 echo "$cmd"
-(mkisofs -D -r -V "METHODS_UBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $tmp/$new_iso_name . > /dev/null 2>&1) &
+(mkisofs -D -r -V "ECONARK_UBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $tmp/$new_iso_name . > /dev/null 2>&1) &
 spinner $!
 
 # make iso bootable (for dd'ing to  USB stick)
