@@ -1,5 +1,8 @@
 #!/bin/bash
 scriptDir="$(dirname "`realpath $0`")"
+echo ''
+echo "scriptDir=$scriptDir"
+echo ''
 # scriptDir=/Volumes/Data/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Machines/Scripts/Methods-ISO/
 cd "$scriptDir"
 start='start_modified-for-econ-ark_start.sh'
