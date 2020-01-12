@@ -2,7 +2,7 @@
 # This script will be in the user's $HOME directory and should be executed upon boot by
 # sudo 
 
-tmp="/home/methods" # Working directory
+tmp="/home/econ-ark" # Working directory
 
 # define download function
 # courtesy of http://fitnr.com/showing-file-download-progress-using-wget.html

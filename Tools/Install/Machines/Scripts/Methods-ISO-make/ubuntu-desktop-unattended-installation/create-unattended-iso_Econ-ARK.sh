@@ -4,7 +4,7 @@
 pathToScript=$(dirname `realpath "$0"`)
 # pathToScript=/media/sf_VirtualBox/OSBOXES-From/ubuntu-unattended-install-options/ubuntu-desktop-unattended-installation/
 methodsURL=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO
-startFile=start_modified-for-econ-ark.sh
+startFile="start_modified-for-econ-ark.sh"
 seed_file="econ-ark.seed"
 ks_file=ks.cfg
 rclocal_file=rc.local
@@ -249,12 +249,13 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $tmp/iso_new/isolinux/isolinux.cfg
 #      echo '[Service]' > /etc/systemd/system/keyboard-setup.service.d/reduce-timeout.conf ;\
 #      echo 'TimeoutStartSec=1000' >> /etc/systemd/system/keyboard-setup.service.d/reduce-timeout.conf ;"
 
+# Copy startFile to /var/local/start.sh 
 late_command="chroot /target curl -L -o /var/local/start.sh $methodsURL/$startFile ;\
      chroot /target curl -L -o /etc/rc.local $methodsURL/$rclocal_file ;\
      chroot /target chmod +x /var/local/start.sh ;\
      chroot /target /bin/bash /var/local/start.sh ;\
      chroot /target chmod +x /etc/rc.local ;\
-     mkdir -p /etc/lightdm/lightdm.conf.d ;\
+     chroot /target mkdir -p /etc/lightdm/lightdm.conf.d ;\
      chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $methodsURL/root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\
      chroot /target chmod 755 /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;"
 

@@ -5,10 +5,10 @@ FLAG="/var/log/firstboot.log"
 if [ ! -f $FLAG ]; then
    #Put here your initialization stuff
    
-   sudo rm /var/local/start_modified-for-methods.log # sudo is not necessary because this should be run as root, but useful as a reminder of that fact
-   sudo /var/local/start_modified-for-methods.sh | sudo tee /var/local/start_modified-for-methods.log
+   sudo rm /var/local/start.log # sudo is not necessary because this should be run as root, but useful as a reminder of that fact
+   sudo /var/local/start.sh | sudo tee /var/local/start.log
 
    #the next line creates an empty file so it won't run the next boot
-   touch $FLAG
+   touch "$FLAG"
    reboot
 fi
