@@ -249,9 +249,10 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $tmp/iso_new/isolinux/isolinux.cfg
 #      echo '[Service]' > /etc/systemd/system/keyboard-setup.service.d/reduce-timeout.conf ;\
 #      echo 'TimeoutStartSec=1000' >> /etc/systemd/system/keyboard-setup.service.d/reduce-timeout.conf ;"
 
-late_command="chroot /target curl -L -o /var/local/$startFile $methodsURL/$startFile ;\
+late_command="chroot /target curl -L -o /var/local/start.sh $methodsURL/$startFile ;\
      chroot /target curl -L -o /etc/rc.local $methodsURL/$rclocal_file ;\
-     chroot /target chmod +x /var/local/$startFile ;\
+     chroot /target chmod +x /var/local/start.sh ;\
+     chroot /target /bin/bash /var/local/start.sh ;\
      chroot /target chmod +x /etc/rc.local ;\
      mkdir -p /etc/lightdm/lightdm.conf.d ;\
      chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $methodsURL/root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\

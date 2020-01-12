@@ -4,7 +4,7 @@
 pathToScript=$(dirname `realpath "$0"`)
 # pathToScript=/media/sf_VirtualBox/OSBOXES-From/ubuntu-unattended-install-options/ubuntu-desktop-unattended-installation/
 methodsURL=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO
-startFile=start_modified-for-methods.sh
+startFile="start_modified-for-methods.sh"
 seed_file="methods.seed"
 ks_file=ks.cfg
 rclocal_file=rc.local
