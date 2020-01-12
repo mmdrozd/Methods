@@ -45,4 +45,4 @@ conda install --yes -c anaconda scipy
 conda install --yes -c anaconda pyopengl # Otherwise you get an error "Segmentation fault (core dumped)"
 
 $scriptDir/Anaconda-jupyter_contrib_nbextensions.sh
-/Methods/Tools/Config/tool/jupytext/default.sh
+#/Methods/Tools/Config/tool/jupytext/default.sh

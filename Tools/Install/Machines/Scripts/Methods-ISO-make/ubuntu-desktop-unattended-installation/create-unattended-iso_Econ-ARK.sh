@@ -276,7 +276,7 @@ pwhash=$(echo $password | mkpasswd -s -m sha-512)
 # the normal separator for sed is /, but both the password and the timezone may contain it
 # so instead, I am using @
 sed -i "s@{{username}}@$username@g" $tmp/iso_new/preseed/$seed_file
-sed -i "s@{{pwhash}}@$pwhash@g" $tmp/iso_new/preseed/$seed_file
+sed -i "s@{{pwhash}}@$pwhash@g"     $tmp/iso_new/preseed/$seed_file
 sed -i "s@{{hostname}}@$hostname@g" $tmp/iso_new/preseed/$seed_file
 sed -i "s@{{timezone}}@$timezone@g" $tmp/iso_new/preseed/$seed_file
 

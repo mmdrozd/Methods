@@ -1,83 +1,48 @@
 #!/bin/bash
-# This script will be in the /var/local/methods directory and should be executed by root at the first boot 
+# Adapted from http://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu
 
-finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish_modified-for-econ-ark.sh
+sudo ls  # make sure we have root permission from the outset
+scriptDir="$(dirname "`realpath $0`")"
 
-# set defaults
-default_hostname="$(hostname)"
-default_domain=""
+if [ -e /tmp/Anaconda ]; then # delete any prior install
+    sudo rm -Rf /tmp/Anaconda
+fi
 
-# define download function
-# courtesy of http://fitnr.com/showing-file-download-progress-using-wget.html
-download()
-{
-    local url=$1
-#    echo -n "    "
-    wget --progress=dot $url 2>&1 | grep --line-buffered "%" | \
-        sed -u -e "s,\.,,g" | awk '{printf("\b\b\b\b%4s", $2)}'
-#    echo -ne "\b\b\b\b"
-#    echo " DONE"
-}
+mkdir /tmp/Anaconda ; cd /tmp/Anaconda
 
-tmp="/tmp"
+CONTREPO=https://repo.continuum.io/archive/
+# Stepwise filtering of the html at $CONTREPO
+# Get the topmost line that matches our requirements, extract the file name.
+ANACONDAURL=$(wget -q -O - $CONTREPO index.html | grep "Anaconda3-" | grep "Linux" | grep "86_64" | head -n 1 | cut -d \" -f 2)
+cmd="wget -O /tmp/Anaconda/$ANACONDAURL $CONTREPO$ANACONDAURL ; cd /tmp/Anaconda"
+echo "$cmd"
+eval "$cmd"
 
-datetime="$(date +%Y%m%d%H%S)"
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hostname
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hosts
+cmd="sudo rm -Rf /usr/local/anaconda3 ; chmod a+x /tmp/Anaconda/$ANACONDAURL ; /tmp/Anaconda/$ANACONDAURL -b -p /usr/local/anaconda3"
+echo "$cmd"
+eval "$cmd"
 
-# # Install Methods course material
+addToPath='export PATH=/usr/local/anaconda3/bin:$PATH'
+eval "$addToPath"
+sudo chmod u+w /etc/environment
+sudo sed -e 's\/usr/local/sbin:\/usr/local/anaconda3/bin:/usr/local/sbin:\g' /etc/environment > /tmp/environment
+sudo sed -e 's\/usr/local/anaconda3/bin:/usr/local/anaconda3/bin\/usr/local/anaconda3/bin\g' /tmp/environment > /tmp/environment2 # eliminate any duplicates
+sudo mv /tmp/environment2 /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
+sudo chmod u-w /etc/environment
 
-# apt-get -y install git
-# GHDir=/home/methods/GitHub/ccarrollATjhuecon
-# mkdir -p "$GHDir"
-# cd "$GHDir"
-# if [ ! -e /home/methods/GitHub/ccarrollATjhuecon/Methods ]; then
-#     git clone https://github.com/ccarrollATjhuecon/Methods.git
-#     cd Methods
-# else
-#     cd Methods
-#     git fetch
-#     git pull
-# fi
-# chmod -Rf a+rwx "$GHDir"
-# chown -Rf methods:methods "$GHDir"
+if [ ! -e /etc/sudoers.d/anaconda3 ]; then # Modify secure path so that anaconda commands will work with sudo
+    sudo mkdir -p /etc/sudoers.d
+    sudo echo 'Defaults secure_path="/usr/local/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/snap/bin:/bin"' | sudo tee /etc/sudoers.d/anaconda3
+fi
 
-# # Now add the paths to the root environment 
-# sudo chmod u+w /etc/environment
+echo "$PATH"
+source /etc/environment
 
-# sudo cat /etc/environment "$GHDir/Methods/Tools/Config/tool/bash/dotbashrc-METHODS" > /tmp/environment
-# sudo mv /tmp/environment /etc/environment # Weird permissions issue prevents direct redirect into /etc/environment
-# sudo chmod u-w /etc/environment
+conda update --yes conda
+conda update --yes anaconda
 
-# source /etc/environment
+conda install --yes -c anaconda scipy
+conda install --yes -c anaconda pyopengl # Otherwise you get an error "Segmentation fault (core dumped)"
 
-# cd Tools/Install/Machines/010_Xubuntu/Scripts
-
-# chown -Rf methods:methods /home/methods/*
-# chown -Rf methods:methods /home/methods/.*
-# chown -Rf methods:methods /home/methods/*.*
-
-# sudo ./010_Basic.sh
-# sudo ./020_Intermediate.sh
-# sudo ./030_Advanced.sh
-
-# # Adding the methods user to the vbox allows the user to browse shared network folders
-# sudo adduser methods vboxsf
-
-# # # download the finish script if it doesn't yet exist
-# # if [[ ! -f $tmp/finish.sh ]]; then
-# #     cd "$tmp"
-# #     download "$finishPath"
-# # fi
-
-# # # set proper permissions on finish script
-# # chmod a+x "$tmp/finish.sh"
-
-# # sudo -u methods xfce4-terminal -e 'bash "$tmp/finish.sh; bash"'
-
-# # remove myself to prevent any unintended changes at a later stage
-# # echo 'Remove this script: sudo rm "$0
-# # rm $0
-
-# #echo 'Run finish.sh'
-
+$scriptDir/Anaconda-jupyter_contrib_nbextensions.sh
+#/Methods/Tools/Config/tool/jupytext/default.sh
