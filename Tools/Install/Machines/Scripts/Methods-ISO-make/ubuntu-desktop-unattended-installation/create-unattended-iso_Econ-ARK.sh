@@ -12,7 +12,12 @@ rclocal_file=rc.local
 # file names & paths
 iso_done="/media/sf_VirtualBox"  # destination folder to store the final iso file
 iso_make="/usr/local/share/iso_make"  # destination folder to store the final iso file
+# create working folders
+echo " remastering your iso file"
+
 mkdir -p "$iso_make"
+mkdir -p "$iso_make/iso_org"
+mkdir -p "$iso_make/iso_new"
 rm -f "$iso_make/$ks_file" # Make sure new version is downloaded
 rm -f "$iso_make/$seed_file" # Make sure new version is downloaded
 rm -f "$iso_make/$startFile" # Make sure new version is downloaded
@@ -171,6 +176,7 @@ if [[ ! -f $iso_done/$download_file ]]; then
 	exit 1
 fi
 
+cd $iso_make
 # download rc.local file
 if [[ ! -f $iso_make/$rclocal_file ]]; then
     echo -n " downloading $rclocal_file: "
@@ -210,12 +216,6 @@ if [[ $bootable == "yes" ]] || [[ $bootable == "y" ]]; then
     fi
 fi
 
-
-# create working folders
-echo " remastering your iso file"
-mkdir -p $iso_make
-mkdir -p $iso_make/iso_org
-mkdir -p $iso_make/iso_new
 
 # mount the image
 if grep -qs $iso_make/iso_org /proc/mounts ; then
