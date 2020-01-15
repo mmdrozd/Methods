@@ -10,5 +10,6 @@ if [ ! -f $FLAG ]; then
 
    #the next line creates an empty file so it won't run the next boot
    touch "$FLAG"
+   echo 'Finished automatic installations.  Rebooting.' | sudo tee /var/local/start.log
    reboot
 fi

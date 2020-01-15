@@ -226,7 +226,9 @@ else
 fi
 
 # copy the iso contents to the working directory
-(cp -rT $iso_make/iso_org $iso_make/iso_new > /dev/null 2>&1) &
+echo 'Copying the iso contents from '$iso_org' to '$iso_new
+#(cp -rT $iso_make/iso_org $iso_make/iso_new > /dev/null 2>&1) &
+(rsync -ra --delete $iso_make/iso_org/ $iso_make/iso_new > /dev/null 2>&1) & # Much faster if iso_new already exists; likely while debugging
 spinner $!
 
 # set the language for the installation menu
@@ -290,12 +292,12 @@ seed_checksum=$(md5sum $iso_make/iso_new/preseed/$seed_file)
 
 # add the autoinstall option to the menu
 sed -i "/label install/ilabel autoinstall\n\
-  menu label ^Autoinstall Econ-ARK Ubuntu Server\n\
+  menu label ^Autoinstall Econ-ARK Xubuntu Server\n\
   kernel /install/vmlinuz\n\
   append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz DEBCONF_DEBUG=5 auto=true priority=high preseed/file=/cdrom/preseed/econ-ark.seed preseed/file/checksum=$seed_checksum -- ks=cdrom:/ks.cfg " $iso_make/iso_new/isolinux/txt.cfg
   
 # add the autoinstall option to the menu for USB Boot
-sed -i '/set timeout=30/amenuentry "Autoinstall Econ-Ark Ubuntu Server" {\n\	set gfxpayload=keep\n\	linux /install/vmlinuz append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz auto=true priority=high preseed/file=/cdrom/preseed/econ-ark.seed quiet ---\n\	initrd	/install/initrd.gz\n\}' $iso_make/iso_new/boot/grub/grub.cfg
+sed -i '/set timeout=30/amenuentry "Autoinstall Econ-ARK Xubuntu Server" {\n\	set gfxpayload=keep\n\	linux /install/vmlinuz append file=/cdrom/preseed/ubuntu-server.seed initrd=/install/initrd.gz auto=true priority=high preseed/file=/cdrom/preseed/econ-ark.seed quiet ---\n\	initrd	/install/initrd.gz\n\}' $iso_make/iso_new/boot/grub/grub.cfg
 sed -i -r 's/timeout=[0-9]+/timeout=1/g' $iso_make/iso_new/boot/grub/grub.cfg
 
 echo " creating the remastered iso"
