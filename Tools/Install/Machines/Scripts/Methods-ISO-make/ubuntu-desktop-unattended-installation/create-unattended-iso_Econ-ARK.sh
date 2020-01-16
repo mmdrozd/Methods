@@ -178,22 +178,22 @@ fi
 
 cd $iso_make
 # download rc.local file
-if [[ ! -f $iso_make/$rclocal_file ]]; then
-    echo -n " downloading $rclocal_file: "
-    download "$methodsURL/$rclocal_file"
-fi
+[[ -f $iso_make/$rclocal_file ]] && rm $iso_make/$rclocal_file
+
+echo -n " downloading $rclocal_file: "
+download "$methodsURL/$rclocal_file"
 
 # download econ-ark seed file
-if [[ ! -f $iso_make/$seed_file ]]; then
-    echo -n " downloading $seed_file: "
-    download "$methodsURL/$seed_file"
-fi
+[[ -f $iso_make/$seed_file ]] && rm $iso_make/$seed_file 
+
+echo -n " downloading $seed_file: "
+download "$methodsURL/$seed_file"
 
 # download kickstart file
-if [[ ! -f $iso_make/$ks_file ]]; then
-    echo -n " downloading $ks_file: "
-    download "$methodsURL/$ks_file"
-fi
+[[ -f $iso_make/$ks_file ]] && rm $iso_make/$ks_file
+
+echo -n " downloading $ks_file: "
+download "$methodsURL/$ks_file"
 
 # install required packages
 echo " installing required packages"
@@ -216,7 +216,6 @@ if [[ $bootable == "yes" ]] || [[ $bootable == "y" ]]; then
     fi
 fi
 
-
 # mount the image
 if grep -qs $iso_make/iso_org /proc/mounts ; then
     echo " image is already mounted, continue"
@@ -228,7 +227,8 @@ fi
 # copy the iso contents to the working directory
 echo 'Copying the iso contents from '$iso_org' to '$iso_new
 #(cp -rT $iso_make/iso_org $iso_make/iso_new > /dev/null 2>&1) &
-(rsync -ra --delete $iso_make/iso_org/ $iso_make/iso_new > /dev/null 2>&1) & # Much faster if iso_new already exists; likely while debugging
+#(rsync -ra --delete $iso_make/iso_org/ $iso_make/iso_new > /dev/null 2>&1) & # Much faster if iso_new already exists; likely while debugging
+rsync -rai --delete $iso_make/iso_org/ $iso_make/iso_new 
 spinner $!
 
 # set the language for the installation menu
@@ -239,7 +239,6 @@ echo en > $iso_make/iso_new/isolinux/lang
 #16.04
 #taken from https://github.com/fries/prepare-ubuntu-unattended-install-iso/blob/master/make.sh
 sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $iso_make/iso_new/isolinux/isolinux.cfg
-
 
 # set late command
 
@@ -305,9 +304,10 @@ cd $iso_make/iso_new
 # echo 'Hit C-C to quit'
 # read answer
 pwd
-cmd="(mkisofs -D -r -V "ECONARK_UBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
+[[ -e "$iso_make/$new_iso_name" ]] && rm "$iso_make/$new_iso_name"
+cmd="(mkisofs -D -r -V "ECONARK_XUBUNTU_$datestr" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
 echo "$cmd"
-(mkisofs -D -r -V "ECONARK_UBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
+(mkisofs -D -r -V "ECONARK_XUBUNTU_"$datestr -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
 spinner $!
 
 # make iso bootable (for dd'ing to  USB stick)
@@ -315,10 +315,13 @@ if [[ $bootable == "yes" ]] || [[ $bootable == "y" ]]; then
     isohybrid $iso_make/$new_iso_name
 fi
 
-cmd="mv $iso_make/$new_iso_name /media/sf_VirtualBox/$new_iso_name"
+cmd="[[ -e $iso_done/$new_iso_name ]] && rm $iso_done/$new_iso_name"
 echo "$cmd"
+eval "$cmd"
+cmd="mv $iso_make/$new_iso_name $iso_done/$new_iso_name"
+echo "$cmd"
+eval "$cmd"
 
-mv $iso_make/$new_iso_name $iso_done/$new_iso_name
 # print info to user
 echo " -----"
 echo " finished remastering your ubuntu iso file"
