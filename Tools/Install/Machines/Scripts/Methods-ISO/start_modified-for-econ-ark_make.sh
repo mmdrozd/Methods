@@ -19,7 +19,7 @@ cat "$scriptDir/vncserver_default_password_setup.sh"  >> "$start"
 
 # Reset hostname; setup bashrc 
 cat "$scriptDir/start_modified-for-econ-ark_start.sh" >> "$start"
-echo "sudo -u $myuser /bin/bash /home/$myuser/.bashrc_aliases" >> "$start" # Execute the new bashrc to start the log
+echo "sudo -u $myuser bash -c -l 'source /home/$myuser/.bashrc_aliases &'" >> "$start" # Execute the new bashrc to start the log
 
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$start"
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh         >> "$start"
