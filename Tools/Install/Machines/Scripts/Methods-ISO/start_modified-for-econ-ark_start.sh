@@ -24,8 +24,8 @@ tmp="/tmp"
 myuser='econ-ark'
 
 datetime="$(date +%Y%m%d%H%S)"
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hostname
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hosts
+sed -i "s/xubuntu/$datetime/g" /etc/hostname
+sed -i "s/xubuntu/$datetime/g" /etc/hosts
 
 bashrcadd=/home/$myuser/.bashrc_aliases
 touch "$bashrcadd"

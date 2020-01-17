@@ -1,13 +1,13 @@
 #!/bin/bash
 sudo apt -y update && sudo apt -y upgrade
 #!/bin/bash
-# This script will be in the /var/local/methods directory and should be executed by root at the first boot 
+# This is the start of a script will be in the /var/local directory and should be executed by root at the first boot 
 
-finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish_modified-for-methods.sh
+finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish.sh
 
 # set defaults
 default_hostname="$(hostname)"
-default_domain="jhu.edu"
+default_domain=""
 
 # define download function
 # courtesy of http://fitnr.com/showing-file-download-progress-using-wget.html
@@ -23,9 +23,26 @@ download()
 
 tmp="/tmp"
 
+myuser='econ-ark'
+
 datetime="$(date +%Y%m%d%H%S)"
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hostname
-sed -i "s/ubuntu/Xub-$datetime/g" /etc/hosts
+sed -i "s/xubuntu/$datetime/g" /etc/hostname
+sed -i "s/xubuntu/$datetime/g" /etc/hosts
+
+bashrcadd=/home/$myuser/.bashrc_aliases
+touch "$bashrcadd"
+echo 'x0vncserver -display :0 >/dev/null 2>&1 &' >> "$bashrcadd"
+echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations"' >> "$bashrcadd"
+echo 'parse_git_branch() {' >> "$bashrcadd"
+echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/" >> "$bashrcadd"
+echo '}' >> "$bashrcadd"
+echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashrcadd"
+
+
+mkdir /home/$myuser/.emacs.d
+chmod a+rw /home/$myuser/.emacs.d
+chown $myuser:$myuser /home/$myuser/.emacs.d
+
 # https://askubuntu.com/questions/328240/assign-vnc-password-using-script
 myuser="econ-ark"
 mypasswd="kra-noce"
@@ -35,6 +52,8 @@ echo "$mypasswd" | vncpasswd -f > /home/$myuser/.vnc/passwd
 chown -R $myuser:$myuser /home/$myuser/.vnc
 chmod 0600 /home/$myuser/.vnc/passwd
 
+touch /home/$myuser/.bashrc_aliases
+echo 'x0vncserver -display :0 >/dev/null 2>&1 &' >> /home/$myuser/.bashrc_aliases
 
 #!/bin/bash
 # Adapted from http://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu
@@ -85,6 +104,12 @@ conda install --yes -c anaconda pyopengl # Otherwise you get an error "Segmentat
 $scriptDir/Anaconda-jupyter_contrib_nbextensions.sh
 #/Methods/Tools/Config/tool/jupytext/default.sh
 sudo apt -y install bash-completion xsel git curl wget cifs-utils openssh-server nautilus-share xclip emacs auctex texlive-full tigervnc-scraping-server
+myuser=econ-ark
+mypasswd=kra-noce
+mkdir /home//.vnc
+echo "$mypasswd" | vncpasswd -f > /home/$myuser/.vnc/passwd
+chown -R $myuser:$myuser /home/$myuser/.vnc
+chmod 0600 /home/$myuser/.vnc/passwd 
 #!/bin/bash
 
 #Download and extract HARK, REMARK, DemARK from GitHUB repository
@@ -100,3 +125,4 @@ git clone https://github.com/econ-ark/DemARK.git
 # https://askubuntu.com/questions/499070/install-virtualbox-guest-addition-terminal
 
 sudo apt -y install build-essential module-assistant virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+mkdir -p /home/$myuser/GitHub/econ-ark ; ln -s /usr/local/share/GitHub/econ-ark /home/$myuser/GitHub/econ-ark
