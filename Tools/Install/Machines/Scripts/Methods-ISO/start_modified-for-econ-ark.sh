@@ -63,7 +63,9 @@ mkdir /home/$myuser/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
 
-sudo -u econ-ark xfce4-terminal -e 'bash -c -i /home/econ-ark/.bashrc_aliases &'
+sudo chmod a+x /home/econ-ark/.bashrc_aliases
+sudo chown econ-ark:econ-ark /home/econ-ark/.bashrc_aliases
+sudo -u econ-ark xfce4-terminal --display :0 -e 'bash -c -i /home/econ-ark/.bashrc_aliases &'
 sudo apt -y update && sudo apt -y upgrade
 #!/bin/bash
 # Adapted from http://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu
