@@ -1,5 +1,26 @@
 #!/bin/bash
-sudo apt -y update && sudo apt -y upgrade
+#!/bin/bash
+# https://askubuntu.com/questions/328240/assign-vnc-password-using-script
+myuser="econ-ark"
+mypass="kra-noce"
+echo "$mypass" >  /tmp/vncpasswd # First is the read-write password
+echo "$myuser" >> /tmp/vncpasswd # Next  is the read-only  password (useful for sharing screen with students)
+
+[[ -e /home/$myuser/.vnc ]] && rm -Rf /home/$myuser/.vnc  # If a previous version exists, delete it
+mkdir /home/$myuser/.vnc
+
+vncpasswd -f < /tmp/vncpasswd > /home/$myuser/.vnc/passwd  # Create encrypted versions
+
+# Give the files the right permissions
+chown -R $myuser:$myuser /home/$myuser/.vnc
+chmod 0600 /home/$myuser/.vnc/passwd
+
+touch /home/$myuser/.bashrc_aliases
+
+echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bashrc_aliases
+echo 'pgrep x0vncserver'  >> /home/$myuser/.bashrc_aliases
+echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bashrc_aliases
+
 #!/bin/bash
 # This is the start of a script will be in the /var/local directory and should be executed by root at the first boot 
 
@@ -38,33 +59,12 @@ echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$
 echo '}' >> "$bashrcadd"
 echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashrcadd"
 
-
 mkdir /home/$myuser/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
 
-#!/bin/bash
-# https://askubuntu.com/questions/328240/assign-vnc-password-using-script
-myuser="econ-ark"
-mypass="kra-noce"
-echo "$mypass" >  /tmp/vncpasswd # First is the read-write password
-echo "$myuser" >> /tmp/vncpasswd # Next  is the read-only  password (useful for sharing screen with students)
-
-[[ -e /home/$myuser/.vnc ]] && rm -Rf /home/$myuser/.vnc  # If a previous version exists, delete it
-mkdir /home/$myuser/.vnc
-
-vncpasswd -f < /tmp/vncpasswd > /home/$myuser/.vnc/passwd  # Create encrypted versions
-
-# Give the files the right permissions
-chown -R $myuser:$myuser /home/$myuser/.vnc
-chmod 0600 /home/$myuser/.vnc/passwd
-
-touch /home/$myuser/.bashrc_aliases
-
-echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bashrc_aliases
-echo 'pgrep x0vncserver'  >> /home/$myuser/.bashrc_aliases
-echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bashrc_aliases
-
+sudo -u econ-ark /bin/bash /home/econ-ark/.bashrc_aliases
+sudo apt -y update && sudo apt -y upgrade
 #!/bin/bash
 # Adapted from http://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu
 
@@ -114,12 +114,6 @@ conda install --yes -c anaconda pyopengl # Otherwise you get an error "Segmentat
 $scriptDir/Anaconda-jupyter_contrib_nbextensions.sh
 #/Methods/Tools/Config/tool/jupytext/default.sh
 sudo apt -y install bash-completion xsel git curl wget cifs-utils openssh-server nautilus-share xclip emacs auctex texlive-full tigervnc-scraping-server
-myuser=econ-ark
-mypasswd=kra-noce
-mkdir /home//.vnc
-echo "$mypasswd" | vncpasswd -f > /home/$myuser/.vnc/passwd
-chown -R $myuser:$myuser /home/$myuser/.vnc
-chmod 0600 /home/$myuser/.vnc/passwd 
 #!/bin/bash
 
 #Download and extract HARK, REMARK, DemARK from GitHUB repository
