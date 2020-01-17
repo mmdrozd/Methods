@@ -21,16 +21,16 @@ download()
 
 tmp="/tmp"
 
-myuser='econ-ark'
+myuser="econ-ark"
 
 datetime="$(date +%Y%m%d%H%S)"
 sed -i "s/xubuntu/$datetime/g" /etc/hostname
 sed -i "s/xubuntu/$datetime/g" /etc/hosts
 
-bashrcadd=/home/$myuser/.bashrc_aliases
+bashrcadd=/home/"$myuser"/.bashrc_aliases
 touch "$bashrcadd"
-echo 'x0vncserver -display :0 >/dev/null 2>&1 &' >> "$bashrcadd"
-echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations"' >> "$bashrcadd"
+echo '' >> "$bashrcadd"
+echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashrcadd"
 echo 'parse_git_branch() {' >> "$bashrcadd"
 echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/" >> "$bashrcadd"
 echo '}' >> "$bashrcadd"

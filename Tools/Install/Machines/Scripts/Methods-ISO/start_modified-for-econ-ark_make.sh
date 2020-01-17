@@ -21,7 +21,7 @@ echo 'sudo apt -y install bash-completion xsel git curl wget cifs-utils openssh-
 
 echo 'myuser=econ-ark' >> "$start"
 echo 'mypasswd=kra-noce' >> "$start"
-echo "mkdir /home/"$myuser"/.vnc" >> "$start"
+echo "mkdir /home/$myuser/.vnc" >> "$start"
 echo 'echo "$mypasswd" | vncpasswd -f > /home/$myuser/.vnc/passwd' >> "$start"
 echo 'chown -R $myuser:$myuser /home/$myuser/.vnc' >> "$start"
 echo 'chmod 0600 /home/$myuser/.vnc/passwd ' >> "$start"
