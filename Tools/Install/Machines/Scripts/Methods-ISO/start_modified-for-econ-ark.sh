@@ -34,7 +34,7 @@ touch "$bashrcadd"
 echo '' >> "$bashrcadd"
 echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashrcadd"
 echo 'parse_git_branch() {' >> "$bashrcadd"
-echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/" >> "$bashrcadd"
+echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$bashrcadd"
 echo '}' >> "$bashrcadd"
 echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashrcadd"
 
@@ -63,7 +63,7 @@ touch /home/$myuser/.bashrc_aliases
 
 echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bashrc_aliases
 echo 'pgrep x0vncserver'  >> /home/$myuser/.bashrc_aliases
-echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/$myuser/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bashrc_aliases
+echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bashrc_aliases
 
 #!/bin/bash
 # Adapted from http://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu
