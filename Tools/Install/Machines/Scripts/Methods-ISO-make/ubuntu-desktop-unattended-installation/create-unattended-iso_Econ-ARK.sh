@@ -305,9 +305,9 @@ cd $iso_make/iso_new
 # read answer
 pwd
 [[ -e "$iso_make/$new_iso_name" ]] && rm "$iso_make/$new_iso_name"
-cmd="(mkisofs -D -r -V "ECONARK_XUBUNTU_$datestr" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
+cmd="(mkisofs -D -r -V ECONARK_XUBUNTU_$datestr -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
 echo "$cmd"
-(mkisofs -D -r -V "ECONARK_XUBUNTU_"$datestr -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
+(mkisofs -D -r -V "ECONARK_XUBUNTU_$datestr" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
 spinner $!
 
 # make iso bootable (for dd'ing to  USB stick)
