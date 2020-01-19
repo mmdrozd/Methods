@@ -19,9 +19,9 @@ cat "$scriptDir/vncserver_default_password_setup.sh"  >> "$start"
 
 # Reset hostname; setup bashrc 
 cat "$scriptDir/start_modified-for-econ-ark_start.sh" >> "$start"
-echo "sudo chmod a+x /home/$myuser/.bashrc_aliases"   >> "$start"
-echo "sudo chown $myuser:$myuser /home/$myuser/.bashrc_aliases" >> "$start"
-echo "sudo -u $myuser xfce4-terminal --display :0 -e 'bash -c -i /home/$myuser/.bashrc_aliases &'" >> "$start" # Execute the new bashrc to start the log
+echo "sudo chmod a+x /home/$myuser/.bash_aliases"   >> "$start"
+echo "sudo chown $myuser:$myuser /home/$myuser/.bash_aliases" >> "$start"
+echo "sudo -u $myuser xfce4-terminal --display :0 -e 'bash -c -i /home/$myuser/.bash_aliases &'" >> "$start" # Execute the new bashrc to start the log
 
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$start"
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh         >> "$start"

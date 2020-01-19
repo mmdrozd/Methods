@@ -17,7 +17,7 @@ This requires several steps to be taken by hand:
    * Reboot, and the folder should now be shared
 1. Install kickstart on the creator machine:
    * `sudo apt -y install system-config-kickstart`
-1. Downloading the ISO (to /media/sf_VirtualBox folder that has been shared with host Mac system via VirtualBox/Machine)
+1. Download the ISO to (to /media/sf_VirtualBox folder that has been shared with host Mac system via VirtualBox/Machine)
 1. Mounting the iso:
    cd /media/sf_VirtualBox/ISOs
    mkdir /mnt/ubuntu_iso

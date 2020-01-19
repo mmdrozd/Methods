@@ -27,14 +27,14 @@ datetime="$(date +%Y%m%d%H%S)"
 sed -i "s/xubuntu/$datetime/g" /etc/hostname
 sed -i "s/xubuntu/$datetime/g" /etc/hosts
 
-bashrcadd=/home/"$myuser"/.bashrc_aliases
-touch "$bashrcadd"
-echo '' >> "$bashrcadd"
-echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashrcadd"
-echo 'parse_git_branch() {' >> "$bashrcadd"
-echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$bashrcadd"
-echo '}' >> "$bashrcadd"
-echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashrcadd"
+bashadd=/home/"$myuser"/.bash_aliases
+touch "$bashadd"
+echo '' >> "$bashadd"
+echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+echo 'parse_git_branch() {' >> "$bashadd"
+echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$bashadd"
+echo '}' >> "$bashadd"
+echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashadd"
 
 mkdir /home/$myuser/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d

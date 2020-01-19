@@ -15,11 +15,11 @@ vncpasswd -f < /tmp/vncpasswd > /home/$myuser/.vnc/passwd  # Create encrypted ve
 chown -R $myuser:$myuser /home/$myuser/.vnc
 chmod 0600 /home/$myuser/.vnc/passwd
 
-touch /home/$myuser/.bashrc_aliases
+touch /home/$myuser/.bash_aliases
 
-echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bashrc_aliases
-echo 'pgrep x0vncserver'  >> /home/$myuser/.bashrc_aliases
-echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bashrc_aliases
+echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bash_aliases
+echo 'pgrep x0vncserver'  >> /home/$myuser/.bash_aliases
+echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bash_aliases
 
 #!/bin/bash
 # This is the start of a script will be in the /var/local directory and should be executed by root at the first boot 
@@ -50,22 +50,22 @@ datetime="$(date +%Y%m%d%H%S)"
 sed -i "s/xubuntu/$datetime/g" /etc/hostname
 sed -i "s/xubuntu/$datetime/g" /etc/hosts
 
-bashrcadd=/home/"$myuser"/.bashrc_aliases
-touch "$bashrcadd"
-echo '' >> "$bashrcadd"
-echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashrcadd"
-echo 'parse_git_branch() {' >> "$bashrcadd"
-echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$bashrcadd"
-echo '}' >> "$bashrcadd"
-echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashrcadd"
+bashadd=/home/"$myuser"/.bash_aliases
+touch "$bashadd"
+echo '' >> "$bashadd"
+echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+echo 'parse_git_branch() {' >> "$bashadd"
+echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$bashadd"
+echo '}' >> "$bashadd"
+echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashadd"
 
 mkdir /home/$myuser/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
 
-sudo chmod a+x /home/econ-ark/.bashrc_aliases
-sudo chown econ-ark:econ-ark /home/econ-ark/.bashrc_aliases
-sudo -u econ-ark xfce4-terminal --display :0 -e 'bash -c -i /home/econ-ark/.bashrc_aliases &'
+sudo chmod a+x /home/econ-ark/.bash_aliases
+sudo chown econ-ark:econ-ark /home/econ-ark/.bash_aliases
+sudo -u econ-ark xfce4-terminal --display :0 -e 'bash -c -i /home/econ-ark/.bash_aliases &'
 sudo apt -y update && sudo apt -y upgrade
 #!/bin/bash
 # Adapted from http://askubuntu.com/questions/505919/how-to-install-anaconda-on-ubuntu
