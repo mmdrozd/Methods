@@ -22,7 +22,7 @@ echo 'pgrep x0vncserver'  >> /home/$myuser/.bash_aliases
 echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bash_aliases
 
 #!/bin/bash
-# This is the start of a script will be in the /var/local directory and should be executed by root at the first boot 
+# This is the start of a script that will be in the /var/local directory and should be executed by root at the first boot 
 
 finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish.sh
 

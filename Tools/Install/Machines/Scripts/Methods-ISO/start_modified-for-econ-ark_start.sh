@@ -1,5 +1,5 @@
 #!/bin/bash
-# This is the start of a script will be in the /var/local directory and should be executed by root at the first boot 
+# This is the start of a script that will be in the /var/local directory and should be executed by root at the first boot 
 
 finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish.sh
 
