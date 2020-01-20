@@ -3,6 +3,7 @@
 
 pathToScript=$(dirname `realpath "$0"`)
 # pathToScript=/media/sf_VirtualBox/OSBOXES-From/ubuntu-unattended-install-options/ubuntu-desktop-unattended-installation/
+# pathToScript=~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Machines/Scripts/Methods-ISO-make/ubuntu-desktop-unattended-installation/
 methodsURL=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO
 startFile="start_modified-for-econ-ark.sh"
 seed_file="econ-ark.seed"
@@ -221,7 +222,8 @@ if grep -qs $iso_make/iso_org /proc/mounts ; then
     echo " image is already mounted, continue"
 else
     echo 'Mounting '$download_file' as '$iso_make/iso_org
-    (mount -o loop $iso_done/$download_file $iso_make/iso_org > /dev/null 2>&1)
+    cp $iso_done/$download_file /tmp/$iso_done/$download_file
+    (mount -o loop /tmp/$download_file $iso_make/iso_org > /dev/null 2>&1)
 fi
 
 # copy the iso contents to the working directory
