@@ -44,5 +44,6 @@ conda update --yes anaconda
 conda install --yes -c anaconda scipy
 conda install --yes -c anaconda pyopengl # Otherwise you get an error "Segmentation fault (core dumped)"
 
-$scriptDir/Anaconda-jupyter_contrib_nbextensions.sh
+conda install --yes -c conda-forge jupyter_contrib_nbextensions
+
 #/Methods/Tools/Config/tool/jupytext/default.sh
