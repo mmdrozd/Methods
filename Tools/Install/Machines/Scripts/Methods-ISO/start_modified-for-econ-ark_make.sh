@@ -14,6 +14,9 @@ sudo chmod a+xw "$start"
 
 echo '#!/bin/bash' > "$start"
 
+# Autostart xfce4-terminal
+cat "$scriptDir/xfce4-terminal_autostart.sh"  >> "$start"
+
 # Set up vnc server
 cat "$scriptDir/vncserver_default_password_setup.sh"  >> "$start"
 
@@ -23,23 +26,6 @@ echo "sudo chmod a+x /home/$myuser/.bash_aliases"   >> "$start"
 echo "sudo chown $myuser:$myuser /home/$myuser/.bash_aliases" >> "$start"
 echo "sudo -u $myuser xfce4-terminal --display :0 -e 'bash -c -i /home/$myuser/.bash_aliases &'" >> "$start" # Execute the new bashrc to start the log
 
-# Launch xfce4-terminal at boot
-sudo -u $myuser mkdir -p /home/$myuser/.config
-sudo -u $myuser touch /home/$myuser/.config/autostart
-
-cat <<EOF /home/$myuser/.config/autostart
-[Desktop Entry]
-Encoding=UTF-8
-Version=0.9.4
-Type=Application
-Name=xfce4-terminal
-Comment=Terminal
-Exec=xfce4-terminal
-OnlyShowIn=XFCE;
-StartupNotify=false
-Terminal=false
-Hidden=false
-EOF
 
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$start"
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh         >> "$start"
