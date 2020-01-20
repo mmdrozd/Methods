@@ -6,6 +6,7 @@ pathToScript=$(dirname `realpath "$0"`)
 # pathToScript=~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Machines/Scripts/Methods-ISO-make/ubuntu-desktop-unattended-installation/
 methodsURL=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO
 startFile="start_modified-for-econ-ark.sh"
+finishFile="finish_modified-for-econ-ark.sh"
 seed_file="econ-ark.seed"
 ks_file=ks.cfg
 rclocal_file=rc.local
@@ -257,8 +258,10 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $iso_make/iso_new/isolinux/isolinux.c
 
 # Copy startFile to /var/local/start.sh 
 late_command="chroot /target curl -L -o /var/local/start.sh $methodsURL/$startFile ;\
+     chroot /target curl -L -o /var/local/start.sh $methodsURL/$startFile ;\
      chroot /target curl -L -o /etc/rc.local $methodsURL/$rclocal_file ;\
      chroot /target chmod +x /var/local/start.sh ;\
+     chroot /target chmod +x /var/local/finish.sh ;\
      chroot /target chmod +x /etc/rc.local ;\
      chroot /target mkdir -p /etc/lightdm/lightdm.conf.d ;\
      chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $methodsURL/root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\

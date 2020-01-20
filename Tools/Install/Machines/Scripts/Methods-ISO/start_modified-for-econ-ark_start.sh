@@ -1,7 +1,4 @@
 #!/bin/bash
-# This is the start of a script that will be in the /var/local directory and should be executed by root at the first boot 
-
-finishPath=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO/finish.sh
 
 # set defaults
 default_hostname="$(hostname)"
@@ -23,20 +20,32 @@ tmp="/tmp"
 
 myuser="econ-ark"
 
+# Change the name of the host to the date and time of creation
 datetime="$(date +%Y%m%d%H%S)"
 sed -i "s/xubuntu/$datetime/g" /etc/hostname
 sed -i "s/xubuntu/$datetime/g" /etc/hosts
 
+# Add stuff to bash login script
 bashadd=/home/"$myuser"/.bash_aliases
 touch "$bashadd"
 echo '' >> "$bashadd"
+
+# On first boot, monitor progress of start install script
 echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+
+# Modify prompt to keep track of git branches
 echo 'parse_git_branch() {' >> "$bashadd"
 echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$bashadd"
 echo '}' >> "$bashadd"
 echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashadd"
 
+chmod a+x "$bashadd"
+chown $myuser:$myuser "$bashadd"
+
+# Create .emacs.d directory with proper permissions
 mkdir /home/$myuser/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
 
+# Get some key apps that should be available immediately 
+sudo apt -y install curl wget tigervnc-scraping-server
