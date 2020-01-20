@@ -223,7 +223,7 @@ if grep -qs $iso_make/iso_org /proc/mounts ; then
     echo " image is already mounted, continue"
 else
     echo 'Mounting '$download_file' as '$iso_make/iso_org
-    cp $iso_done/$download_file /tmp/$iso_done/$download_file
+    cp $iso_done/$download_file /tmp/$download_file
     (mount -o loop /tmp/$download_file $iso_make/iso_org > /dev/null 2>&1)
 fi
 
@@ -258,7 +258,7 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $iso_make/iso_new/isolinux/isolinux.c
 
 # Copy startFile to /var/local/start.sh 
 late_command="chroot /target curl -L -o /var/local/start.sh $methodsURL/$startFile ;\
-     chroot /target curl -L -o /var/local/start.sh $methodsURL/$startFile ;\
+     chroot /target curl -L -o /var/local/finish.sh $methodsURL/$finishFile ;\
      chroot /target curl -L -o /etc/rc.local $methodsURL/$rclocal_file ;\
      chroot /target chmod +x /var/local/start.sh ;\
      chroot /target chmod +x /var/local/finish.sh ;\
