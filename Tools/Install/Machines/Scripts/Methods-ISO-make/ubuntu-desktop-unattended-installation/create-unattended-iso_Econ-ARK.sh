@@ -2,9 +2,7 @@
 # Adapted from netson github create-unattended/create-unattended-iso.sh
 
 pathToScript=$(dirname `realpath "$0"`)
-# pathToScript=/media/sf_VirtualBox/OSBOXES-From/ubuntu-unattended-install-options/ubuntu-desktop-unattended-installation/
-# pathToScript=~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Machines/Scripts/Methods-ISO-make/ubuntu-desktop-unattended-installation/
-methodsURL=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO
+online=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO
 startFile="start_modified-for-econ-ark.sh"
 finishFile="finish_modified-for-econ-ark.sh"
 seed_file="econ-ark.seed"
@@ -12,8 +10,8 @@ ks_file=ks.cfg
 rclocal_file=rc.local
 
 # file names & paths
-iso_done="/media/sf_VirtualBox"  # destination folder to store the final iso file
-iso_make="/usr/local/share/iso_make"  # destination folder to store the final iso file
+iso_done="/media/sf_VirtualBox"       # where to store the final iso file - shared with host machine
+iso_make="/usr/local/share/iso_make"  # source folder for ISO file
 # create working folders
 echo " remastering your iso file"
 
@@ -183,19 +181,19 @@ cd $iso_make
 [[ -f $iso_make/$rclocal_file ]] && rm $iso_make/$rclocal_file
 
 echo -n " downloading $rclocal_file: "
-download "$methodsURL/$rclocal_file"
+download "$online/$rclocal_file"
 
 # download econ-ark seed file
 [[ -f $iso_make/$seed_file ]] && rm $iso_make/$seed_file 
 
 echo -n " downloading $seed_file: "
-download "$methodsURL/$seed_file"
+download "$online/$seed_file"
 
 # download kickstart file
 [[ -f $iso_make/$ks_file ]] && rm $iso_make/$ks_file
 
 echo -n " downloading $ks_file: "
-download "$methodsURL/$ks_file"
+download "$online/$ks_file"
 
 # install required packages
 echo " installing required packages"
@@ -245,30 +243,17 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $iso_make/iso_new/isolinux/isolinux.c
 
 # set late command
 
-#   late_command="chroot /target curl -L -o /home/$username/start.sh $methodsURL/$startFile ;\
-#     chroot /target chmod +x /home/$username/start.sh ;"
-
-# late_command="chroot /target curl -L -o /var/local/$startFile $methodsURL/$startFile ;\
-#      chroot /target curl -L -o /etc/rc.local $methodsURL/$rclocal_file ;\
-#      chroot /target chmod +x /var/local/$startFile ;\
-#      chroot /target chmod +x /etc/rc.local ;\
-#      mkdir -p /etc/systemd/system/keyboard-setup.service.d ;\
-#      echo '[Service]' > /etc/systemd/system/keyboard-setup.service.d/reduce-timeout.conf ;\
-#      echo 'TimeoutStartSec=1000' >> /etc/systemd/system/keyboard-setup.service.d/reduce-timeout.conf ;"
-
-# Copy startFile to /var/local/start.sh 
-late_command="chroot /target curl -L -o /var/local/start.sh $methodsURL/$startFile ;\
-     chroot /target curl -L -o /var/local/finish.sh $methodsURL/$finishFile ;\
-     chroot /target curl -L -o /etc/rc.local $methodsURL/$rclocal_file ;\
+late_command="chroot /target curl -L -o /var/local/start.sh $online/$startFile ;\
+     chroot /target curl -L -o /var/local/finish.sh $online/$finishFile ;\
+     chroot /target curl -L -o /etc/rc.local $online/$rclocal_file ;\
      chroot /target chmod +x /var/local/start.sh ;\
      chroot /target chmod +x /var/local/finish.sh ;\
      chroot /target chmod +x /etc/rc.local ;\
      chroot /target mkdir -p /etc/lightdm/lightdm.conf.d ;\
-     chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $methodsURL/root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\
+     chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $online /root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\
      chroot /target chmod 755 /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;"
-#     chroot /target /bin/bash /var/local/start.sh ;\
 
-# copy the econ-ark seed file to the iso
+# copy the seed file to the iso
 cp -rT $iso_make/$seed_file $iso_make/iso_new/preseed/$seed_file
 
 # copy the kickstart file to the root
@@ -306,20 +291,20 @@ sed -i -r 's/timeout=[0-9]+/timeout=1/g' $iso_make/iso_new/boot/grub/grub.cfg
 
 echo " creating the remastered iso"
 cd $iso_make/iso_new
-# echo 'Hit C-C to quit'
-# read answer
-pwd
+
 [[ -e "$iso_make/$new_iso_name" ]] && rm "$iso_make/$new_iso_name"
 cmd="(mkisofs -D -r -V ECONARK_XUBUNTU_$datestr -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
 echo "$cmd"
-(mkisofs -D -r -V "ECONARK_XUBUNTU_$datestr" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
+eval "$cmd"
+#(mkisofs -D -r -V "ECONARK_XUBUNTU_$datestr" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
 spinner $!
 
-# make iso bootable (for dd'ing to  USB stick)
+# make iso bootable (for dd'ing to USB stick)
 if [[ $bootable == "yes" ]] || [[ $bootable == "y" ]]; then
     isohybrid $iso_make/$new_iso_name
 fi
 
+# Move it to the destination
 cmd="[[ -e $iso_done/$new_iso_name ]] && rm $iso_done/$new_iso_name"
 echo "$cmd"
 eval "$cmd"
@@ -337,8 +322,9 @@ echo " your hostname is: $hostname"
 echo " your timezone is: $timezone"
 echo
 
+# uncomment the exit to perform cleanup of drive after run
 exit
-# cleanup
+
 umount $iso_make/iso_org
 rm -rf $iso_make/iso_new
 rm -rf $iso_make/iso_org
@@ -353,5 +339,7 @@ unset pwhash
 unset download_file
 unset download_location
 unset new_iso_name
+unset iso_make
+unset iso_done
 unset tmp
 unset seed_file

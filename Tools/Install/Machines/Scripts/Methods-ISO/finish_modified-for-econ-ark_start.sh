@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script will be in the user's $HOME directory and should be executed upon boot by root
+# This script will be executed in the background after the start script
 
 myuser="econ-ark"
 

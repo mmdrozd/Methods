@@ -3,12 +3,10 @@
 
 FLAG="/var/log/firstboot.log"
 if [ ! -f $FLAG ]; then
-   #Put here your initialization stuff
+   rm /var/local/start.log 
+   /var/local/start.sh  | tee /var/local/start.log        # Do stuff that should be done before autologin of first user
+   (/var/local/finish.sh | tee -a /var/local/start.log) & # Launch remainder as a background process so econ-ark user can autologin
    
-   sudo rm /var/local/start.log # sudo is not necessary because this should be run as root, but useful as a reminder of that fact
-   sudo /var/local/start.sh  | sudo tee /var/local/start.log     # Do early start stuff 
-   (sudo /var/local/finish.sh | sudo tee -a /var/local/start.log) & # Launch as a background process so econ-ark user can autologin
-   
-   #the next line creates an empty file so it won't run the next boot
+   # create an empty 'signal' file so the if will fail after the first boot
    touch "$FLAG"
 fi

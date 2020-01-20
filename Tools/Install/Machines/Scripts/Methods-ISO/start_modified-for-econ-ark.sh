@@ -1,4 +1,5 @@
 #!/bin/bash
+# Autostart terminal upon autologin so that ~/.bash_alias will be executed automatically
 # Launch xfce4-terminal at boot
 myuser=econ-ark
 sudo -u $myuser mkdir -p   /home/$myuser/.config/autostart
@@ -19,6 +20,7 @@ Hidden=false
 EOF
 
 sudo chown $myuser:$myuser /home/$myuser/.config/autostart/xfce4-terminal.desktop
+# Set up vnc server so students can connect to instructor machine
 
 # Set up vnc server 
 # https://askubuntu.com/questions/328240/assign-vnc-password-using-script
@@ -63,7 +65,7 @@ tmp="/tmp"
 
 myuser="econ-ark"
 
-# Change the name of the host to the date and time of creation
+# Change the name of the host to the date and time of its creation
 datetime="$(date +%Y%m%d%H%S)"
 sed -i "s/xubuntu/$datetime/g" /etc/hostname
 sed -i "s/xubuntu/$datetime/g" /etc/hosts
@@ -82,10 +84,11 @@ echo "	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'" >> "$
 echo '}' >> "$bashadd"
 echo 'export PS1="\u@\h:\W\[\033[32m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "' >>"$bashadd"
 
+# Make ~/.bash_aliases be owned by "$myuser" instead of root
 chmod a+x "$bashadd"
 chown $myuser:$myuser "$bashadd"
 
-# Create .emacs.d directory with proper permissions
+# Create .emacs.d directory with proper permissions -- avoids annoying startup warning msg
 mkdir /home/$myuser/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
