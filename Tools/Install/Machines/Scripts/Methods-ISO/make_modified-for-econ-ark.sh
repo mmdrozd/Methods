@@ -8,7 +8,7 @@ myuser="econ-ark"
 sudo "./start_modified-for-$myuser-make.sh"
 sudo "./finish_modified-for-$myuser-make.sh"
 
-econarktools="/Volumes/Data/Code/ARK/econ-ark-tools/"
+econarktools="~/GitHub/econ-ark/econ-ark-tools/"
 ISOmaker="Virtual/Machine/VirtualBox/ISO-maker"
 ditto "$scriptDir/start_modified-for-$myuser.sh"  "$econarktools/$ISOmaker/start.sh"
 ditto "$scriptDir/finish_modified-for-$myuser.sh" "$econarktools/$ISOmaker/finish.sh"
