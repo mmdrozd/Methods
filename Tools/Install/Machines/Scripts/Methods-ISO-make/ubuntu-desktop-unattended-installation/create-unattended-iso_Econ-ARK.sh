@@ -119,19 +119,19 @@ while true; do
     case $ubver in
         [1]* )  download_file="ubuntu-$prec_vers-server-amd64.iso"           # filename of the iso to be downloaded
                 download_location="http://releases.ubuntu.com/$prec/"     # location of the file to be downloaded
-                new_iso_name="ubuntu-$prec_vers-server-amd64-unattended_$name-$datestr.iso" # filename of the new iso file to be created
+                new_iso_name="ubuntu-$prec_vers-server-amd64-unattended_$name.iso" # filename of the new iso file to be created
                 break;;
 	[2]* )  download_file="ubuntu-$trus_vers-server-amd64.iso"             # filename of the iso to be downloaded
                 download_location="http://releases.ubuntu.com/$trus/"     # location of the file to be downloaded
-                new_iso_name="ubuntu-$trus_vers-server-amd64-unattended_$name-$datestr.iso"   # filename of the new iso file to be created
+                new_iso_name="ubuntu-$trus_vers-server-amd64-unattended_$name.iso"   # filename of the new iso file to be created
                 break;;
         [3]* )  download_file="ubuntu-$xenn_vers-server-amd64.iso"
                 download_location="http://releases.ubuntu.com/$xenn/"
-                new_iso_name="ubuntu-$xenn_vers-server-amd64-unattended_$name-$datestr.iso"
+                new_iso_name="ubuntu-$xenn_vers-server-amd64-unattended_$name.iso"
                 break;;
         [4]* )  download_file="ubuntu-$bion_vers-server-amd64.iso"
                 download_location="http://cdimage.ubuntu.com/releases/$bion/release/"
-                new_iso_name="ubuntu-$bion_vers-server-amd64-unattended_$name-$datestr.iso"
+                new_iso_name="ubuntu-$bion_vers-server-amd64-unattended_$name.iso"
                 break;;
         * ) echo " please answer [1], [2], [3] or [4]";;
     esac
