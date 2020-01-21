@@ -10,6 +10,7 @@ ks_file=ks.cfg
 rclocal_file=rc.local
 
 # file names & paths
+iso_from="/media/sf_VirtualBox"       # where to find the original ISO
 iso_done="/media/sf_VirtualBox"       # where to store the final iso file - shared with host machine
 iso_make="/usr/local/share/iso_make"  # source folder for ISO file
 # create working folders
@@ -87,7 +88,7 @@ case "$(lsb_release -rs)" in
 esac
 
 #get the latest versions of Ubuntu LTS
-cd $iso_done
+cd $iso_from
 
 iso_makehtml=$iso_make/tmphtml
 rm $iso_makehtml >/dev/null 2>&1
@@ -162,16 +163,16 @@ if [[ "$password" != "$password2" ]]; then
 fi
 
 # download the ubuntu iso. If it already exists, do not delete in the end.
-cd $iso_done
-if [[ ! -f $iso_done/$download_file ]]; then
+cd $iso_from
+if [[ ! -f $iso_from/$download_file ]]; then
     echo -n " downloading $download_file: "
     download "$download_location$download_file"
 fi
-if [[ ! -f $iso_done/$download_file ]]; then
+if [[ ! -f $iso_from/$download_file ]]; then
 	echo "Error: Failed to download ISO: $download_location$download_file"
 	echo "This file may have moved or may no longer exist."
 	echo
-	echo "You can download it manually and move it to $iso_done/$download_file"
+	echo "You can download it manually and move it to $iso_from/$download_file"
 	echo "Then run this script again."
 	exit 1
 fi
@@ -221,7 +222,7 @@ if grep -qs $iso_make/iso_org /proc/mounts ; then
     echo " image is already mounted, continue"
 else
     echo 'Mounting '$download_file' as '$iso_make/iso_org
-    cp $iso_done/$download_file /tmp/$download_file
+    cp $iso_from/$download_file /tmp/$download_file
     (mount -o loop /tmp/$download_file $iso_make/iso_org > /dev/null 2>&1)
 fi
 
@@ -250,7 +251,7 @@ late_command="chroot /target curl -L -o /var/local/start.sh $online/$startFile ;
      chroot /target chmod +x /var/local/finish.sh ;\
      chroot /target chmod +x /etc/rc.local ;\
      chroot /target mkdir -p /etc/lightdm/lightdm.conf.d ;\
-     chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $online /root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\
+     chroot /target curl -L -o /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf $online/root/etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;\
      chroot /target chmod 755 /etc/lightdm/lightdm.conf.d/autologin-econ-ark.conf ;"
 
 # copy the seed file to the iso
@@ -293,10 +294,10 @@ echo " creating the remastered iso"
 cd $iso_make/iso_new
 
 [[ -e "$iso_make/$new_iso_name" ]] && rm "$iso_make/$new_iso_name"
-cmd="(mkisofs -D -r -V ECONARK_XUBUNTU_$datestr -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
+cmd="(mkisofs -D -r -V ECONARK_XUBUNTU -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
 echo "$cmd"
 eval "$cmd"
-#(mkisofs -D -r -V "ECONARK_XUBUNTU_$datestr" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
+#(mkisofs -D -r -V "ECONARK_XUBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
 spinner $!
 
 # make iso bootable (for dd'ing to USB stick)
@@ -339,6 +340,7 @@ unset pwhash
 unset download_file
 unset download_location
 unset new_iso_name
+unset iso_from
 unset iso_make
 unset iso_done
 unset tmp
