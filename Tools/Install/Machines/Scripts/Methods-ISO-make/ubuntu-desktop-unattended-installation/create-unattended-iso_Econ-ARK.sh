@@ -228,8 +228,6 @@ fi
 
 # copy the iso contents to the working directory
 echo 'Copying the iso contents from '$iso_org' to '$iso_new
-#(cp -rT $iso_make/iso_org $iso_make/iso_new > /dev/null 2>&1) &
-#(rsync -ra --delete $iso_make/iso_org/ $iso_make/iso_new > /dev/null 2>&1) & # Much faster if iso_new already exists; likely while debugging
 rsync -rai --delete $iso_make/iso_org/ $iso_make/iso_new 
 spinner $!
 
@@ -262,9 +260,9 @@ cp -rT $iso_make/$ks_file $iso_make/iso_new/$ks_file
 chmod 744 $iso_make/iso_new/$ks_file
 
 # include firstrun script
-echo "
-# setup firstrun script
-d-i preseed/late_command                                    string      $late_command" >> $iso_make/iso_new/preseed/$seed_file
+echo "# setup firstrun script"
+echo "$late_command"                                    >> $iso_make/iso_new/preseed/$seed_file
+echo "d-i preseed/late_command                                    string      " >> $iso_make/iso_new/preseed/$seed_file
 
 # generate the password hash
 pwhash=$(echo $password | mkpasswd -s -m sha-512)
@@ -294,10 +292,10 @@ echo " creating the remastered iso"
 cd $iso_make/iso_new
 
 [[ -e "$iso_make/$new_iso_name" ]] && rm "$iso_make/$new_iso_name"
-cmd="(mkisofs -D -r -V ECONARK_XUBUNTU -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
+cmd="(mkisofs -D -r -V XUBUNTARK -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &"
 echo "$cmd"
 eval "$cmd"
-#(mkisofs -D -r -V "ECONARK_XUBUNTU" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso_make/$new_iso_name . > /dev/null 2>&1) &
+
 spinner $!
 
 # make iso bootable (for dd'ing to USB stick)
