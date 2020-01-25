@@ -1,11 +1,8 @@
 # The Final Project
 
-The final project should be a REMARK, with a directory structure patterend on that of the BufferStockTheory REMARK.
+The final project should be a REMARK, with a directory structure patterend on that of the [BufferStockTheory REMARK](https://github.com/llorracc/BufferStockTheory) repo.
 
-You will "turn it in" by making a pull request to the econ-ark/REMARK repository,
-from a "fork" of econ-ark/REMARK that you make as the first step of your project.
-
-(Your PR should be from the "master branch" of your fork.)
+You will "turn it in" by making a pull request to the econ-ark/REMARK repository, from a "fork" of econ-ark/REMARK that you should make as the first step of your project.  (Your PR should be from the "master branch" of your fork.)
 
 ## The project should satisfy the following requirements:
 
@@ -32,10 +29,8 @@ the key results of your attempt to replicate the results of an existing paper
       1. Aside from tools you use from the Econ-ARK/HARK toolkit, the REMARK should contain
          all the ingredients needed for someone else to be able to reproduce exactly
          what you have done AND to understand why you did what you did
-      1. Notably, if you use scripts provided by me from the methods course, you need to
-         copy those scripts to inside your REMARK's directory structure
            * Think of the audience of the REMARK as being a graduate student like yourself at the beginning of the semester
-1. It should also contain a "paper" patterned on the BufferStockTheory paper.
+1. It should also contain a "paper" whose structure is patterned on the structure of the BufferStockTheory paper.
 1. Patterned, here, means that it should have:
    * A title page with your name(s) and appropriate links (assume that the PR for the paper will be accepted so that urls will be the ones that would be appropriate if it were already posted as a REMARK)
    * Some "body" text
