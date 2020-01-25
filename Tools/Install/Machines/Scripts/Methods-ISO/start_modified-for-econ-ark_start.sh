@@ -52,9 +52,8 @@ chown $myuser:$myuser "$bashadd"
 
 
 # Create .emacs.d directory with proper permissions -- avoids annoying startup warning msg
-
 cd    /home/$myuser
-download "online=https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Config/tool/emacs/dot/emacs-ubuntu-virtualbox"
+download "https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Config/tool/emacs/dot/emacs-ubuntu-virtualbox"
 mv emacs-ubuntu-virtualbox ~/.emacs
 chmod a+x ~/.emacs
 
