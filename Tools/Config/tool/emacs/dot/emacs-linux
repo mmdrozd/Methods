@@ -10,8 +10,8 @@
   (load "~/.emacs-thisUser")
 )
 
-(if (file-exists-p "/Volumes/Sync/Lib/config/emacs/dot/emacs-all")
-  (load "/Volumes/Sync/Lib/config/emacs/dot/emacs-all")
+(if (file-exists-p "/Volumes/Sync/Lib/config/tool/emacs/dot/emacs-all")
+  (load "/Volumes/Sync/Lib/config/tool/emacs/dot/emacs-all")
 )
 
 (if (file-exists-p "~/.emacs-all")
@@ -106,7 +106,7 @@
  '(safe-local-variable-values (quote ((TeX-parse-self . t)))))
 
 ; list the packages you want
-(setq package-list '(pbcopy yasnippet tablist color-theme async flymd)) 
+(setq package-list '(yasnippet tablist color-theme async flymd)) 
 
 ; fetch the list of packages available
 (unless package-archive-contents
@@ -116,9 +116,6 @@
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
-
-(require 'pbcopy)
-(turn-on-pbcopy)
 
 (if (file-exists-p "~/.emacs-thisUser")
   (load "~/.emacs-thisUser")

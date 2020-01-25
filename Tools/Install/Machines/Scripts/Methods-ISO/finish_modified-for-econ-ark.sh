@@ -41,6 +41,8 @@ if [ ! -e /etc/sudoers.d/anaconda3 ]; then # Modify secure path so that anaconda
     sudo echo 'Defaults secure_path="/usr/local/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/snap/bin:/bin"' | sudo tee /etc/sudoers.d/anaconda3
 fi
 
+sudo chmod -Rf /usr/local/anaconda3
+
 source /etc/environment  # Get the new environment
 
 conda update --yes conda
@@ -57,7 +59,7 @@ sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-
 #Download and extract HARK, REMARK, DemARK from GitHUB repository
 
 conda install --yes -c conda-forge econ-ark
-arkHome=/usr/local/share/GitHub/econ-ark
+arkHome=/usr/local/share/data/GitHub/econ-ark
 mkdir -p "$arkHome"
 cd "$arkHome"
 git clone https://github.com/econ-ark/REMARK.git
@@ -66,8 +68,9 @@ git clone https://github.com/econ-ark/DemARK.git
 # https://askubuntu.com/questions/499070/install-virtualbox-guest-addition-terminal
 
 sudo apt -y install build-essential module-assistant virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
-mkdir -p /home/econ-ark/GitHub/econ-ark ; ln -s /usr/local/share/GitHub/econ-ark /home/econ-ark/GitHub/econ-ark
-chown -Rf econ-ark:econ-ark /usr/local/share/GitHub/econ-ark # Make it be owned by econ-ark user 
+sudo -u econ-ark mkdir -p /home/econ-ark/GitHub; sudo -u econ-ark ln -s /usr/local/share/data/GitHub/econ-ark /home/econ-ark/GitHub
+chown -Rf econ-ark:econ-ark /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user 
+chmod -Rf a+rw /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user 
 
 echo Finished automatic installations.  Rebooting.
 reboot 

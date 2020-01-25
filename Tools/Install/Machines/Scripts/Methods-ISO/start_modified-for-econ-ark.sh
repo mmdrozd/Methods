@@ -91,7 +91,7 @@ chown $myuser:$myuser "$bashadd"
 # Create .emacs.d directory with proper permissions -- avoids annoying startup warning msg
 mkdir /home/$myuser/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d
-chown $myuser:$myuser /home/$myuser/.emacs.d
+chown $myuser:$myuser -Rf /home/$myuser/.emacs.d
 
 # Get some key apps that should be available immediately 
 sudo apt -y install curl wget tigervnc-scraping-server
