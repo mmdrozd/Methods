@@ -17,6 +17,9 @@ echo '# Get default packages for Econ-ARK machine' >> "$finish"
 echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs auctex' >> "$finish"
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "!/bin/bash"  >> "$finish"
+cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "$finish"
+echo 'cd ~/GitHub/econ-ark/REMARK/binder ; pip3 install -r requirements.txt' >> "$finish" 
+
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Packages/VirtualBox-Guest-Additions.sh | fgrep -v "!/bin/bash" >> "$finish"
 echo "mkdir -p /home/$myuser/GitHub/econ-ark ; ln -s /usr/local/share/GitHub/econ-ark /home/$myuser/GitHub/econ-ark" >> "$finish" 
 echo "chown -Rf $myuser:$myuser /usr/local/share/GitHub/econ-ark # Make it be owned by econ-ark user " >> "$finish" 
