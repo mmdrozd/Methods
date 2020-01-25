@@ -21,7 +21,7 @@ mkdir -p  "$econarktools/$ISOmaker/root"
 rsync -avr "$scriptDir/root/" "$econarktools/$ISOmaker/root"
 cp -a "$scriptDir/../Methods-ISO-make/ubuntu-desktop-unattended-installation/create-unattended-iso_Econ-ARK.sh" "$econarktools/$ISOmaker"
 cd "$econarktools/$ISOmaker"
-rpl -Rf "_modified-for-econ-ark.sh" ".sh" *
+rpl -Rf ".sh" ".sh" *
 
-rpl -f 'https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO' "https://raw.githubusercontent.com/econ-ark/econ-ark-tools/master/$ISOmaker" *
-rpl -vf 'iso_done="/media/sf_VirtualBox"' 'iso_done="/usr/local/share/data/drive.google.com/econ-ark@jhuecon.org/Resources/Virtual/Machine"'  * 
+rpl -f 'https://raw.githubusercontent.com/econ-ark/econ-ark-tools/master/Virtual/Machine/VirtualBox/ISO-maker' "https://raw.githubusercontent.com/econ-ark/econ-ark-tools/master/$ISOmaker" *
+rpl -vf 'iso_done="/usr/local/share/data/drive.google.com/econ-ark@jhuecon.org/Resources/Virtual/Machine"' 'iso_done="/usr/local/share/data/drive.google.com/econ-ark@jhuecon.org/Resources/Virtual/Machine"'  * 

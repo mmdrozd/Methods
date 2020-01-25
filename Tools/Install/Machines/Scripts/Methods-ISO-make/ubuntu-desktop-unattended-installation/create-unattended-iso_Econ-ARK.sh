@@ -321,7 +321,7 @@ echo " your hostname is: $hostname"
 echo " your timezone is: $timezone"
 echo
 
-cmd="rclone copy '"$iso_make/$new_iso_name"'"
+cmd="rclone copy '"$iso_done/$new_iso_name"'"
 cmd+=" econ-ark-google-drive:econ-ark@jhuecon.org/Resources/Virtual/Machine/$datestr-$new_iso_name"
 echo 'To copy to Google drive, execute the command below:'
 echo ''
