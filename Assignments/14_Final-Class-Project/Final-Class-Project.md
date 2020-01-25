@@ -1,10 +1,11 @@
-
 # The Final Project
 
 The final project should be a REMARK, with a directory structure patterend on that of the BufferStockTheory REMARK.
 
 You will "turn it in" by making a pull request to the econ-ark/REMARK repository,
 from a "fork" of econ-ark/REMARK that you  will make when you begin your project.
+
+Your PR should be from the "master branch" of your fork.
 
 ## The project should satisfy the following requirements:
 
