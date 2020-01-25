@@ -112,7 +112,7 @@ chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
 
 # Get some key apps that should be available immediately 
-sudo apt -y install curl wget tigervnc-scraping-server
+sudo apt -y install curl wget tigervnc-scraping-server rpl
 
 # Give econ-ark
 sudo adduser "$myuser" vboxsf

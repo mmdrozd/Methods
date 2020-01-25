@@ -17,6 +17,7 @@ echo '# Get default packages for Econ-ARK machine' >> "$finish"
 echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs auctex' >> "$finish"
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "!/bin/bash"  >> "$finish"
+chown $myuser:$myuser /home/$myuser/GitHub
 cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "$finish"
 echo 'cd ~/GitHub/econ-ark/REMARK/binder ; pip3 install -r requirements.txt' >> "$finish" 
 

@@ -59,7 +59,7 @@ download "https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Too
 
 mv emacs-ubuntu-virtualbox /home/$myuser/.emacs
 chmod a+rwx /home/$myuser/.emacs
-chown "$myuser:$myuser" /home/$myuser//.emacs
+chown "$myuser:$myuser" /home/$myuser/.emacs
 
 mkdir /home/$myuser/.emacs.d
 
