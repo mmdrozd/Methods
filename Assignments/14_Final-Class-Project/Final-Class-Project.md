@@ -3,9 +3,9 @@
 The final project should be a REMARK, with a directory structure patterend on that of the BufferStockTheory REMARK.
 
 You will "turn it in" by making a pull request to the econ-ark/REMARK repository,
-from a "fork" of econ-ark/REMARK that you  will make when you begin your project.
+from a "fork" of econ-ark/REMARK that you make as the first step of your project.
 
-Your PR should be from the "master branch" of your fork.
+(Your PR should be from the "master branch" of your fork.)
 
 ## The project should satisfy the following requirements:
 
@@ -22,7 +22,7 @@ parallel that of the BufferStockTheory REMARK
        * If the `do_all.py` execution time is more than, say, 5 minutes:
           * There should also be a `do_min.py` file that runs in less than 5 minutes
           * It should produce some illustrative subset of the results
-1. It should contain a Jupyter notebook (like "BufferStockTheory.ipynb") summarizes
+1. It should contain a Jupyter notebook (like "BufferStockTheory.ipynb") that summarizes
 the key results of your attempt to replicate the results of an existing paper
    * The overriding objectives are two:
       1. It should be as as clear as possible to someone using your REMARK how you obtained your results
@@ -56,16 +56,22 @@ You should be sure to have set things up so that I have permission to edit your
 fork of the REMARK repository
 
 So, if your GitHubID were BalassaB, and your project was BalssaSamuelson, when you issue the PR saying that your REMARK is ready,
-from a bash shell I would perform the following steps:
+from a bash shell in a vanilla [XUBUNTARK](https://github.com/econ-ark/econ-ark-tools/tree/master/Virtual/Machine/VirtualBox) virtual machine, I would perform the following steps:
 
+	cd ~/GitHub
+	mkdir BalassaB
+	cd ~/BalassaB
     git clone https://github.com/BalassaB/REMARK.git
     cd REMARK/REMARKs/BalassaSamuelson
     ipython do_all.py
-    ipython do_min.py
-    ./make_paper.sh
+	./doEverything.sh
 
 Assuming all of those steps worked, I would then launch from the command line:
 
     jupyter notebook
 
-and I would look through the BalassaSamuelson Jupyter notebook.
+and I would see if the the BalassaSamuelson.ipynb Jupyter notebook works.
+
+Assuming that everything works, I will then grade your project on the criteria above; in particular, the crucial desiderata are about making it easy for other people to reproduce and understand your results (which requires good documentation).
+
+
