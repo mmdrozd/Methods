@@ -41,8 +41,6 @@ if [ ! -e /etc/sudoers.d/anaconda3 ]; then # Modify secure path so that anaconda
     sudo echo 'Defaults secure_path="/usr/local/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/snap/bin:/bin"' | sudo tee /etc/sudoers.d/anaconda3
 fi
 
-sudo chmod -Rf /usr/local/anaconda3
-
 source /etc/environment  # Get the new environment
 
 conda update --yes conda
@@ -76,13 +74,28 @@ echo '(You can switch back to the systemwide version using pip install econ-ark)
 echo 'This is your local, personal copy of DemARK, which you can modify.  '    >  DemARK-README.md
 echo 'This is your local, personal copy of REMARK, which you can modify.  '    >  REMARK-README.md
 
+#!/bin/sh
+pip install jupyter_contrib_nbextensions
+jupyter contrib nbextension install --user
+jupyter nbextension enable codefolding/main
+jupyter nbextension enable codefolding/edit
+jupyter nbextension enable toc2/main
+jupyter nbextension enable collapsible_headings/main
+python -m cite2c.install
+result=$(python <<EOF
+from notebook.services.config.manager import ConfigManager
+cm = ConfigManager()
+cm.update('cite2c', {'zotero':{"user_id": "5043554","username": "econ-ark","access_token": "XZpH9NsoAZmDMmjLKiy8xMXX"}})
+EOF
+      )
+
+cd ~/GitHub/econ-ark/REMARK/binder ; pip3 install -r requirements.txt
 
 # https://askubuntu.com/questions/499070/install-virtualbox-guest-addition-terminal
 
 sudo apt -y install build-essential module-assistant virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
-sudo -u econ-ark mkdir -p /home/econ-ark/GitHub; sudo -u econ-ark ln -s /usr/local/share/data/GitHub/econ-ark /home/econ-ark/GitHub
-chown -Rf econ-ark:econ-ark /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user 
-chmod -Rf a+rw /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user 
+mkdir -p /home/econ-ark/GitHub/econ-ark ; ln -s /usr/local/share/GitHub/econ-ark /home/econ-ark/GitHub/econ-ark
+chown -Rf econ-ark:econ-ark /usr/local/share/GitHub/econ-ark # Make it be owned by econ-ark user 
 
 echo Finished automatic installations.  Rebooting.
 reboot 

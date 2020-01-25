@@ -57,9 +57,9 @@ echo -n "downloading .emacs file"
 
 download "https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Config/tool/emacs/dot/emacs-ubuntu-virtualbox"
 
-mv emacs-ubuntu-virtualbox ~/.emacs
-chmod a+rwx ~/.emacs
-chown "$myuser:$myuser" ~/.emacs
+mv emacs-ubuntu-virtualbox /home/$myuser/.emacs
+chmod a+rwx /home/$myuser/.emacs
+chown "$myuser:$myuser" /home/$myuser//.emacs
 
 mkdir /home/$myuser/.emacs.d
 
