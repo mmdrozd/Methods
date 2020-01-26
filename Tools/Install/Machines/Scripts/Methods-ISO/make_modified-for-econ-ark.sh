@@ -28,4 +28,4 @@ cd "$econarktools/$ISOmaker"
 rpl -Rf "_modified-for-econ-ark.sh" ".sh" *
 
 rpl -f 'https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO' "https://raw.githubusercontent.com/econ-ark/econ-ark-tools/master/$ISOmaker" *
-rpl -vf 'iso_done="/media/sf_VirtualBox"' 'iso_done="/usr/local/share/data/drive.google.com/econ-ark@jhuecon.org/Resources/Virtual/Machine"'  * 
+rpl -vf 'iso_done="/media/sf_VirtualBox/ISO-made/methods"' 'iso_done="/media/sf_VirtualBox/ISO-made/econ-ark-tools"'  * 

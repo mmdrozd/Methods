@@ -10,16 +10,24 @@ sudo chmod a+xw "$finish"
 
 echo '#!/bin/bash' > "$finish"
 
+echo '# Set username'  >> "$finish"
+echo "myuser=$myuser"  >> "$finish"
+
 echo '# Update everything ' >> "$finish"
+
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$finish"
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh | fgrep -v "!/bin/bash"        >> "$finish"
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
 echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs gpg' >> "$finish"
 
-# Set up security for emacs package downloading 
-echo "gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40 " >> "$finish"
+echo '# Create a public key for security purposes'     >> "$finish"
+echo -n 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/' >> "$finish"
+echo  "$myuser/.ssh/id_rsa" >> "$finish" 
+echo '# Set up security for emacs package downloading ' >> "$finish"
+echo "sudo -u $myuser gpg --list-keys " >> "$finish"
+echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40" >> "$finish"
 
-cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "!/bin/bash"  >> "$finish"
+cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
 chown "$myuser:$myuser" /home/$myuser/GitHub
 cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "$finish"
 echo 'cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r requirements.txt' >> "$finish" 
