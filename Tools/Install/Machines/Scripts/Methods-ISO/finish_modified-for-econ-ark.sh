@@ -82,6 +82,12 @@ echo '(You can switch back to the systemwide version using pip install econ-ark)
 echo 'This is your local, personal copy of DemARK, which you can modify.  '    >  DemARK-README.md
 echo 'This is your local, personal copy of REMARK, which you can modify.  '    >  REMARK-README.md
 
+sudo -u econ-ark pip install jupyter_contrib_nbextensions
+sudo -u econ-ark jupyter contrib nbextension install --user
+sudo -u econ-ark jupyter nbextension enable codefolding/main
+sudo -u econ-ark jupyter nbextension enable codefolding/edit
+sudo -u econ-ark jupyter nbextension enable toc2/main
+sudo -u econ-ark jupyter nbextension enable collapsible_headings/main
 cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r requirements.txt
 
 # https://askubuntu.com/questions/499070/install-virtualbox-guest-addition-terminal

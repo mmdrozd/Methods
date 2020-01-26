@@ -29,7 +29,14 @@ echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
 chown -Rf "$myuser:$myuser" /home/$myuser/GitHub
-cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "/home/$myuser/.bash_aliases"
+
+echo "sudo -u $myuser pip install jupyter_contrib_nbextensions"     >> "$finish"
+echo "sudo -u $myuser jupyter contrib nbextension install --user"   >> "$finish"
+echo "sudo -u $myuser jupyter nbextension enable codefolding/main"  >> "$finish"
+echo "sudo -u $myuser jupyter nbextension enable codefolding/edit"  >> "$finish"
+echo "sudo -u $myuser jupyter nbextension enable toc2/main"         >> "$finish"
+echo "sudo -u $myuser jupyter nbextension enable collapsible_headings/main"  >> "$finish"
+
 echo 'cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r requirements.txt' >> "$finish" 
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Packages/VirtualBox-Guest-Additions.sh | fgrep -v "!/bin/bash" >> "$finish"
