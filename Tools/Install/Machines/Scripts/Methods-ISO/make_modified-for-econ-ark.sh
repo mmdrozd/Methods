@@ -20,9 +20,9 @@ echo cp -af "$scriptDir/finish_modified-for-$myuser.sh" "$econarktools/$ISOmaker
 
 cp -af "ks.cfg" "$econarktools/$ISOmaker"
 cp -af "rc.local" "$econarktools/$ISOmaker"
-cp -af "econ-afrk.seed" "$econarktools/$ISOmaker"
+cp -af "econ-ark.seed" "$econarktools/$ISOmaker"
 mkdir -p  "$econarktools/$ISOmaker/root"
-rsync -afvr "$scriptDir/root/" "$econarktools/$ISOmaker/root"
+rsync -avr "$scriptDir/root/" "$econarktools/$ISOmaker/root"
 cp -af "$scriptDir/../Methods-ISO-make/ubuntu-desktop-unattended-installation/create-unattended-iso_Econ-ARK.sh" "$econarktools/$ISOmaker"
 cd "$econarktools/$ISOmaker"
 rpl -Rf "_modified-for-econ-ark.sh" ".sh" *
