@@ -17,7 +17,6 @@ echo cp -af "$scriptDir/start_modified-for-$myuser.sh"  "$econarktools/$ISOmaker
 
 cp -af "$scriptDir/finish_modified-for-$myuser.sh" "$econarktools/$ISOmaker/finish.sh"
 echo cp -af "$scriptDir/finish_modified-for-$myuser.sh" "$econarktools/$ISOmaker/finish.sh"
-exit
 
 cp -af "ks.cfg" "$econarktools/$ISOmaker"
 cp -af "rc.local" "$econarktools/$ISOmaker"
