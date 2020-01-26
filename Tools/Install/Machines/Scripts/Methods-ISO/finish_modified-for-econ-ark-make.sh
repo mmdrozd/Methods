@@ -28,8 +28,8 @@ echo "sudo -u $myuser gpg --list-keys " >> "$finish"
 echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40" >> "$finish"
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
-chown "$myuser:$myuser" /home/$myuser/GitHub
-cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "$finish"
+chown -Rf "$myuser:$myuser" /home/$myuser/GitHub
+cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "/home/$myuser/.bash_aliases"
 echo 'cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r requirements.txt' >> "$finish" 
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Packages/VirtualBox-Guest-Additions.sh | fgrep -v "!/bin/bash" >> "$finish"
