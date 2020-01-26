@@ -38,7 +38,10 @@ touch "$bashadd"
 echo '' >> "$bashadd"
 
 # On first boot, monitor progress of start install script
-echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+echo 'if [[ ! -f /var/log/firstboot.log ]]; then' >> "$bashadd"
+echo  '  xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+echo  'fi'
+
 
 # Modify prompt to keep track of git branches
 echo 'parse_git_branch() {' >> "$bashadd"

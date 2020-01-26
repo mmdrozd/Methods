@@ -42,7 +42,7 @@ touch /home/$myuser/.bash_aliases
 
 echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bash_aliases
 echo 'pgrep x0vncserver > /dev/null'  >> /home/$myuser/.bash_aliases
-echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bash_aliases
+echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 ' >> /home/$myuser/.bash_aliases
 
 
 # set defaults
@@ -83,7 +83,10 @@ touch "$bashadd"
 echo '' >> "$bashadd"
 
 # On first boot, monitor progress of start install script
-echo '[[ ! -f /var/log/firstboot.log ]] && xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+echo 'if [[ ! -f /var/log/firstboot.log ]]; then' >> "$bashadd"
+echo  '  xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+echo  'fi'
+
 
 # Modify prompt to keep track of git branches
 echo 'parse_git_branch() {' >> "$bashadd"
@@ -104,7 +107,7 @@ download "https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Too
 
 mv emacs-ubuntu-virtualbox /home/$myuser/.emacs
 chmod a+rwx /home/$myuser/.emacs
-chown "$myuser:$myuser" /home/$myuser//.emacs
+chown "$myuser:$myuser" /home/$myuser/.emacs
 
 mkdir /home/$myuser/.emacs.d
 
@@ -112,7 +115,7 @@ chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
 
 # Get some key apps that should be available immediately 
-sudo apt -y install curl wget tigervnc-scraping-server rpl
+sudo apt -y install curl wget tigervnc-scraping-server
 
 # Give econ-ark
 sudo adduser "$myuser" vboxsf
