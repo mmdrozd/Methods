@@ -14,10 +14,13 @@ echo '# Update everything ' >> "$finish"
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$finish"
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh | fgrep -v "!/bin/bash"        >> "$finish"
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
-echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs auctex' >> "$finish"
+echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs gpg' >> "$finish"
+
+# Set up security for emacs package downloading 
+echo "gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40 " >> "$finish"
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "!/bin/bash"  >> "$finish"
-chown $myuser:$myuser /home/$myuser/GitHub
+chown "$myuser:$myuser" /home/$myuser/GitHub
 cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "$finish"
 echo 'cd ~/GitHub/econ-ark/REMARK/binder ; pip3 install -r requirements.txt' >> "$finish" 
 

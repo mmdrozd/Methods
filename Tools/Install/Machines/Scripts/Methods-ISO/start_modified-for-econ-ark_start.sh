@@ -35,12 +35,11 @@ done
 # Add stuff to bash login script
 bashadd=/home/"$myuser"/.bash_aliases
 touch "$bashadd"
-echo '' >> "$bashadd"
 
-# On first boot, monitor progress of start install script
+echo '# On first boot, monitor progress of start install script' >> "$bashadd"
 echo 'if [[ ! -f /var/log/firstboot.log ]]; then' >> "$bashadd"
 echo  '  xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
-echo  'fi'
+echo  'fi' >> "$bashadd"
 
 
 # Modify prompt to keep track of git branches
