@@ -14,7 +14,7 @@
 (package-initialize)
 
 ;; list the packages you want
-(setq package-list '(use-package auctex shell-here org csv-mode markdown-mode git magit elpy gnu-elpa-keyring-update))
+(setq package-list '(use-package auctex shell-here org csv-mode markdown-mode git magit elpy gnu-elpa-keyring-update bash-completion))
 ;; fetch the list of packages available
 (unless package-archive-contents
 (package-refresh-contents))
