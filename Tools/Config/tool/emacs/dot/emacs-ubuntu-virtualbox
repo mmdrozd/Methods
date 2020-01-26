@@ -247,3 +247,5 @@ python-shell-interpreter-args "-i --simple-prompt")
                 (setq interprogram-cut-function 'xsel-cut-function)
                 (setq interprogram-paste-function 'xsel-paste-function))
 		
+
+(shell)
