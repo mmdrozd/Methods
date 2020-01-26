@@ -20,5 +20,5 @@ touch /home/$myuser/.bash_aliases
 
 echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bash_aliases
 echo 'pgrep x0vncserver > /dev/null'  >> /home/$myuser/.bash_aliases
-echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 &' >> /home/$myuser/.bash_aliases
+echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 ' >> /home/$myuser/.bash_aliases
 
