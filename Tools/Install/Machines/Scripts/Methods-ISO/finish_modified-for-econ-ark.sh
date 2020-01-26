@@ -52,7 +52,8 @@ conda install --yes -c anaconda pyopengl # Otherwise you get an error "Segmentat
 conda install --yes -c conda-forge jupyter_contrib_nbextensions
 
 # Get default packages for Econ-ARK machine
-sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs auctex
+sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs gpg
+gpg --homedir /home/econ-ark/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40 
 
 #Download and extract HARK, REMARK, DemARK from GitHUB repository
 

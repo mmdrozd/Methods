@@ -42,7 +42,7 @@ touch /home/$myuser/.bash_aliases
 
 echo '# If not already running, launch the vncserver whenever an interactive shell starts' >> /home/$myuser/.bash_aliases
 echo 'pgrep x0vncserver > /dev/null'  >> /home/$myuser/.bash_aliases
-echo '[[ $? -eq 1 ]] && x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >/dev/null 2>&1 ' >> /home/$myuser/.bash_aliases
+echo '[[ $? -eq 1 ]] && (x0vncserver -display :0 -PasswordFile=/home/'$myuser'/.vnc/passwd >> /dev/null 2>&1 &)' >> /home/$myuser/.bash_aliases
 
 
 # set defaults
@@ -80,12 +80,11 @@ done
 # Add stuff to bash login script
 bashadd=/home/"$myuser"/.bash_aliases
 touch "$bashadd"
-echo '' >> "$bashadd"
 
-# On first boot, monitor progress of start install script
+echo '# On first boot, monitor progress of start install script' >> "$bashadd"
 echo 'if [[ ! -f /var/log/firstboot.log ]]; then' >> "$bashadd"
 echo  '  xfce4-terminal -e "tail -f /var/local/start.log"  # On first boot, watch the remaining installations' >> "$bashadd"
-echo  'fi'
+echo  'fi' >> "$bashadd"
 
 
 # Modify prompt to keep track of git branches
