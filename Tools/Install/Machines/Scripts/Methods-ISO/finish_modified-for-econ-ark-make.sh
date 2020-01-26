@@ -33,9 +33,9 @@ cat ~/GitHub/econ-ark/REMARK/binder/postBuild | fgrep -v "#!/bin/bash" >> "$fini
 echo 'cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r requirements.txt' >> "$finish" 
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Packages/VirtualBox-Guest-Additions.sh | fgrep -v "!/bin/bash" >> "$finish"
-echo "mkdir -p /home/$myuser/GitHub ; ln -s /usr/local/share/GitHub/econ-ark /home/$myuser/GitHub/econ-ark" >> "$finish" 
+echo "mkdir -p /home/$myuser/GitHub ; ln -s /usr/local/share/data/GitHub/econ-ark /home/$myuser/GitHub/econ-ark" >> "$finish" 
 echo "chown $myuser:$myuser /home/$myuser/GitHub" >> "$finish" 
-echo "chown -Rf $myuser:$myuser /usr/local/share/GitHub/econ-ark # Make it be owned by econ-ark user " >> "$finish" 
+echo "chown -Rf $myuser:$myuser /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user " >> "$finish" 
 
 echo ''                                               >> "$finish" 
 echo 'echo Finished automatic installations.  Rebooting.'  >> "$finish" 
