@@ -159,6 +159,12 @@ The return value is the new value of LIST-VAR."
 '(setq TeX-command-list
 (remove '("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber")
 TeX-command-list)))
+(eval-after-load "tex-mode" 
+
+'(setq TeX-command-list
+(remove '("Biber" "biber %s" TeX-run-Biber nil (plain-tex-mode latex-mode doctex-mode ams-tex-mode texinfo-mode) :help "Run Biber")
+TeX-command-list)))
+
 
 ;; from realpython.com/emacs-the-best-python-editor                 
 (when (require 'flycheck nil t)
