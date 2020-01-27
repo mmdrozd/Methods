@@ -51,13 +51,14 @@ You should be sure to have set things up so that I have permission to edit your
 fork of the REMARK repository
 
 So, if your GitHubID were BalassaB, and your project was BalssaSamuelson, when you issue the PR saying that your REMARK is ready,
-from a bash shell in a vanilla [XUBUNTARK](https://github.com/econ-ark/econ-ark-tools/tree/master/Virtual/Machine/VirtualBox) virtual machine, I would perform the following steps:
+cd
 
 	cd ~/GitHub
 	mkdir BalassaB
 	cd ~/BalassaB
     git clone https://github.com/BalassaB/REMARK.git
     cd REMARK/REMARKs/BalassaSamuelson
+	sudo pip install -r requirements.txt
     ipython do_all.py
 	./doEverything.sh
 
