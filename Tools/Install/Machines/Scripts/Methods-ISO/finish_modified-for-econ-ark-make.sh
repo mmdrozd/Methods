@@ -18,7 +18,7 @@ echo '# Update everything ' >> "$finish"
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$finish"
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh | fgrep -v "!/bin/bash"        >> "$finish"
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
-echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs gpg' >> "$finish"
+echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs gpg evince' >> "$finish"
 
 echo '# Create a public key for security purposes'     >> "$finish"
 echo -n 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/' >> "$finish"
