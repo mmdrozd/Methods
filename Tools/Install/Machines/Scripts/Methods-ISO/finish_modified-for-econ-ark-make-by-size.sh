@@ -1,4 +1,18 @@
 #!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Wrong number of arguments:"
+    echo "usage: ${0##*/} MIN|MAX"
+    exit 1
+else
+    if ( [ ! "$1" == "MIN" ] && [ ! "$1" == "MAX" ] ); then
+	echo "usage: ${0##*/} MIN|MAX"
+	exit 2
+    fi
+fi
+
+size="$1"
+
 scriptDir="$(dirname "`realpath $0`")"
 cd "$scriptDir"
 echo ''
@@ -16,9 +30,19 @@ echo "myuser=$myuser"  >> "$finish"
 echo '# Update everything ' >> "$finish"
 
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$finish"
-cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh | fgrep -v "!/bin/bash"        >> "$finish"
+
+if [ "$size" == "MAX" ]; then
+    echo '# Extra packages for MAX' >> "$finish"
+    cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh | fgrep -v "!/bin/bash" >> "$finish" 
+fi    
+
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
-echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip texlive-full emacs gpg evince' >> "$finish"
+echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip emacs gpg nbval' >> "$finish"
+
+if [ "$size" == "MAX" ]; then
+    echo '# Extra packages for MAX' >> "$finish"
+    echo 'sudo apt -y evince texlive-full quantecon scipy' >> "$finish"
+fi    
 
 echo '# Create a public key for security purposes'     >> "$finish"
 echo -n 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/' >> "$finish"
@@ -27,15 +51,23 @@ echo '# Set up security for emacs package downloading ' >> "$finish"
 echo "sudo -u $myuser gpg --list-keys " >> "$finish"
 echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40" >> "$finish"
 
-cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
+cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK-MIN.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
+if [[ "$size" != "MIN" ]]; then
+    cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK-$size.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
+fi
+
 chown -Rf "$myuser:$myuser" /home/$myuser/GitHub
 
 echo "sudo -u $myuser pip install jupyter_contrib_nbextensions"     >> "$finish"
 echo "sudo -u $myuser jupyter contrib nbextension install --user"   >> "$finish"
-echo "sudo -u $myuser jupyter nbextension enable codefolding/main"  >> "$finish"
-echo "sudo -u $myuser jupyter nbextension enable codefolding/edit"  >> "$finish"
-echo "sudo -u $myuser jupyter nbextension enable toc2/main"         >> "$finish"
-echo "sudo -u $myuser jupyter nbextension enable collapsible_headings/main"  >> "$finish"
+
+if [[ "$size" == "MAX" ]]; then
+    echo '# Extra nbextensions for MAX' >> "$finish"
+    echo "sudo -u $myuser jupyter nbextension enable codefolding/main"  >> "$finish"
+    echo "sudo -u $myuser jupyter nbextension enable codefolding/edit"  >> "$finish"
+    echo "sudo -u $myuser jupyter nbextension enable toc2/main"         >> "$finish"
+    echo "sudo -u $myuser jupyter nbextension enable collapsible_headings/main"  >> "$finish"
+fi
 
 echo 'cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r requirements.txt' >> "$finish" 
 
