@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# A few things to do quickly at the very beginning; the "finish" script is stuff that runs in the background for a long time 
 # set defaults
 default_hostname="$(hostname)"
 default_domain=""
@@ -27,12 +28,6 @@ sed -i "s/xubuntu/$datetime/g" /etc/hosts
 
 cd /home/"$myuser"
 
-# Remove the linux automatically created directories like "Music" and "Pictures"
-# Leave only required directories Downloads and Desktop
-for d in ./*/; do
-    [[ ! "$d" == "Downloads" ]] && [[ ! "$d" == "Desktop" ]] && rm -Rf "$d"
-done
-
 # Add stuff to bash login script
 bashadd=/home/"$myuser"/.bash_aliases
 touch "$bashadd"
@@ -54,7 +49,7 @@ chown $myuser:$myuser "$bashadd"
 
 
 # Get some key apps that should be available immediately 
-sudo apt -y install curl wget tigervnc-scraping-server
+sudo apt -y install tigervnc-scraping-server
 
 # Create .emacs.d directory with proper permissions -- avoids annoying startup warning msg
 cd    /home/$myuser
@@ -70,6 +65,3 @@ mkdir /home/$myuser/.emacs.d
 
 chmod a+rw /home/$myuser/.emacs.d
 chown $myuser:$myuser /home/$myuser/.emacs.d
-
-# Give econ-ark
-sudo adduser "$myuser" vboxsf

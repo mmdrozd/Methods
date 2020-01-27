@@ -20,16 +20,30 @@ myuser="econ-ark"
 finish="finish_modified-for-$myuser.sh"
 rm "$finish"
 touch "$finish"
-sudo chmod a+xw "$finish"
+sudo chmod a+rxw "$finish"
 
 echo '#!/bin/bash' > "$finish"
 
 echo '# Set username'  >> "$finish"
 echo "myuser=$myuser"  >> "$finish"
 
+echo '# The cups service sometimes gets stuck; stop it before that happens' >> "$finish"
+echo 'sudo systemctl stop cups-browsed.service '   >> "$finish"
+echo 'sudo systemctl disable cups-browsed.service' >> "$finish"
+
 echo '# Update everything ' >> "$finish"
 
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$finish"
+
+# Give econ-ark
+sudo adduser "$myuser" vboxsf
+
+# Remove the linux automatically created directories like "Music" and "Pictures"
+# Leave only required directories Downloads and Desktop
+for d in ./*/; do
+    [[ ! "$d" == "Downloads" ]] && [[ ! "$d" == "Desktop" ]] && rm -Rf "$d"
+done
+
 
 if [ "$size" == "MAX" ]; then
     echo '# Extra packages for MAX' >> "$finish"
@@ -43,7 +57,7 @@ else # Install stuff needed if anaconda is not there; https://liunxize.com/post/
 fi    
 
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
-echo 'sudo apt -y install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip emacs gpg nbval' >> "$finish"
+echo 'sudo apt -y curl install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip gpg nbval' >> "$finish"
 
 if [ "$size" == "MAX" ]; then
     echo '# Extra packages for MAX' >> "$finish"
@@ -53,7 +67,9 @@ fi
 echo '# Create a public key for security purposes'     >> "$finish"
 echo -n 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/' >> "$finish"
 echo  "$myuser/.ssh/id_rsa" >> "$finish" 
+
 echo '# Set up security for emacs package downloading ' >> "$finish"
+echo 'sudo apt -y emacs' >> "$finish"
 echo "sudo -u $myuser gpg --list-keys " >> "$finish"
 echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40" >> "$finish"
 
