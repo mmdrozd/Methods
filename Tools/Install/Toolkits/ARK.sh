@@ -2,7 +2,8 @@
 
 #Download and extract HARK, REMARK, DemARK from GitHUB repository
 
-conda install --yes -c conda-forge econ-ark
+# conda install --yes -c conda-forge econ-ark
+pip install econ-ark
 arkHome=/usr/local/share/data/GitHub/econ-ark
 mkdir -p "$arkHome"
 cd "$arkHome"
