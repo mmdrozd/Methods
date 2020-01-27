@@ -47,7 +47,7 @@ rpl -Rf "_modified-for-econ-ark.sh" ".sh" *
 rpl -f 'https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Tools/Install/Machines/Scripts/Methods-ISO' "https://raw.githubusercontent.com/econ-ark/econ-ark-tools/master/$ISOmaker" *
 rpl -vf 'iso_done="/media/sf_VirtualBox/ISO-made/methods"' 'iso_done="/media/sf_VirtualBox/ISO-made/econ-ark-tools"'  * 
 
-cmd="cd $scriptDir ; git add . ; git commit -m 'Autoupdate start files' ; git push ; cd $econarktools/$ISOmaker ; cp finish.sh finish-$size.sh ; rm Size-To-Build-Now-Is-* ; touch Size-To-Build-Now-Is-$side ; git add . ; git commit -m 'Autoupdate start files' ; git push ; sudo ./create-unattended-iso_Econ-ARK-by-size.sh $size"
+cmd="cd $scriptDir ; git add . ; git commit -m 'Autoupdate start files' ; git push ; cd $econarktools/$ISOmaker ; cp finish.sh finish-$size.sh ; rm -f Size-To-Build-Now-Is-* ; touch Size-To-Build-Now-Is-$size ; git add . ; git commit -m 'Autoupdate start files' ; git push ; sudo ./create-unattended-iso_Econ-ARK-by-size.sh $size"
 echo ""
 echo "To create the machine, execute the commands below, which should be on the clipboard:"
 echo ""
