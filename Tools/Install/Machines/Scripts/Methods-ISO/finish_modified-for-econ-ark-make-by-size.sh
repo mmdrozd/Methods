@@ -37,7 +37,9 @@ if [ "$size" == "MAX" ]; then
 else # Install stuff needed if anaconda is not there; https://liunxize.com/post/how-to-installpy-thon-3-8-on-ubuntu-18-04
     echo 'sudo add-apt-repository -y ppa:deadsnakes/ppa' >> "$finish"
     echo 'sudo apt -y install software-properties-common python3 python3-pip python-pytest' >> "$finish"
-    echo 'sudo update-alternatives --install /usr/bin/python python /usr/bin/python3' >> "$finish"
+    echo 'sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10' >> "$finish"
+    echo 'sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10' >> "$finish"
+    echo 'sudo apt -y python-pytest' >> "$finish"    
 fi    
 
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
