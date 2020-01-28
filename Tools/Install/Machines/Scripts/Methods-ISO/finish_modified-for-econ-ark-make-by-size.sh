@@ -45,9 +45,10 @@ else # Install stuff needed if anaconda is not there; https://liunxize.com/post/
     echo 'sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10' >> "$finish"
     echo 'sudo apt -y python-pytest' >> "$finish"    
 fi    
+echo 'sudo pip install nbval' >> "$finish"
 
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
-echo 'sudo apt -y install curl git bash-completion xsel cifs-utils openssh-server nautilus-share xclip gpg nbval' >> "$finish"
+echo 'sudo apt -y install curl git bash-completion xsel cifs-utils openssh-server nautilus-share xclip gpg' >> "$finish"
 
 if [ "$size" == "MAX" ]; then
     echo '# Extra packages for MAX' >> "$finish"
@@ -78,6 +79,7 @@ chown -Rf "$myuser:$myuser" /home/$myuser/GitHub
 echo "sudo -u $myuser pip install jupyter_contrib_nbextensions"     >> "$finish"
 echo "sudo -u $myuser jupyter contrib nbextension install --user"   >> "$finish"
 
+
 if [[ "$size" == "MAX" ]]; then
     echo '# Extra nbextensions for MAX' >> "$finish"
     echo "sudo -u $myuser jupyter nbextension enable codefolding/main"  >> "$finish"
@@ -91,7 +93,11 @@ echo 'cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r re
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Packages/VirtualBox-Guest-Additions.sh | fgrep -v "!/bin/bash" >> "$finish"
 echo "mkdir -p /home/$myuser/GitHub ; ln -s /usr/local/share/data/GitHub/econ-ark /home/$myuser/GitHub/econ-ark" >> "$finish" 
 echo "chown $myuser:$myuser /home/$myuser/GitHub" >> "$finish" 
-echo "chown -Rf $myuser:$myuser /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user " >> "$finish" 
+echo "chown -Rf $myuser:$myuser /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user " >> "$finish"
+
+# Give econ-ark
+echo "sudo adduser "$myuser" vboxsf" >> "$finish"
+
 
 echo ''                                               >> "$finish" 
 echo 'echo Finished automatic installations.  Rebooting.'  >> "$finish" 
