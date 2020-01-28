@@ -55,12 +55,17 @@ if [ "$size" == "MAX" ]; then
 fi    
 
 echo '# Create a public key for security purposes'     >> "$finish"
-echo -n 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/' >> "$finish"
-echo  "$myuser/.ssh/id_rsa" >> "$finish" 
+echo 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/@myuser/.ssh' >> "$finish"
 
 echo '# Set up security for emacs package downloading ' >> "$finish"
 echo 'sudo apt -y install emacs' >> "$finish"
-echo "sudo -u $myuser gpg --list-keys " >> "$finish"
+echo "sudo -u $myuser emacs -batch -l ~/.emacs --eval='(package-list-packages)'" >> "$finish"
+echo "sudo -u $myuser mkdir -p /home/$myuser/.emacs.d/elpa"                      >> "$finish"
+echo "sudo -u $myuser mkdir -p /home/$myuser/.emacs.d/elpa/gnupg"                >> "$finish"
+echo "sudo -u $myuser gpg --list-keys "                                          >> "$finish"
+echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa       --list-keys" >> "$finish"
+echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --list-keys" >> "$finish"
+echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa       --receive-keys 066DAFCB81E42C40"  >> "$finish"
 echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40" >> "$finish"
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK-MIN.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
