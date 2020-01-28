@@ -35,16 +35,6 @@ echo '# Update everything ' >> "$finish"
 
 echo 'sudo apt -y update && sudo apt -y upgrade' >> "$finish"
 
-# Give econ-ark
-sudo adduser "$myuser" vboxsf
-
-# Remove the linux automatically created directories like "Music" and "Pictures"
-# Leave only required directories Downloads and Desktop
-for d in ./*/; do
-    [[ ! "$d" == "Downloads" ]] && [[ ! "$d" == "Desktop" ]] && rm -Rf "$d"
-done
-
-
 if [ "$size" == "MAX" ]; then
     echo '# Extra packages for MAX' >> "$finish"
     cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Languages/Anaconda3-Latest.sh | fgrep -v "!/bin/bash" >> "$finish"
@@ -57,7 +47,7 @@ else # Install stuff needed if anaconda is not there; https://liunxize.com/post/
 fi    
 
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
-echo 'sudo apt -y curl install git bash-completion xsel cifs-utils openssh-server nautilus-share xclip gpg nbval' >> "$finish"
+echo 'sudo apt -y install curl git bash-completion xsel cifs-utils openssh-server nautilus-share xclip gpg nbval' >> "$finish"
 
 if [ "$size" == "MAX" ]; then
     echo '# Extra packages for MAX' >> "$finish"
@@ -69,7 +59,7 @@ echo -n 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -
 echo  "$myuser/.ssh/id_rsa" >> "$finish" 
 
 echo '# Set up security for emacs package downloading ' >> "$finish"
-echo 'sudo apt -y emacs' >> "$finish"
+echo 'sudo apt -y install emacs' >> "$finish"
 echo "sudo -u $myuser gpg --list-keys " >> "$finish"
 echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40" >> "$finish"
 
