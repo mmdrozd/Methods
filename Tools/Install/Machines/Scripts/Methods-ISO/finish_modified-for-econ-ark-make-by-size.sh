@@ -45,9 +45,10 @@ else # Install stuff needed if anaconda is not there; https://liunxize.com/post/
     echo 'sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 10' >> "$finish"
     echo 'sudo apt -y python-pytest' >> "$finish"    
 fi    
+echo 'sudo pip install nbval' >> "$finish"
 
 echo '# Get default packages for Econ-ARK machine' >> "$finish"
-echo 'sudo apt -y install curl git bash-completion xsel cifs-utils openssh-server nautilus-share xclip gpg nbval' >> "$finish"
+echo 'sudo apt -y install curl git bash-completion xsel cifs-utils openssh-server nautilus-share xclip gpg' >> "$finish"
 
 if [ "$size" == "MAX" ]; then
     echo '# Extra packages for MAX' >> "$finish"
@@ -55,12 +56,17 @@ if [ "$size" == "MAX" ]; then
 fi    
 
 echo '# Create a public key for security purposes'     >> "$finish"
-echo -n 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/' >> "$finish"
-echo  "$myuser/.ssh/id_rsa" >> "$finish" 
+echo 'sudo -u $myuser ssh-keygen -t rsa -b 4096 -q -N "" -C $myuser@XUBUNTU -f /home/@myuser/.ssh' >> "$finish"
 
 echo '# Set up security for emacs package downloading ' >> "$finish"
 echo 'sudo apt -y install emacs' >> "$finish"
-echo "sudo -u $myuser gpg --list-keys " >> "$finish"
+echo "sudo -u $myuser emacs -batch -l ~/.emacs --eval='(package-list-packages)'" >> "$finish"
+echo "sudo -u $myuser mkdir -p /home/$myuser/.emacs.d/elpa"                      >> "$finish"
+echo "sudo -u $myuser mkdir -p /home/$myuser/.emacs.d/elpa/gnupg"                >> "$finish"
+echo "sudo -u $myuser gpg --list-keys "                                          >> "$finish"
+echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa       --list-keys" >> "$finish"
+echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --list-keys" >> "$finish"
+echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa       --receive-keys 066DAFCB81E42C40"  >> "$finish"
 echo "sudo -u $myuser gpg --homedir /home/$myuser/.emacs.d/elpa/gnupg --receive-keys 066DAFCB81E42C40" >> "$finish"
 
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Toolkits/ARK-MIN.sh                        | fgrep -v "#!/bin/bash"  >> "$finish"
@@ -72,6 +78,7 @@ chown -Rf "$myuser:$myuser" /home/$myuser/GitHub
 
 echo "sudo -u $myuser pip install jupyter_contrib_nbextensions"     >> "$finish"
 echo "sudo -u $myuser jupyter contrib nbextension install --user"   >> "$finish"
+
 
 if [[ "$size" == "MAX" ]]; then
     echo '# Extra nbextensions for MAX' >> "$finish"
@@ -86,7 +93,11 @@ echo 'cd /usr/local/share/data/GitHub/econ-ark/REMARK/binder ; pip install -r re
 cat ~/GitHub/ccarrollATjhuecon/Methods/Tools/Install/Packages/VirtualBox-Guest-Additions.sh | fgrep -v "!/bin/bash" >> "$finish"
 echo "mkdir -p /home/$myuser/GitHub ; ln -s /usr/local/share/data/GitHub/econ-ark /home/$myuser/GitHub/econ-ark" >> "$finish" 
 echo "chown $myuser:$myuser /home/$myuser/GitHub" >> "$finish" 
-echo "chown -Rf $myuser:$myuser /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user " >> "$finish" 
+echo "chown -Rf $myuser:$myuser /usr/local/share/data/GitHub/econ-ark # Make it be owned by econ-ark user " >> "$finish"
+
+# Give econ-ark
+echo "sudo adduser "$myuser" vboxsf" >> "$finish"
+
 
 echo ''                                               >> "$finish" 
 echo 'echo Finished automatic installations.  Rebooting.'  >> "$finish" 

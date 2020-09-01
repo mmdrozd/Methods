@@ -35,6 +35,9 @@ touch "$bashadd"
 echo '# On first boot, monitor progress of start install script' >> "$bashadd"
 echo 'if [[ ! -f /var/log/firstboot.log ]]; then' >> "$bashadd"
 echo  '  xfce4-terminal -e "tail -f /var/local/start-and-finish.log"  # On first boot, watch the remaining installations' >> "$bashadd"
+echo  '  echo ; echo The machine is installing more software.' >> "$bashadd"
+echo  '  echo It will reboot one more time before it finishes.' >> "$bashadd"
+echo  '  echo Please wait until that reboot before using it.' >> "$bashadd"
 echo  'fi' >> "$bashadd"
 
 # Modify prompt to keep track of git branches
@@ -59,9 +62,10 @@ download "https://raw.githubusercontent.com/ccarrollATjhuecon/Methods/master/Too
 
 for userloop in root $myuser; do
     cp emacs-ubuntu-virtualbox /home/$userloop/.emacs
-    chmod a+rwx /home/$userloop/.emacs
-    chown "$userloop:$userloop" /home/$userloop/.emacs
 done
+
+chmod a+rwx /home/$myuser/.emacs
+chown "$myuser:$myuser" /home/$myuser/.emacs
 
 rm emacs-ubuntu-virtualbox
 
@@ -70,14 +74,13 @@ mkdir /home/$myuser/.emacs.d ; mkdir /root/.emacs.d
 chmod a+rw /home/$myuser/.emacs.d 
 chown $myuser:$myuser /home/$myuser/.emacs.d
 
-# Give econ-ark
-sudo adduser "$myuser" vboxsf
-
 # Remove the linux automatically created directories like "Music" and "Pictures"
 # Leave only required directories Downloads and Desktop
 cd /home/$myuser
 
 for d in ./*/; do
-    [[ ! "$d" == "Downloads" ]] && [[ ! "$d" == "Desktop" ]] && rm -Rf "$d"
+    if [[ ! "$d" == "./Downloads/" ]] && [[ ! "$d" == "./Desktop/" ]] && [[ ! "$d" == "./snap/" ]]; then
+	rm -Rf "$d"
+    fi
 done
 

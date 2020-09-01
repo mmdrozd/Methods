@@ -17,8 +17,13 @@ echo 'Local mods will not affect systemwide, unless you change the default sourc
 echo "   cd $arkHOME ;  pip install -e setup.py "  >> HARK-README.md
 echo '' >> HARK-README.md
 echo '(You can switch back to the systemwide version using pip install econ-ark)' >> HARK-README.md
+echo 'To test whether everything works, in the root directory type:.  '    >  HARK-README.md
+echo 'pytest '    >  HARK-README.md
 
 
 echo 'This is your local, personal copy of DemARK, which you can modify.  '    >  DemARK-README.md
+echo 'To test whether everything works, in the root directory type:.  '    >  DemARK-README.md
+echo 'cd notebooks ; pytest --nbval-lax *.ipynb  '    >  DemARK-README.md
+
 echo 'This is your local, personal copy of REMARK, which you can modify.  '    >  REMARK-README.md
 
