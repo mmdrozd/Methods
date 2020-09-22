@@ -3,7 +3,8 @@ This assignment is for you to learn to use emacs and Markdown and GitHub to give
 
 * Because I fiddle with the numbers that prefix the name of files, when you see `[Num]` below, that is a standin for whatever the actual numerical prefix is for the file in question. So, for example, I would refer to this file as `[Num]_Report-Your-Results-Using-Markdown.md`
 
-1. For each assignment (starting with this one), follow the instructions in `How-To-Turn-In-Assignments` to create a copy of the assignment with the appropriate name (that is, with your moniker appended) at the appropriate place in your `/pri` directory
+1. For each assignment, create a copy of the assignment with the appropriate name (that is, with your [`moniker`](https://github.com/llorracc/JobMarket/blob/master/Notation/Notation.md) appended.
+   * So, if I were doing this assignment, I'd create a copy entitled `Report-Your-Results-Using-Markdown_CarrollCD.md`
 
 0. Now, you will edit each of the assignment files to add comments and feedback
 
@@ -23,7 +24,7 @@ This assignment is for you to learn to use emacs and Markdown and GitHub to give
 
    0. If the instructions were not clear enough for you to be able to figure out what to do and you were unable to accomplish it, you should provide a description of what you tried and your guess of why it failed.  For example, if you did not have write permission for the files and could not figure out how to grant yourself such permission, you might write:
 
-      * I couldn't change the names of the files to add my moniker, and I couldn't edit them after I copied them to my `[droot]/pri/Methods/Assignments` directory  [CDC]
+      * I couldn't change the names of the files to add my moniker because I did not have the right permissions  [CDC]
 
    0. When you find a place where you think the instructions should be improved or added to or clarified, you should post a GitHub "issue" containing your proposed edits. For example, you might want to edit the line earlier in the this assignment that reads:
 
