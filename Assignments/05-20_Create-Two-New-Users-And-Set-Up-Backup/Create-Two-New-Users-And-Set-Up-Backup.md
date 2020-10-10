@@ -2,7 +2,7 @@
 
 ## Install `homebrew` 
 
-[`homebrew`](https://docs.brew.sh/Homebrew-on-Linux)) is an alternative to the built-in `package manager` called `apt` that is the default for `Debian`-based Linux distributions like Ubuntu.
+[`homebrew`](https://docs.brew.sh/Homebrew-on-Linux) is an alternative to the built-in `package manager` called `apt` that is the default for `Debian`-based Linux distributions like Ubuntu.
 
 You will install homebrew by pasting the link at the bottom of this section into your
 terminal.
@@ -18,7 +18,7 @@ install using apt, homebrew has several advantages:
    * On Linux machines, the method you should use is the `recommended` one
       * This will create a new user on your machine named `linuxbrew`
 	 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" 
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
 ## Create A User For Your Own Stuff
 
@@ -37,7 +37,7 @@ Like for me, the user would be `carrollcd`.
 
 1. Create another user named Shared
    * Give it the standard econ-ark password: kra-noce
-1. As before login and delete the junk folders
+1. As before, login and delete the junk folders
 1. Now create the following folders:
    * GitHub
    * Downloads
@@ -76,7 +76,7 @@ and which can then connect to any of a variety of remote storage services (you c
 The tool I want you to use is called [`Duplicati`](https://duplicati.readthedocs.io/en/latest/02-installation/#installing-duplicati-on-linux).
 
 (Follow the Linux installation instructions available on the website, supplemented by [these further instructions](https://forum.duplicati.com/installing-duplicati-on-linux-ubuntu-linuxlite/743) - except that I found I needed to 
-install the full version of `mono` and not just `mono-runtime`
+install the full version of `mono` and not just `mono-runtime.` I expect you to use common sense in interpreting the instructions; for example, the preparation instructions advise you to install a variety of packages, including python, but obviously you know that python is already installed. Or, the instructions tell you to create some config files using the `nano` editor, but you presumably will want to use emacs instead.
 
 As for backends, you will need to make that choice yourself among the many options. One option is Google Drive,
 and I believe that Google provides 15gb of free storage to users, so you could use that. Another option is
