@@ -76,7 +76,9 @@ and which can then connect to any of a variety of remote storage services (you c
 The tool I want you to use is called [`Duplicati`](https://duplicati.readthedocs.io/en/latest/02-installation/#installing-duplicati-on-linux).
 
 (Follow the Linux installation instructions available on the website, supplemented by [these further instructions](https://forum.duplicati.com/installing-duplicati-on-linux-ubuntu-linuxlite/743) - except that I found I needed to 
-install the full version of `mono` and not just `mono-runtime.` I expect you to use common sense in interpreting the instructions; for example, the preparation instructions advise you to install a variety of packages, including python, but obviously you know that python is already installed. Or, the instructions tell you to create some config files using the `nano` editor, but you presumably will want to use emacs instead.
+install the full version of `mono` and not just `mono-runtime` (it's better if mono-runtime works for you because the full version of mono is big).
+
+I expect you to use common sense in interpreting the instructions; for example, the preparation instructions advise you to install a variety of packages, including python, but obviously you know that python is already installed. Or, the instructions tell you to create some config files using the `nano` editor, but you presumably will want to use emacs instead.
 
 As for backends, you will need to make that choice yourself among the many options. One option is Google Drive,
 and I believe that Google provides 15gb of free storage to users, so you could use that. Another option is
