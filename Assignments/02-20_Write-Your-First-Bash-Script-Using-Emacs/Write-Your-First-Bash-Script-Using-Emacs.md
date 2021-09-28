@@ -1,9 +1,10 @@
+# Write Your First Bash Script Using Emacs
 
 This assignment takes you through the process of writing your first bash script using Emacs in your VM.
 
 Before beginning the assignment, please read through the first two chapters, [Inception](https://guide.bash.academy/inception/)
 and [Commands and Arguments](https://guide.bash.academy/commands/) of [The Bash Guide](https://guide.bash.academy/) and
-do the associated exercisese.
+do the associated exercises.
 
 When that is done, complete the assignment below (which combines elementary bash with elementary Emacs usage)
 
