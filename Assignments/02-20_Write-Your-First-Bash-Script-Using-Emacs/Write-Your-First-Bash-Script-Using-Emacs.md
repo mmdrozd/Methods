@@ -9,7 +9,8 @@ do the associated exercises.
 When that is done, complete the assignment below (which combines elementary bash with elementary Emacs usage)
 
 0. Launch `Emacs` from the terminal using the command `emacs -nw` 
-
+   
+   Done [MMD]
 0. Create a new file by hitting C-x C-f (that's short for CTRL-x followed by CTRL-f)
 
    * Emacs will pop up a little `minibuffer` at the _bottom_ of the terminal saying `Find file:`
@@ -17,19 +18,26 @@ When that is done, complete the assignment below (which combines elementary bash
    * This is its way of asking you the filename you want to use
 
    * Give it a filename `First-Bash-Script-[Moniker].sh`
+   
+   Done [MMD]
 
 0. As the first line of the script, enter the exact letters `#!/bin/bash`
 
    * This is the magic spell that identifies the file as a bash script file
-
+   
+   Done[MMD]
 0. Now hit return a couple of times and type `echo "Hello world!"`
-
+   
+   Done [MMD]
 0. Hit `C-x C-s` (Control-x followed by Control-s) to save the file
-
+   
+   Done [MMD]
 0. Hit `C-x C-c` to exit from Emacs
-
+   
+   Done [MMD]
 0. In the `Terminal` shell, type `cd ~` to change the directory to the home directory `~` where you created the file
-
+   
+	   Done [MMD]
 0. Before the file can be executed, it must be marked as executable.
 
    * This is done using the `chmod` command (short for `change the modification characteristics of the file`)
@@ -38,16 +46,19 @@ When that is done, complete the assignment below (which combines elementary bash
 
    * The `*.sh` syntax means `all files ending in .sh`
 
+	Done [MMD]
 0. Now you should be able to execute the file in either of two ways:
 
    0. Type `/bin/bash First-Bash-Script-[Moniker].sh`
 
    0. Type `./First-Bash-Script-[Moniker].sh`
-
+   
+	   Done [MMD]
 0. Capture the magnificent results of your efforts in an output file by adding ` > First-Bash-Script-[Moniker].out` after typing one of the above options to execute the .sh file. For example,
 
    `./First-Bash-Script-[Moniker].sh  > First-Bash-Script-[Moniker].out`
-
+   
+	   Done [MMD]
 0. View the results in two ways:
 
    0.  At the shell type `cat *.out`
@@ -61,13 +72,16 @@ When that is done, complete the assignment below (which combines elementary bash
       * You will notice that this time, Emacs opens as a graphical application in its own window
 
       * The reason is that your previous invocation of emacs included the `-nw` flag, which is short for `no window` and has the effect of launching emacs inside the shell window
-
+  
+	  Done[MMD]
 0. Update your local copy of the class "Methods" repository:
 
     `cd ~/GitHub/ccarrollATjhuecon/Methods`
     `git pull`
 
+	Done[MMD]
 0. Move your script to the /Assignments/[##-##]-Write-Your-First-Bash-Script-Using-Emacs in the
 local copy the "Methods" repo
 
+	Done [MMD]
 
