@@ -5,8 +5,11 @@ This assignment is for you to learn to use emacs and Markdown and GitHub to give
 
 1. First you need a fork of the Methods repo.  If you have already interacted with it by making a PR, then you already have a fork.  Otherwise, just go to https://github.com/ccarrollATjhuecon/Methods (WHILE LOGGED INTO YOUR OWN GITHUB ACCCOUNT), and click the Fork button.
 
+
+	Done[MMD]
 1. Next, clone your fork to your local computer, where you will be editing each of the assignments
 
+	Done[MMD]
 0. Using Emacs, edit the assignments as described below:
 
 0. All lines you add to the files should end with your initials (FirstMiddleLast, [FML])
@@ -35,8 +38,10 @@ This assignment is for you to learn to use emacs and Markdown and GitHub to give
 	   
        0. All lines you add to the files should end with your initials (FirstMiddleLast, [FML]). If you do not have a middle name, use the letter X [CXC]
 
+	Done [MMD]
    0. When you are done editing the assignments, you should be able to examine the resulting prettified Markdown document by hitting C-c C-c p (that is, Control-C, Control-C, p). You may want to search about this command online. (Google: `markdown editing mode in emacs`)
-   
+
+	Done [MMD]
 0. When you are done with editing each assignment:
    * add your changes to your fork of the repo:
       `git add [whatever is the assignment name]`
@@ -46,3 +51,4 @@ This assignment is for you to learn to use emacs and Markdown and GitHub to give
       `git push` 
    * Go online to github.com and issue a Pull Request for the change to be merged in
    
+   Done [MMD]
