@@ -11,24 +11,34 @@ that allow interaction with the remote computer almost as if the user were physi
    * We will therefore illustrate the use of the ssh commend by doing something pretty meta: Connecting via ssh to THE SAME COMPUTER YOU ARE CONNECTING FROM
 0. Steps:
    * Launch a `Terminal` window (and NOT a shell prompt from inside emacs)
+   
+	   Done [MMD]
    * Become the root user (superuser) using the `su` command
       * This requires you to have enabled the root user in your VM; if you have not done this, do so using the command `sudo passwd root` and give the root user the same password as the `econ-ark` user (Google for more info)
    * Test whether you have succeeded by using the `whoami` command
       * The answer should be `root`
+	  
+	  Done [MMD]
    * `ssh econ-ark@localhost` will initiate a `remote` connection from your own computer to itself
 	  * (By default, in unix your own computer can be addressed as `localhost`)
       * If this is the first time you have connected from your current machine to the remote machine, you will asked to permit the connection va a `key fingerprint` which is a security mechanism. Accept this request
    * If instead of `localhost` you specified some other valid username and hostname, you would connect as that user to that machine instead
       * Assuming that the connection is permitted by firewalls and other security mechanisms...
 	  * And that connecting by ssh has been enabled on the other machine
+	  
+	  Done[MMD]
 0. You should now be connected to the remote computer on precisely the same footing you would have if you had logged into the computer from a physical connection like a keyboard
    * Confirm that you are logged in as the econ-ark user using the `whoami` command
    * A second proof that you are logged in as the econ-ark user is to use the command `ls`
    * You should see the usual default list of folders from your home directory
+   
+   Done[MMD]
 0. Exit from your secure shell:
    * `exit` is the command
    * `whoami` should now identify you as the `root` user again
    * `exit` from your status as superuser and return to your normal identity
+   
+   Done[MMD]
 0. There is no need to become the root user in order to use the secure shell
    * This was done here mainly to avoid confusion
    * When the econ-ark user uses ssh to connect as the econ-ark user to localost, everything looks identical to the way it would look before the ssh command
@@ -48,6 +58,9 @@ We are going to again become root for the purpose of executing this command. Bel
 
 A Google search for `scp command examples` will turn up a host of other ways to use the command. You can also do a bit of
 prep work so that you do not need to enter your password for the remote machine every time you use the command.
+
+
+Done but pathway has to be adjusted to included ccarrollATjhuecon (issue has been posted by classmate) [MMD]
 
 ## SSH keys
 
@@ -71,12 +84,16 @@ If the keys DO exist already, you need to make sure they have the right permissi
   `sudo chmod 600 ~/.ssh/id_rsa`
   `sudo chmod 644 ~/.ssh/id_rsa.pub`
 
+Done [MMD]
+
 ## Registering your key with a remote resource (GitHub)
 
    Registering your key allows you to interact with a remote machine without the cumbersome requirement to enter a username and password at every step. This is particularly convenient when interacting with GitHub.
 
    Instructions for how register your ssh key with your GitHub account [are here](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account)
 
+
+Done [MMD]
    You should follow those instructions (since your machine should already have a key, you can omit the step of generating one)
 
    In order to interact with a remote repo without using password or username, you need to adjust GitHub's url for connecting with the remote resource via ssh rather than https.  For example, if you obtained a repo originally by
@@ -127,3 +144,5 @@ you should see exactly the same listing, because these are two paths to the same
 The command to unmount:
 
 	sudo fusermount -u /mnt/Methods
+
+I could not figure out the mounting. Kept getting an error with regards to econ-ark@localhost:/home/econ-ark/GitHub/ccarrollATjhuecon/Methods does not exist. [MMD]
