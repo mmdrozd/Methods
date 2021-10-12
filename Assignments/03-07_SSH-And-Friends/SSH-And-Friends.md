@@ -145,4 +145,4 @@ The command to unmount:
 
 	sudo fusermount -u /mnt/Methods
 
-I could not figure out the mounting. Kept getting an error with regards to econ-ark@localhost:/home/econ-ark/GitHub/ccarrollATjhuecon/Methods does not exist. [MMD]
+Done [MMD]
